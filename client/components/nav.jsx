@@ -2,7 +2,7 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 
 // import DropdownNav from './dropdown';
-import { LinkContainer } from 'react-router-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -31,47 +31,39 @@ export default function Header(props) {
                 </button>
                 <ul className="dropdown-menu">
                   <li>
-                    <LinkContainer to="">
-                      <a className="dropdown-item" href="#">
-                        Home
-                      </a>
-                    </LinkContainer>
+                    <a className="dropdown-item" href="">
+                      Home
+                    </a>
                   </li>
                   <li>
-                    <LinkContainer to="/timeline">
-                      <a className="dropdown-item" href="#">
-                        Timeline
-                      </a>
-                    </LinkContainer>
+                    <a className="dropdown-item" href="#timeline">
+                      Timeline
+                    </a>
                   </li>
                   <li>
-                    <LinkContainer to="/addevent">
-                      <a className="dropdown-item" href="#">
-                        Add event
-                      </a>
-                    </LinkContainer>
+
+                    <a className="dropdown-item" href="#addform">
+                      Add event
+                    </a>
+                  </li>
+
+                  <li>
+
+                    <a className="dropdown-item" href="#scheduling">
+                      Schedule Event
+                    </a>
                   </li>
                   <li>
-                    <LinkContainer to="/addform">
-                      <a className="dropdown-item" href="#">
-                        Add form
-                      </a>
-                    </LinkContainer>
-                  </li>
-                  
-                  <li>
-                    <LinkContainer to="/scheduling">
-                      <a className="dropdown-item" href="#">
-                        Schedule Event
-                      </a>
-                    </LinkContainer>
+
+                    <a className="dropdown-item" href="#calendar">
+                      Calendar
+                    </a>
                   </li>
                   <li>
-                    <LinkContainer to="/calendar">
-                      <a className="dropdown-item" href="/calendar">
-                        Calendar
-                      </a>
-                    </LinkContainer>
+
+                    <a className="dropdown-item" href="#viewphoto">
+                      View photos
+                    </a>
                   </li>
                 </ul>
               </div>

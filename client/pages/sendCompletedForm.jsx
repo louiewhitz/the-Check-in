@@ -1,125 +1,62 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { FaUserNurse, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
+
 export default class AddForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
       description: '',
-      otherDesc: '',
-      eventId: null,
+      summary: '',
       eventTypeId: null,
-      photoUrl: '',
+      file: '../images/apod.jpeg',
       title: ''
     };
-    this.eventType = this.eventType.bind(this);
-    this.setEventName = this.setEventName.bind(this);
-    this.handleImage = this.handleImage.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
+    this.fileInputRef = React.createRef();
+    this.onChange = this.onChange.bind(this);
+    this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.enterTypeClick = this.enterTypeClick.bind(this);
+    this.eventType = this.eventType.bind(this);
+  }
+
+  onChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+
+  onFileChange(event) {
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0])
+    });
   }
 
   eventType(number) {
-    const setEventTypeId = number => {
-      return number;
-    };
+    this.setState({ eventTypeId: number });
+    return this.number;
   }
 
-  // setTitle(e.target.value);
-  // setComment(e.target.value);
-  // setOther(e.target.value);
-  // setImage(e.target.value); // event is defined in handler rather than setThing. Wont show up here as defined
-  // setValues(e.target.value);
-  // }, [eventTypeId, title, comment, other, photo, value]);
+  handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    const image = this.fileInputRef.current.files[0];
+    formData.append('summary', this.state.summary);
+    formData.append('eventTypeId', this.state.eventTypeId);
 
-  // const eventType = number => {
-  //   console.log(number);
-  //   return setEventTypeId(number);
-  // };
+    formData.append('title', this.state.title);
+    formData.append('description', this.state.description);
+    formData.append('image', image);
+    fetch('/api/events', {
+      method: 'POST',
+      body: formData
+    })
+      .then(() => {
+        window.location.hash = '#';
+      })
+      .catch(err => console.error('Dang! Fetch FAIIIIILED', err));
+  }
 
-  // const name = string => {
-  //   console.log(string);
-  //   return setEventName(string);
-  // };
-
-  // const handleCommentChange = e => {
-  //   setComment(e.target.value);
-  //   console.log(comment);
-  // };
-
-  // const handleTitle = e => {
-  //   setTitle(e.target.value);
-  //   console.log(title);
-  // };
-
-  // const handleOther = e => {
-  //   setOther(e.target.value);
-  //   console.log(e.target.value);
-  // };
-  // const fileInputRef = useRef();
-  // const handleFile = () => {
-  //   setImage(fileInputRef.current.files[0]);
-  // };
-
-  handleSubmit = e => {
-    if (e) {
-      console.log(e);
-      e.preventDefault();
-      if (eventTypeId === 0) {
-        setEventClick(false);
-        return;
-      }
-
-      setEventClick(true);
-      seteventId(eventId + 1);
-
-      const image = fileInputRef.current.files[0];
-      console.log('image', image);
-      const nameofEvent = eventName;
-      console.log('nameofEvent', nameofEvent);
-      const eventType = eventTypeId;
-      console.log('eventType ', eventType);
-      const description = comment;
-      console.log('description', description);
-      const newTitle = title;
-      console.log('newTitle', newTitle);
-      const summary = other;
-      console.log('summary ', summary);
-      const id = eventId;
-      console.log('id', eventId);
-      setValues({
-        ...value,
-        photo: image,
-        title,
-        description: comment,
-        summary: other,
-        eventType: eventTypeId,
-        eventId: id,
-        nameEvent: eventName
-      });
-
-      // sealues([...value, newFormData]);
-    }
-  };
-
-  // const formData = new FormData();
-  // formData.append('formData', newFormData);
-  // const method = {
-  //   method: 'POST',
-  //   body: formData
-  // };
-
-  // fetch('api/events', method)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     useState(newFormData)
-  //   })
   render() {
     return (
       <div className="container-md mx-auto">
@@ -134,91 +71,86 @@ export default class AddForm extends React.Component {
           </div>
           <div className="col-sm" />
         </div>
-        <form className="row" id="eventId" onSubmit={handleSubmit}>
+        <form className="row" id="eventId" onSubmit={this.handleSubmit}>
           <div className="form-holder">
             <div className="form-content">
               <div className="">
                 <div className="col d-flex justify-content-evenly flex-wrap">
-                  <div
-                    className="circleOne btn btn-hover border rounded-circle btn-active d-flex p-2"
-                    onClick={() => name('walk')}
-                    name={eventName}>
+                  <button
+                    className="circle-one btn btn-hover border rounded-circle btn-active d-flex p-2"
+                    data-set={this.state.eventTypeId}
+                    type="button"
+                    onClick={() => this.eventType(1)}>
                     <IoMdPeople
                       size={60}
                       style={{ fill: 'pink' }}
                       className="pb-1"
-                      onClick={() => this.eventType(1)}
-                      name={this.getEvent}
                     />
-                  </div>
-                  <div
-                    className="circleThree btn btn-hover border rounded-circle btn-active d-flex p-1"
-                    onClick={() => name('movie')}
-                    name={eventName}>
+                  </button>
+                  <button
+                    className="circle-three btn btn-hover border rounded-circle btn-active d-flex p-1"
+                    data-set={this.state.eventTypeId}
+                    type="button"
+                    onClick={() => this.eventType(2)}>
                     <BiCameraMovie
                       size={60}
                       style={{ fill: '#FFA500' }}
                       className="ps-1"
-                      onClick={() => eventType(2)}
-                      value={eventTypeId}
                     />
-                  </div>
-                  <div
-                    className="circleFour border btn btn-hover border-3 rounded-circle btn-active d-flex p-2"
-                    // onClick={() => name('phone')}
-                    name={eventName}>
+                  </button>
+                  <button
+                    className="circle-four border btn btn-hover border-3 rounded-circle btn-active d-flex p-2"
+                    data-set={this.state.eventTypeId}
+                    type="button"
+                    onClick={() => this.eventType(3)}>
                     <FaPhoneAlt
                       size={47}
                       style={{ fill: 'green' }}
                       className="pt-1"
-                      // onClick={() => eventType(3)}
-                      // value={eventTypeId}
                     />
-                  </div>
-                  <div
-                    className="circleFive btn-active btn-hover border btn border-3 rounded-circle btn-active d-flex p-2"
-                    onClick={() => name('meal')}
-                    name={eventName}>
+                  </button>
+                  <button
+                    className="circle-five btn btn-active btn-hover border btn border-3 rounded-circle btn-active d-flex p-2"
+                    data-set={this.state.eventTypeId}
+                    type="button"
+                    onClick={() => this.eventType(4)}>
                     <IoMdRestaurant
+                      name="eventTypeId"
                       size={50}
                       style={{ fill: '#52003a' }}
-                      onClick={() => eventType(4)}
-                      value={eventTypeId}
                     />
-                  </div>
-                  <div
-                    className="circleTwo btn-hover border btn btn-active rounded-circle btn-active d-flex p-2"
-                    onClick={() => name('doctor')}
-                    name={eventName}>
+                  </button>
+                  <button
+                    className="circle-two btn-hover border btn-active rounded-circle btn-active d-flex p-2"
+                    data-set={this.state.eventTypeId}
+                    type="button"
+                    onClick={() => this.eventType(5)}>
                     <FaUserNurse
                       size={50}
                       style={{ fill: '#00008B' }}
-                      onClick={() => eventType(5)}
-                      value={eventTypeId}
+                      // onClick={() => eventType(5)}
                     />
-                  </div>
-                  <div
-                    className="circleSix btn btn-hover border rounded-circle btn-active d-flex justify-content-center align-items-center"
-                    onClick={() => eventType(6)}
-                    value={eventTypeId}>
-                    <p
-                      className="font-bold fs-4 pt-3 fw-bold otherText text-warning"
-                      onClick={() => name('other')}
-                      name={eventName}>
+                  </button>
+                  <button
+                    className="circle-six btn btn-hover border rounded-circle btn-active d-flex justify-content-center align-items-center"
+                    onClick={() => this.eventType(6)}
+                    type="button"
+                    data-set={this.state.eventTypeId}>
+                    <p className="font-bold fs-4 pt-3 fw-bold otherText text-warning">
                       Other
                     </p>
-                  </div>
+                  </button>
                 </div>
               </div>
               <div className="row">
                 <div className="col form-group pt-2">
                   <label htmlFor="other" className="d-block fs-5 form-label" />
                   <input
-                    id="other"
-                    name="other"
+                    id="summary"
+                    name="summary"
                     type="text"
-                    onChange={handleOther}
-                    value={other}
+                    onChange={this.onChange}
+                    value={this.state.summary}
                     placeholder="Other...."
                     className="form-control rounded mt-3 bg-transparent px-4 py-2.5 text-light"
                   />
@@ -230,8 +162,8 @@ export default class AddForm extends React.Component {
                     required
                     name="title"
                     type="text"
-                    onChange={handleTitle}
-                    value={title}
+                    onChange={this.onChange}
+                    value={this.state.title}
                     placeholder="Title..."
                     className="form-control rounded bg-transparent px-4 py-2.5 font-bold text-heading text-light"
                   />
@@ -247,10 +179,10 @@ export default class AddForm extends React.Component {
                   <textarea
                     className="form-control border-2 border-muted-2 bg-transparent px-4 py-2.5 text-light"
                     rows="5"
-                    id="comment"
-                    name="comment"
-                    onChange={handleCommentChange}
-                    value={comment}
+                    id="description"
+                    name="description"
+                    onChange={this.onChange}
+                    value={this.state.description}
                   />
                 </div>
               </div>
@@ -258,19 +190,18 @@ export default class AddForm extends React.Component {
                 <div className="col justify-content-evenly">
                   <div className="mb-3">
                     <label htmlFor="formFile" className="form-label">
-                      Default file input example
+                      image
                     </label>
                     <input
                       className="form-control text-white-50 bg-dark"
                       type="file"
                       id="formFile"
-                      name="photo"
-                      onChange={handleFile}
-                      ref={fileInputRef}
+                      name="photoUrl"
+                      ref={this.fileInputRef}
+                      onChange={this.state.onFileChange}
                       accept=".png, .jpg, .jpeg, .gif"
                     />
                   </div>
-
                   <div className="d-flex justify-content-end">
                     <button
                       className="btn btn-primary btn-md mt-2"
@@ -279,9 +210,6 @@ export default class AddForm extends React.Component {
                     </button>
                   </div>
                 </div>
-                {!enterTypeClick && (
-                  <p className="text-warning">Please choose an event type</p>
-                )}
               </div>
             </div>
           </div>

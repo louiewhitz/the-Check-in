@@ -9,7 +9,7 @@ CREATE TABLE "public"."users" (
 	"userId" serial NOT NULL,
 	"firstName" TEXT NOT NULL,
 	"lastName" TEXT NOT NULL,
-	"lastPost" serial NOT NULL,
+	"lastPost" timestamptz default null,
 	CONSTRAINT "users_pk" PRIMARY KEY ("userId")
 ) WITH (
   OIDS=FALSE
@@ -26,7 +26,7 @@ CREATE TABLE "public"."events" (
 	"userId" integer NOT NULL,
 	"eventTypeId" integer NOT NULL,
 	"timelineId" integer NOT NULL,
-	"scheduleId" integer NOT NULL,
+	"scheduleId" integer default null,
 	CONSTRAINT "events_pk" PRIMARY KEY ("eventId")
 ) WITH (
   OIDS=FALSE
@@ -35,7 +35,7 @@ CREATE TABLE "public"."events" (
 
 
 CREATE TABLE "public"."eventTypes" (
-	"eventTypeId" serial NOT NULL,
+	"eventTypeId" integer NOT NULL,
 	"eventName" TEXT NOT NULL,
 	CONSTRAINT "eventTypes_pk" PRIMARY KEY ("eventTypeId")
 ) WITH (
@@ -45,7 +45,7 @@ CREATE TABLE "public"."eventTypes" (
 
 
 CREATE TABLE "public"."schedules" (
-	"scheduleId" serial NOT NULL,
+	"scheduleId" integer NOT NULL,
 	"title" TEXT NOT NULL,
 	"scheduleTime" TIMESTAMP NOT NULL,
 	"timelineId" integer NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE "public"."schedules" (
 CREATE TABLE "public"."timelines" (
 	"timelineId" serial NOT NULL,
 	"timelineFor" TEXT NOT NULL,
-	"lastPost" TIMESTAMP,
+	"lastPost" TIMESTAMPTZ default null,
 	CONSTRAINT "timelines_pk" PRIMARY KEY ("timelineId")
 ) WITH (
   OIDS=FALSE

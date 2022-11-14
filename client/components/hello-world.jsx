@@ -1,21 +1,24 @@
 import React from 'react';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
 
-// const style = { color: 'white', fontSize: '1.5em' };
-export default function Add(props) {
+export default function HomeBase(props) {
   return (
     <div className="container">
+      <div className="container">
+        <p className="text-white text-center me-4">Add your event,</p>
+        <p className="text-white text-center ms-5">get the ball rolling</p>
+      </div>
+      ;
       <div className="row d-flex justify-content-evenly">
         <div className="col text-end">
-          <Link to="/addevent">
+          <a href="#addform">
             <IoAddCircle size={200} style={{ fill: 'greenyellow' }} />
-          </Link>
+          </a>
         </div>
         <div className="col text-start">
-          <Link to="/schedule">
+          <a href='#scheduling'>
             <IoCalendarSharp size={200} style={{ fill: 'purple' }} />
-          </Link>
+          </a>
         </div>
       </div>
     </div>
