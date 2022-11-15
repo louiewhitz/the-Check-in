@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
   box-sizing: border-box;
-  box-sizing: border-box;
 }
 
 div.bg-light {
@@ -23,9 +22,9 @@ body {
   object-fit: contain;
 }
 
-.img {
+/* .img {
   width: 100%;
-}
+} */
 
 .navbar-brand {
   font-family: "Moon Dance", cursive;
@@ -70,8 +69,6 @@ input::-webkit-calendar-picker-indicator {
   margin: 0;
   transform: rotate(0deg);
   transform: rotate(0deg);
-  transform: rotate(0deg);
-  transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   cursor: pointer;
@@ -87,8 +84,6 @@ input::-webkit-calendar-picker-indicator {
   left: 0;
   transform: rotate(0deg);
   transform: rotate(0deg);
-  transform: rotate(0deg);
-  transition: 0.25s ease-in-out;
   transition: 0.25s ease-in-out;
   transition: 0.25s ease-in-out;
   background: #e3f2fd;
@@ -116,11 +111,9 @@ input::-webkit-calendar-picker-indicator {
 .animated-icon2.open span:nth-child(2) {
   transform: rotate(45deg);
   transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 
 .animated-icon2.open span:nth-child(3) {
-  transform: rotate(-45deg);
   transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
@@ -152,7 +145,6 @@ input::-webkit-calendar-picker-indicator {
   transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
-  transition: all 0.4s ease-in-out;
 }
 
 .btn-active:active {
@@ -161,7 +153,6 @@ input::-webkit-calendar-picker-indicator {
 
 .btn-hover:hover {
   background-position: 100% 0;
-  transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
@@ -411,7 +402,7 @@ a {
 #other,
 #title,
 #comment {
-  width: 100%;
+  width: 85%;
   border: 2px solid rgb(134, 130, 130);
 }
 
@@ -425,7 +416,6 @@ a {
   display: inline-block;
   width: 100%;
   min-width: 720px;
-  border-radius: 10px;
   border-radius: 10px;
   border-radius: 10px;
   text-align: left;
@@ -454,3 +444,224 @@ button {
 
   /* width: 100%; */
 }
+
+section#timeline {
+  width: 100%;
+  margin: 20px auto;
+  position: relative;
+}
+
+section#timeline::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0 0 0 -1px;
+  width: 2px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+section#timeline article {
+  width: 100%;
+  margin: 0 0 20px;
+  position: relative;
+}
+
+section#timeline article::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+section#timeline article div.inner {
+  width: 80%;
+  float: right;
+  margin: 5px 0 0;
+  border-radius: 6px;
+}
+
+.phone {
+  width: 75px;
+  height: 75px;
+  border: 2px solid white;
+  background-image:
+    linear-gradient(
+      to right,
+      #0ba360,
+      #3cba92,
+      #30dd8a,
+      #2bb673
+    );
+  box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+}
+
+.meal {
+  width: 75px;
+  height: 75px;
+  border: 2px solid white;
+  background-image:
+    linear-gradient(
+      to right,
+      #eb3941,
+      #f15e64,
+      #f37e82,
+      #e2373f
+    );
+  box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
+}
+
+.doctor {
+  width: 75px;
+  height: 75px;
+  border: 2px solid white;
+  background-image:
+    linear-gradient(
+      to right,
+      #25aae1,
+      #4481eb,
+      #04befe,
+      #3f86ed
+    );
+  box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.movie {
+  width: 75px;
+  height: 75px;
+  border: 2px solid white;
+  background-image:
+    linear-gradient(
+      to right,
+      #f5ce62,
+      #e43603,
+      #fa7199,
+      #e85a19
+    );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+
+.other {
+  width: 75px;
+  height: 75px;
+  border: 2px solid white;
+  background-image:
+    linear-gradient(
+      to right,
+      #744648,
+      #a5a2a5,
+      #8c8e96,
+      #7e997c
+    );
+  box-shadow: 0 5px 15px rgba(92, 87, 87, 0.4);
+}
+
+.walk {
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+  border: 2px solid white;
+  background-image:
+    linear-gradient(
+      to right,
+      #6253e1,
+      #852d91,
+      #a3a1ff,
+      #f24645
+    );
+  box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+}
+
+.missed-day {
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding: 5px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 0 0 -14px;
+  border-radius: 100%;
+  border: 2px solid rgb(124, 19, 19);
+  background-image:
+    linear-gradient(
+      to right,
+      #910c24,
+      #ba4549,
+      #de243d,
+      #f24645
+    );
+  box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+}
+
+section#timeline article div.inner span.date {
+  display: block;
+  padding: 5px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 0 0 -32px;
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+  border: 2px solid white;
+}
+
+section#timeline article div.inner span.date span {
+  display: block;
+  text-align: center;
+}
+
+section#timeline article div.inner span.date span.other {
+  font-size: 18px;
+}
+
+section#timeline article div.inner h2 {
+  padding: 10px;
+  margin: 0;
+  color: rgb(75, 188, 208);
+  font-size: 20px;
+  background: #14073e;
+  letter-spacing: -1px;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+}
+
+section#timeline article div.inner p {
+  padding: 15px;
+  margin: 0;
+  font-size: 14px;
+  background: #424867;
+  color: #ceced9;
+  border-radius: 0 0 6px 6px;
+}
+
+section#timeline article div.inner .bg {
+  padding: 5px;
+  margin: 0;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  position: relative;
+}
+
+section#timeline article div.inner .edit {
+  position: absolute;
+  top: 1;
+  right: 0;
+}
+
+section#timeline article div.inner .thisdate {
+  position: absolute;
+  top: 1;
+  left: 0;
+  color: rgb(192, 153, 205);
+}
+
+/*
+.img {
+  width: 60px;
+  height: auto;
+  border-radius: 100%;
+} */

@@ -32,6 +32,27 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/events/:eventId', (req, res, next) => {
+  const eventId = Number(req.params.eventId);
+  if (!eventId) {
+    throw new ClientError(400, 'entryId must be a positive integer');
+  }
+  const sql = `
+   select *
+     from "events"
+     where "eventId" = $1
+  `;
+  const params = [eventId];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError(404, `cannot find entry with eventId ${eventId}`);
+      }
+      res.json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.post('/api/events', uploadsMiddleware, (req, res, next) => {
   const { title, description, summary, eventTypeId, timelineId, scheduleId } =
     req.body;

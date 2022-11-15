@@ -52,7 +52,7 @@ export default class AddForm extends React.Component {
       body: formData
     })
       .then(() => {
-        window.location.hash = '#';
+        window.location.hash = '#timeline';
       })
       .catch(err => console.error('Dang! Fetch FAIIIIILED', err));
   }
@@ -110,7 +110,7 @@ export default class AddForm extends React.Component {
                     />
                   </button>
                   <button
-                    className="circle-five btn btn-active btn-hover border btn border-3 rounded-circle btn-active d-flex p-2"
+                    className="circle-five btn btn-active btn-hover border btn  rounded-circle btn-active d-flex p-2"
                     data-set={this.state.eventTypeId}
                     type="button"
                     onClick={() => this.eventType(4)}>
