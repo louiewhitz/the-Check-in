@@ -1,6 +1,6 @@
 
-insert into "users" ("firstName", "lastName")
-  values ('Sally', 'May');
+insert into "users" ("firstName", "lastName", "hashedPassword", "username")
+  values ('Sally', 'May', 'dummy', 'marigold');
 
 insert into "timelines" ("timelineFor")
   values ('James');
