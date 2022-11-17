@@ -48,7 +48,7 @@ export default class SignIn extends React.Component {
 
   render() {
     const user = this.context.user;
-    console.log('user', user);
+
     if (user) return <Redirect to="#" />;
 
     const { action } = this.props;
@@ -58,7 +58,6 @@ export default class SignIn extends React.Component {
       action === 'sign-up' ? 'Sign in instead' : 'Register now';
 
     const submitButtonText = action === 'sign-up' ? 'Register' : 'Log In';
-    // thats what the sign up contaoner was for, so this is the sign in and then theres a sign up I just need to incorporate that again, I also realize we can use App.context for whether someone is signed -- that was trying to take us to the users page just now lol I have to add it elseweren AAHH I SEEE Just write WELCOME OR SIGN IN ON EACH PAGE
 
     return (
       <div>
