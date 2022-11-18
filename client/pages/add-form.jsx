@@ -1,4 +1,6 @@
 import React from 'react';
+import Redirect from '../components/redirect';
+import AppContext from '../lib/app-context';
 import { FaUserNurse, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
@@ -39,16 +41,21 @@ export default class AddForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const formData = new FormData();
     const image = this.fileInputRef.current.files[0];
+
     formData.append('summary', this.state.summary);
     formData.append('eventTypeId', this.state.eventTypeId);
-
     formData.append('title', this.state.title);
     formData.append('description', this.state.description);
     formData.append('image', image);
+
     fetch('/api/events', {
       method: 'POST',
+      headers: {
+        'X-Access-Token': localStorage.getItem('auth-token')
+      },
       body: formData
     })
       .then(() => {
@@ -58,6 +65,12 @@ export default class AddForm extends React.Component {
   }
 
   render() {
+    const { user } = this.context;
+
+    if (!user) {
+      return <Redirect to="#sign-in" />;
+    }
+
     return (
       <div className="container-md mx-auto">
         <div className="row d-flex justify-content-center align-items-center flex-wrap">
@@ -218,3 +231,5 @@ export default class AddForm extends React.Component {
     );
   }
 }
+
+AddForm.contextType = AppContext;

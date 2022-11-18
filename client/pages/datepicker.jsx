@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AppContext from '../lib/app-context';
+import Redirect from '../components/redirect';
 import { FaUserNurse, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
-import 'react-datepicker/dist/react-datepicker.css';
 
 import DatePicker from 'react-datepicker';
 
@@ -19,6 +20,7 @@ const ScheduleMe = () => {
 
   const [eventTypeId, setEventTypeId] = useState(0);
   const [title, setTitle] = useState('');
+  const { user } = useContext(AppContext);
 
   // const [value, setValues] = useState([]);
   // const [eventName, setEventName] = useState('');
@@ -27,14 +29,18 @@ const ScheduleMe = () => {
   };
   const handleTitle = e => {
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
 
   const eventType = number => {
-    console.log(number);
+    // console.log(number);
     setEventTypeId(number);
     return setEventTypeId(number);
   };
+
+  if (!user) {
+    return <Redirect to="#sign-in" />;
+  }
 
   return (
     <div className="container-md mx-auto">

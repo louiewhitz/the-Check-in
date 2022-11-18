@@ -1,8 +1,5 @@
 import React from 'react';
-
 import AppContext from '../lib/app-context';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class Header extends React.Component {
   // static contextType = UserContext;  // ryan put this here

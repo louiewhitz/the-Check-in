@@ -1,14 +1,13 @@
 import React from 'react';
+import Redirect from '../components/redirect';
+import AppContext from '../lib/app-context';
 import { FaTrashAlt } from 'react-icons/fa';
-
 import { RiEdit2Fill } from 'react-icons/ri';
-
 import { CgProfile } from 'react-icons/cg';
-
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
 import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
+
 export default class Timeline extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +18,11 @@ export default class Timeline extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/events')
+    fetch('/api/events', {
+      headers: {
+        'X-Access-Token': localStorage.getItem('auth-token')
+      }
+    })
       .then(res => res.json())
       .then(events =>
         this.setState({
@@ -31,6 +34,12 @@ export default class Timeline extends React.Component {
   }
 
   render() {
+    const { user } = this.context;
+
+    if (!user) {
+      return <Redirect to="#sign-in" />;
+    }
+
     return this.state.loaing
       ? (
         <p>...Please hold on a sec, loading</p>
@@ -101,3 +110,5 @@ function AllEvents(props) {
     </article>
   );
 }
+
+Timeline.contextType = AppContext;

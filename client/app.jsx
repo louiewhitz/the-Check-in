@@ -1,23 +1,23 @@
 import React from 'react';
 import Calendar from './pages/calendar';
 import jwtDecode from 'jwt-decode';
-import Redirect from './lib/redirect';
+import Redirect from './components/redirect';
 import PageContainer from './components/page-container';
 
 // import SchedulePage from './pages/schedule-page';
 import Header from './components/nav';
-import SignUp from './components/signup';
+// import SignUp from './components/signup';
 
 // import AddEvent from './pages/Add';
 import Timeline from './pages/timeline';
 
 import ScheduleMe from './pages/datepicker';
-import AddForm from './pages/sendCompletedForm';
-import HomeBase from './components/hello-world';
+import AddForm from './pages/add-form';
+import HomeBase from './pages/home';
 import Notes from './pages/notes';
-import SignIn from './components/signin';
+// import SignIn from './components/signin';
 import AppContext from './lib/app-context';
-import AuthPage from './pages/auth-form';
+import AuthPage from './pages/auth';
 import { parseRoute } from './lib';
 
 export default class App extends React.Component {
@@ -28,7 +28,9 @@ export default class App extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
-    // this.handleSignIn = this.handleSignIn.bind(this);
+
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -38,20 +40,20 @@ export default class App extends React.Component {
 
       this.setState({ route: parsedRoute });
     });
-    const token = window.localStorage.getItem('react-context-jwt');
+    const token = window.localStorage.getItem('auth-token');
     const user = token ? jwtDecode(token) : null;
     this.setState({ user, isAuthorizing: false });
   }
 
   handleSignIn(result) {
     const { user, token } = result;
-    window.localStorage.setItem('react-context-jwt', token);
+    window.localStorage.setItem('auth-token', token);
     this.setState({ user });
     return <Redirect to="timeline" />;
   }
 
   handleSignOut() {
-    window.localStorage.removeItem('react-context-jwt');
+    window.localStorage.removeItem('auth-token');
     this.setState({ user: null });
     window.location.hash = 'sign-in';
     return <Redirect to="sign-in" />;
@@ -62,10 +64,9 @@ export default class App extends React.Component {
     if (route.path === '') {
       return <HomeBase />;
     }
-    // if (route.path === 'sign-in' || route.path === 'sign-up') {
-    //   return <AuthPage />;
-    // }
-
+    if (route.path === 'sign-in' || route.path === 'sign-up') {
+      return <AuthPage />;
+    }
     if (route.path === 'addform') {
       return <AddForm />;
     }
@@ -75,17 +76,11 @@ export default class App extends React.Component {
     if (route.path === 'scheduling') {
       return <ScheduleMe />;
     }
-    if (route.path === 'sign-in') {
-      return <SignIn />;
-    }
     if (route.path === 'notes') {
       return <Notes />;
     }
     if (route.path === 'calendar') {
       return <Calendar />;
-    }
-    if (route.path === 'sign-up') {
-      return <SignUp />;
     }
   }
 
