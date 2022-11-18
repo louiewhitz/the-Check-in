@@ -63,7 +63,7 @@ export default class Header extends React.Component {
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#sign-up">
+                      <a className="dropdown-item" href="#sign-in">
                         Sign Up
                       </a>
                     </li>

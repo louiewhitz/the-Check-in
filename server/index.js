@@ -115,7 +115,7 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     })
     .catch(err => next(err));
 });
-app.use(authorizationMiddleware);
+// app.use(authorizationMiddleware);
 
 app.post('/api/events', uploadsMiddleware, (req, res, next) => {
   const { title, description, summary, eventTypeId, timelineId, scheduleId } =
