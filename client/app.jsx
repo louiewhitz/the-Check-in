@@ -3,19 +3,12 @@ import Calendar from './pages/calendar';
 import jwtDecode from 'jwt-decode';
 import Redirect from './components/redirect';
 import PageContainer from './components/page-container';
-
-// import SchedulePage from './pages/schedule-page';
 import Header from './components/nav';
-// import SignUp from './components/signup';
-
-// import AddEvent from './pages/Add';
 import Timeline from './pages/timeline';
-
 import ScheduleMe from './pages/datepicker';
 import AddForm from './pages/add-form';
 import HomeBase from './pages/home';
 import Notes from './pages/notes';
-// import SignIn from './components/signin';
 import AppContext from './lib/app-context';
 import AuthPage from './pages/auth';
 import { parseRoute } from './lib';
@@ -88,7 +81,7 @@ export default class App extends React.Component {
     if (this.state.isAuthorizing) return null;
     const { user, route } = this.state;
     const { handleSignIn, handleSignOut } = this;
-    const contextValue = { user, route, handleSignIn, handleSignOut }; // should this not be this.state.user, etc?
+    const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
         <>

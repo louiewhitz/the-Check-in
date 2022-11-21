@@ -43,53 +43,48 @@ export default class AuthForm extends React.Component {
     const { action } = this.props;
     const { handleChange, handleSubmit } = this;
     const { firstName, lastName, username, password } = this.state;
-    const alternateActionHref = action === 'sign-up'
-      ? '#sign-in'
-      : '#sign-up';
-    const alternatActionText = action === 'sign-up'
-      ? 'Sign in instead'
-      : 'Register now';
-    const submitButtonText = action === 'sign-up'
-      ? 'Register'
-      : 'Log In';
+    const alternateActionHref = action === 'sign-up' ? '#sign-in' : '#sign-up';
+    const alternatActionText =
+      action === 'sign-up' ? 'Sign in instead' : 'Register now';
+    const submitButtonText = action === 'sign-up' ? 'Register' : 'Log In';
     return (
       <form className="w-100" onSubmit={handleSubmit}>
-        {
-          action === 'sign-up'
-            ? (
-              <>
-                <div className="mb-3">
-                  <label htmlFor="firstName" className="form-label">
-                    First Name
-                  </label>
-                  <input
-                    required
-                    autoFocus
-                    id="firstName"
-                    type="text"
-                    name="firstName"
-                    onChange={handleChange}
-                    value={firstName}
-                    className="form-control bg-light" />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="lastName" className="form-label">
-                    Last Name
-                  </label>
-                  <input
-                    required
-                    autoFocus
-                    id="lastName"
-                    type="text"
-                    name="lastName"
-                    onChange={handleChange}
-                    value={lastName}
-                    className="form-control bg-light" />
-                </div>
-              </>
-              )
-            : null
-        }
+        {action === 'sign-up'
+          ? (
+            <>
+              <div className="mb-3">
+                <label htmlFor="firstName" className="form-label">
+                  First Name
+                </label>
+                <input
+                required
+                autoFocus
+                id="firstName"
+                type="text"
+                name="firstName"
+                onChange={handleChange}
+                value={firstName}
+                className="form-control bg-transparent"
+              />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="lastName" className="form-label">
+                  Last Name
+                </label>
+                <input
+                required
+                autoFocus
+                id="lastName"
+                type="text"
+                name="lastName"
+                onChange={handleChange}
+                value={lastName}
+                className="form-control bg-light"
+              />
+              </div>
+            </>
+            )
+          : null}
         <div className="mb-3">
           <label htmlFor="username" className="form-label">
             Username
@@ -102,7 +97,8 @@ export default class AuthForm extends React.Component {
             name="username"
             onChange={handleChange}
             value={username}
-            className="form-control bg-light" />
+            className="form-control bg-light"
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">
@@ -115,7 +111,8 @@ export default class AuthForm extends React.Component {
             name="password"
             onChange={handleChange}
             value={password}
-            className="form-control bg-light" />
+            className="form-control bg-light"
+          />
         </div>
         <div className="d-flex justify-content-between align-items-center">
           <small>

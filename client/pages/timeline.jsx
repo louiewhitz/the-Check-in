@@ -3,10 +3,11 @@ import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
 import { FaTrashAlt } from 'react-icons/fa';
 import { RiEdit2Fill } from 'react-icons/ri';
-import { CgProfile } from 'react-icons/cg';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
 import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class Timeline extends React.Component {
   constructor(props) {
@@ -77,6 +78,7 @@ export default class Timeline extends React.Component {
 }
 function AllEvents(props) {
   const { eventTypeId, title, description, createdAt } = props.event;
+
   const postedOn = new Date(createdAt);
 
   const post = format(postedOn, 'EEEE, ii, yy');
@@ -100,8 +102,6 @@ function AllEvents(props) {
               className="mx-1"
               style={{ fill: '#25aae1' }}
             />
-
-            <CgProfile size={30} className="mx-1" />
           </span>
         </h2>
 

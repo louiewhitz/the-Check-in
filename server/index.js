@@ -81,6 +81,21 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/all-usernames', (req, res, next) => {
+  const { username } = req.body;
+  const sql = `
+  select "username"
+  from "users";
+  `;
+  db.query(sql)
+    .then(result => {
+      const users = [];
+      result.rows.forEach(user => users.push(user.username));
+      res.status(200).json(users);
+    })
+    .catch(err => next(err));
+});
+
 app.use(authorizationMiddleware);
 
 app.get('/api/events', (req, res, next) => {
@@ -97,7 +112,7 @@ app.get('/api/events', (req, res, next) => {
 app.get('/api/events/:eventId', (req, res, next) => {
   const eventId = Number(req.params.eventId);
   if (!eventId) {
-    throw new ClientError(400, 'entryId must be a positive integer');
+    throw new ClientError(400, 'eventId must be a positive integer');
   }
   const sql = `
    select *
@@ -116,14 +131,8 @@ app.get('/api/events/:eventId', (req, res, next) => {
 });
 
 app.post('/api/events', uploadsMiddleware, (req, res, next) => {
-  const {
-    title,
-    description,
-    summary,
-    eventTypeId,
-    timelineId,
-    scheduleId
-  } = req.body;
+  const { title, description, summary, eventTypeId, timelineId, scheduleId } =
+    req.body;
 
   const userId = req.user.userId;
 

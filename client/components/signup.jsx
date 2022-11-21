@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import AppContext from '../lib/app-context';
-import Redirect from '../lib/redirect';
+// import Redirect from '../lib/redirect';
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -41,7 +42,7 @@ export default class SignUp extends React.Component {
         lastName: this.state.lastName
       })
       .then(res => {
-        console.log('res.data:', res.data);
+        // console.log('res.data:', res.data);
         // this.context.props(res.data);
 
         this.setState({ username: '', password: '' });
@@ -58,9 +59,6 @@ export default class SignUp extends React.Component {
   render() {
     console.log('this.state', this.state);
     console.log('prpos in render', this.props);
-    // const user = this.user.context;
-
-    // if (user) return <Redirect to="" />;
 
     const { action } = this.props;
     const { handleChange, handleSubmit } = this;

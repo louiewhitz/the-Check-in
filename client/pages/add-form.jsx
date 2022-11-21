@@ -8,7 +8,6 @@ import { BiCameraMovie } from 'react-icons/bi';
 export default class AddForm extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       description: '',
       summary: '',
@@ -70,7 +69,6 @@ export default class AddForm extends React.Component {
     if (!user) {
       return <Redirect to="#sign-in" />;
     }
-
     return (
       <div className="container-md mx-auto">
         <div className="row d-flex justify-content-center align-items-center flex-wrap">
@@ -138,11 +136,7 @@ export default class AddForm extends React.Component {
                     data-set={this.state.eventTypeId}
                     type="button"
                     onClick={() => this.eventType(5)}>
-                    <FaUserNurse
-                      size={50}
-                      style={{ fill: '#00008B' }}
-                      // onClick={() => eventType(5)}
-                    />
+                    <FaUserNurse size={50} style={{ fill: '#00008B' }} />
                   </button>
                   <button
                     className="circle-six btn btn-hover border rounded-circle btn-active d-flex justify-content-center align-items-center"

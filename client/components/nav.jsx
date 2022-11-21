@@ -2,7 +2,6 @@ import React from 'react';
 import AppContext from '../lib/app-context';
 
 export default class Header extends React.Component {
-  // static contextType = UserContext;  // ryan put this here
   render() {
     const { user, handleSignOut } = this.context;
     return (
@@ -57,11 +56,6 @@ export default class Header extends React.Component {
                     <li>
                       <a className="dropdown-item" href="#viewphoto">
                         View Photos
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#sign-in">
-                        Sign Up
                       </a>
                     </li>
                   </ul>

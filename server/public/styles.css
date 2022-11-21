@@ -136,8 +136,6 @@ input::-webkit-calendar-picker-indicator {
   color: #fff;
   cursor: pointer;
 
-  /* margin: 20px;
-    height: 55px; */
   text-align: center;
   border: none;
   background-size: 300% 100%;
@@ -745,4 +743,9 @@ input[type='checkbox'] {
   margin-bottom: 15px;
   background: rgba(255, 255, 255, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#show-modal {
+  border: none;
+  background-color: transparent;
 }
