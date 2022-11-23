@@ -1,21 +1,16 @@
 import React from 'react';
 import Calendar from './pages/calendar';
-import jsonwebtoken from 'jsonwebtoken';
-// import Home from './pages/home';
-// import SchedulePage from './pages/schedule-page';
+import jwtDecode from 'jwt-decode';
+import Redirect from './components/redirect';
+import PageContainer from './components/page-container';
 import Header from './components/nav';
-import SignUp from './components/signup';
-import SignUpContainer from './pages/signupcontainer';
-// import AddEvent from './pages/Add';
 import Timeline from './pages/timeline';
-// import Auth from '../components/auth-form';
-import DatePicker from './pages/datepicker';
-import AddForm from './pages/sendCompletedForm';
-import HomeBase from './components/hello-world';
+import ScheduleMe from './pages/datepicker';
+import AddForm from './pages/add-form';
+import HomeBase from './pages/home';
 import Notes from './pages/notes';
-import SignIn from './components/signin';
 import AppContext from './lib/app-context';
-
+import AuthPage from './pages/auth';
 import { parseRoute } from './lib';
 
 export default class App extends React.Component {
@@ -26,7 +21,9 @@ export default class App extends React.Component {
       isAuthorizing: true,
       route: parseRoute(window.location.hash)
     };
-    // this.handleSignIn = this.handleSignIn.bind(this);
+
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -36,20 +33,23 @@ export default class App extends React.Component {
 
       this.setState({ route: parsedRoute });
     });
-    const token = window.localStorage.getItem('react-context-jwt');
-    const user = token ? jsonwebtoken(token) : null;
+    const token = window.localStorage.getItem('auth-token');
+    const user = token ? jwtDecode(token) : null;
     this.setState({ user, isAuthorizing: false });
   }
 
   handleSignIn(result) {
     const { user, token } = result;
-    window.localStorage.setItem('react-context-jwt', token);
+    window.localStorage.setItem('auth-token', token);
     this.setState({ user });
+    return <Redirect to="timeline" />;
   }
 
   handleSignOut() {
-    window.localStorage.removeItem('react-context-jwt');
+    window.localStorage.removeItem('auth-token');
     this.setState({ user: null });
+    window.location.hash = 'sign-in';
+    return <Redirect to="sign-in" />;
   }
 
   renderPage() {
@@ -58,11 +58,7 @@ export default class App extends React.Component {
       return <HomeBase />;
     }
     if (route.path === 'sign-in' || route.path === 'sign-up') {
-      return <SignUpContainer />;
-    }
-
-    if (route.path === '') {
-      return <HomeBase />;
+      return <AuthPage />;
     }
     if (route.path === 'addform') {
       return <AddForm />;
@@ -71,10 +67,7 @@ export default class App extends React.Component {
       return <Timeline />;
     }
     if (route.path === 'scheduling') {
-      return <DatePicker />;
-    }
-    if (route.path === 'sign-in') {
-      return <SignIn />;
+      return <ScheduleMe />;
     }
     if (route.path === 'notes') {
       return <Notes />;
@@ -82,20 +75,19 @@ export default class App extends React.Component {
     if (route.path === 'calendar') {
       return <Calendar />;
     }
-    if (route.path === 'sign-up') {
-      return <SignUp />;
-    }
   }
 
   render() {
     if (this.state.isAuthorizing) return null;
     const { user, route } = this.state;
     const { handleSignIn, handleSignOut } = this;
-    const contextValue = { user, route, handleSignIn, handleSignOut }; // should this not be this.state.user, etc?
+    const contextValue = { user, route, handleSignIn, handleSignOut };
     return (
       <AppContext.Provider value={contextValue}>
-        <Header />
-        {this.renderPage()}
+        <>
+          <Header />
+          <PageContainer>{this.renderPage()}</PageContainer>
+        </>
       </AppContext.Provider>
     );
   }

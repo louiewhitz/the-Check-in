@@ -1,55 +1,85 @@
 import React from 'react';
 import SignIn from '../components/signin';
-import AppContext from '../lib/app-context';
+
 import SignUp from '../components/signup';
-import Redirect from '../lib/redirect'; // can use this 'https://v5.reactrouter.com/web/api/Redirect'
 
 export default class SignUpContainer extends React.Component {
-  render() {
-    const { user, route, handleSignIn } = this.context;
-    // console.log('this.context Auth', this.context);
-
-    if (user) return <Redirect to="" />; /// <<< thats the redirect
-
-    const welcomeMessage =
-      route.path === 'sign-in' ? 'Welcome back!' : 'Sign up';
-    // can use this 'https://v5.reactrouter.com/web/api/Redirect'
-
-    return (
-      <div>
-        <div className="form-block-wrapper" />
-        <section className="form-block form-bl">
-          <header className="form-block__header">
-            <h1>{welcomeMessage}</h1>
-            <div className="form-block__toggle-block">
-              <label htmlFor="form-toggler" className="circle" />
-            </div>
-          </header>
-          <LoginForm mode={this.state.action} onSubmit={this.props.action} />
-        </section>
-      </div>
-    );
-  }
-}
-
-SignUpContainer.contextType = AppContext;
-
-/* <AuthForm
-              key={route.path}
-              action={route.path}
-              onSignIn={handleSignIn} />
-          </div> */
-
-class LoginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOn: this.props.action };
+    this.state = {
+      currentPage: 'sign-in'
+    };
+    this.toggleSign = this.toggleSign.bind(this);
+  }
+
+  toggleMode() {
+    const action = this.state.isOn === 'login' ? 'sign-up' : 'login';
+    this.setState({ isOn: action });
+  }
+
+  toggleSign(route) {
+    if (route === 'sign-in') {
+      this.setState({
+        currentPage: 'sign-in',
+        welcomeMessage: 'Welcome Back!',
+        href: '#sign-up'
+      });
+    } else {
+      this.setState({
+        currentPage: 'sign-up',
+        welcomeMessage: 'Sign up',
+        href: '#sign-in'
+      });
+    }
   }
 
   render() {
-    console.log('state', this.state);
-    console.log('props', this.props);
+    // console.log('this.state:', this.state);
+    return (
+      <div>
+        <div className="container">
+          <div className="form-block-wrapper" />
+          <section className="form-block-wrapper">
+            {/* <header className="form-block__header">
+              <h1 className="text-white">
+                {this.state.currentPage === 'sign-up'
+                  ? 'Sign up'
+                  : 'Welcome Back'}
+              </h1>
 
-    return <SignIn />;
+              <div className="form-block__toggle-block">
+                <span>
+                  {this.state.currentPage === 'sign-up' ? 'Already' : "Don't"}{' '}
+                  have an account? Click here &#8594;
+                </span>
+                <a
+                  href={
+                    this.state.currentPage === 'sign-up'
+                      ? '#sign-in'
+                      : '#sign-up'
+                  }
+                  id="form-toggler"
+                  onClick={this.toggleMode.bind(this)}
+                  className="toggle-button"
+                />
+                {this.state.currentPage === 'sign-up' ? 'login' : 'Register'}
+                <label htmlFor="form-toggler" className="circle" />
+              </div>
+            </header> */}
+            <div>
+              {this.state.currentPage === 'sign-up'
+                ? (
+                  <SignUp />
+                  )
+                : this.state.currentPage === 'sign-in'
+                  ? (
+                    <SignIn />
+                    )
+                  : null}
+            </div>
+          </section>
+        </div>
+      </div>
+    );
   }
 }

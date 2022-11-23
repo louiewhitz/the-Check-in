@@ -28,6 +28,7 @@ CREATE TABLE "public"."events" (
 	"eventTypeId" integer NOT NULL,
 	"timelineId" integer NOT NULL,
 	"scheduleId" integer,
+
 	CONSTRAINT "events_pk" PRIMARY KEY ("eventId")
 ) WITH (
   OIDS=FALSE

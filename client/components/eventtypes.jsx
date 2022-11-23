@@ -18,12 +18,15 @@ export default function EventType(props) {
           </span>
         </span>
       );
-
     case 2:
       return (
-        <span className="date doctor">
+        <span className="date movie">
           <span>
-            <FaUserNurse size={50} style={{ fill: '#00008B' }} />
+            <BiCameraMovie
+              size={60}
+              style={{ fill: '#FFA500' }}
+              className="ps-1"
+            />
           </span>
         </span>
       );
@@ -53,20 +56,14 @@ export default function EventType(props) {
           </span>
         </span>
       );
-
     case 5:
       return (
-        <span className="date movie">
+        <span className="date doctor">
           <span>
-            <BiCameraMovie
-              size={60}
-              style={{ fill: '#FFA500' }}
-              className="ps-1"
-            />
+            <FaUserNurse size={50} style={{ fill: '#00008B' }} />
           </span>
         </span>
       );
-
     case 6:
       return (
         <span className="date other btn-hover">

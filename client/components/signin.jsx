@@ -1,6 +1,6 @@
 import React from 'react';
-import Redirect from '../lib/redirect';
 import AppContext from '../lib/app-context';
+import Redirect from '../lib/redirect';
 
 export default class SignIn extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ export default class SignIn extends React.Component {
   }
 
   toggleMode() {
-    const action = this.state.isOn === 'login' ? 'sign-up' : 'login';
+    const action = this.state.isOn === 'sign-up' ? 'sign-up' : 'sign-in';
     this.setState({ isOn: action });
   }
 
@@ -41,19 +41,26 @@ export default class SignIn extends React.Component {
         if (action === 'sign-up') {
           window.location.hash = 'sign-in';
         } else if (result.user && result.token) {
-          this.props.onSignIn(result);
+          this.context.onSignIn(result.data);
         }
+        window.location.hash = 'timeline';
+
+        event.target.reset();
       });
   }
 
   render() {
-    const user = this.context.user;
+    console.log('this.state', this.state);
+    console.log('prpos in sign in ', this.props);
 
-    if (user) return <Redirect to="#" />;
+    const user = this.context.user;
+    console.log('user ', user);
+
+    if (user) return <Redirect to="" />;
 
     const { action } = this.props;
     const { handleChange, handleSubmit } = this;
-    const alternateActionHref = action === 'sign-up' ? '#sign-in' : '#sign-up';
+
     const alternatActionText =
       action === 'sign-up' ? 'Sign in instead' : 'Register now';
 
@@ -64,14 +71,11 @@ export default class SignIn extends React.Component {
         <div className="form-block-wrapper" />
         <section className="form-block">
           <header className="form-block__header">
-            <h1>{alternatActionText}</h1>
+            <h1 className="text-white">Welcome</h1>
             <div className="form-block__toggle-block">
-              <span>
-                {alternatActionText === 'sign-up' ? "don't" : 'Already'} have an
-                account? Click here &#8594;
-              </span>
+              <span>Don't have an account? Click here &#8594;</span>
               <a
-                href={alternateActionHref}
+                href="#sign-up"
                 id="form-toggler"
                 onClick={this.toggleMode.bind(this)}
                 className="toggle-button">

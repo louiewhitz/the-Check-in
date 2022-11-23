@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import AppContext from '../lib/app-context';
-import Redirect from '../lib/redirect';
+// import Redirect from '../lib/redirect';
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export default class SignUp extends React.Component {
     // console.log('state:', this.state);
     // console.log('submit props', this.props);
     event.preventDefault();
+
     // axios is used for an api call
     axios
       .post('/api/auth/sign-up', {
@@ -40,8 +42,8 @@ export default class SignUp extends React.Component {
         lastName: this.state.lastName
       })
       .then(res => {
-        console.log('res.data:', res.data);
-        this.context.props(res.data);
+        // console.log('res.data:', res.data);
+        // this.context.props(res.data);
 
         this.setState({ username: '', password: '' });
       })
@@ -55,15 +57,12 @@ export default class SignUp extends React.Component {
   }
 
   render() {
-    // console.log('this.state', this.state);
-    // console.log('prpos in render', this.props);
-    // const user = this.user.context;
-
-    // if (user) return <Redirect to="" />;
+    console.log('this.state', this.state);
+    console.log('prpos in render', this.props);
 
     const { action } = this.props;
     const { handleChange, handleSubmit } = this;
-    const alternateActionHref = action === 'sign-up' ? '#sign-up' : '#sign-in';
+    const alternateActionHref = '#sign-in';
     const alternatActionText =
       action === 'sign-up' ? 'Sign in instead' : 'Register now';
     const submitButtonText = action === 'sign-up' ? 'Register' : 'Log In';
@@ -73,12 +72,9 @@ export default class SignUp extends React.Component {
         <div className="form-block-wrapper" />
         <section className="form-block">
           <header className="form-block__header">
-            <h1>{alternatActionText}</h1>
+            <h1 className="text-white">Sign up</h1>
             <div className="form-block__toggle-block">
-              <span>
-                {alternatActionText === 'sign-up' ? "don't" : 'Already'} have an
-                account? Click here &#8594;
-              </span>
+              <span>Already have an account? account? Click here &#8594;</span>
               <a
                 href={alternateActionHref}
                 id="form-toggler"
