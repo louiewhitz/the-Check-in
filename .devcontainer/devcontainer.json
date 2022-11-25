@@ -13,7 +13,8 @@
 		"thebearingedge.lfz-code",
 		"jawandarajbir.react-vscode-extension-pack",
 		"ms-vsliveshare.vsliveshare",
-		"ms-vsliveshare.vsliveshare-audio"
+		"ms-vsliveshare.vsliveshare-audio",
+		"redhat.fabric8-analytics"
 	]
     }
   },

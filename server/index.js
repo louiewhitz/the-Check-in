@@ -96,6 +96,24 @@ app.get('/api/all-usernames', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
+  // console.log('req.file:', req.file);
+  // https://www.npmjs.com/package/multer-s3#file-information
+
+  const fileUrl = req.file.location; // The S3 url to access the uploaded file later
+
+  /* "logic" */
+
+  res.end(); // this is just here so my request doesn't hang
+});
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({
+    error: 'an unexpected error occurred (check the server terminal)'
+  });
+});
+
 app.use(authorizationMiddleware);
 
 app.get('/api/events', (req, res, next) => {
@@ -139,7 +157,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
   if (!title || !eventTypeId) {
     throw new ClientError(400, 'title and event type are required');
   }
-  const photoUrl = `/images/${req.file.filename}`;
+  const photoUrl = req.file.location;
   const sql = `
    insert into "events" ("title", "summary", "description", "photoUrl", "eventTypeId", "timelineId", "userId")
     values ($1, $2, $3, $4, $5, $6, $7)
