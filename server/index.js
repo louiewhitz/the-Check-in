@@ -10,6 +10,7 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const authorizationMiddleware = require('./authorization-middleware');
 const ClientError = require('./client-error');
+const Client = require('pg/lib/client');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -129,15 +130,16 @@ app.get('/api/events', (req, res, next) => {
 
 app.get('/api/events/:eventId', (req, res, next) => {
   const eventId = Number(req.params.eventId);
+  const userId = Number(req.params.userId);
   if (!eventId) {
     throw new ClientError(400, 'eventId must be a positive integer');
   }
   const sql = `
    select *
      from "events"
-     where "eventId" = $1
+     where "eventId" = $1 AND "userId" = $2
   `;
-  const params = [eventId];
+  const params = [eventId, userId];
   db.query(sql, params)
     .then(result => {
       if (!result.rows[0]) {
@@ -177,6 +179,27 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     .then(result => {
       const [newEvent] = result.rows;
       res.status(201).json(newEvent);
+    })
+    .catch(err => next(err));
+});
+
+app.patch('api/events/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+  const { eventId } = Number(req.params.eventId);
+  const { title, description } = req.body;
+  if (!title || !description) {
+    throw new ClientError(400, 'sorry, title and description are required');
+  }
+  const sql = `UPDATE "events"
+  SET "title" = $1,
+  "description" = $2
+  WHERE "eventId" = $3 AND "userId" = $4
+  RETURNING *;`;
+  const params = [title, description, eventId, userId];
+  db.query(sql, params)
+    .then(result => {
+      const [editedEvent] = result.rows;
+      res.json(editedEvent);
     })
     .catch(err => next(err));
 });

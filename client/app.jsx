@@ -11,6 +11,7 @@ import HomeBase from './pages/home';
 import Notes from './pages/notes';
 import AppContext from './lib/app-context';
 import AuthPage from './pages/auth';
+import UpdateForm from './components/delete-and-edit';
 import { parseRoute } from './lib';
 
 export default class App extends React.Component {
@@ -74,6 +75,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'calendar') {
       return <Calendar />;
+    }
+    if (route.path === 'edit') {
+      return <UpdateForm />;
     }
   }
 

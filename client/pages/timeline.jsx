@@ -6,6 +6,7 @@ import { RiEdit2Fill } from 'react-icons/ri';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
 import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
+import EditForm from '../components/edit-modal';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,6 +17,7 @@ export default class Timeline extends React.Component {
       events: [],
       loading: true
     };
+    // this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -97,11 +99,7 @@ function AllEvents(props) {
               className="mx-1"
               style={{ fill: '#fa7199' }}
             />
-            <RiEdit2Fill
-              size={30}
-              className="mx-1"
-              style={{ fill: '#25aae1' }}
-            />
+            <EditForm />
           </span>
         </h2>
 
