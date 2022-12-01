@@ -115,7 +115,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.use(authorizationMiddleware);
+// app.use(authorizationMiddleware);
 
 app.get('/api/events', (req, res, next) => {
   const sql = `
@@ -128,24 +128,34 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/events/:eventId', (req, res, next) => {
-  const eventId = Number(req.params.eventId);
-  const userId = Number(req.params.userId);
-  if (!eventId) {
-    throw new ClientError(400, 'eventId must be a positive integer');
-  }
+app.get('/api/all-useridentification', (req, res, next) => {
+  const { userId } = req.body;
   const sql = `
-   select *
-     from "events"
-     where "eventId" = $1 AND "userId" = $2
+  select "userId"
+  from "users";
   `;
-  const params = [eventId, userId];
+  db.query(sql)
+    .then(result => {
+      const users = [];
+      result.rows.forEach(user => users.push(user.userId));
+      res.status(200).json(users);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/events/:eventId', (req, res, next) => {
+  const userId = req.user.userId;
+
+  const eventId = Number(req.params.eventId);
+  console.log('eventId', eventId);
+  const sql = `
+  select "title", "description", "createdAt", "userId" from "events" where "eventId" = $1;
+  `;
+  const params = [eventId];
   db.query(sql, params)
     .then(result => {
-      if (!result.rows[0]) {
-        throw new ClientError(404, `cannot find entry with eventId ${eventId}`);
-      }
-      res.json(result.rows[0]);
+      const data = result.rows;
+      res.json(data);
     })
     .catch(err => next(err));
 });
@@ -154,6 +164,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
   const { title, description, summary, eventTypeId, timelineId, scheduleId } =
     req.body;
 
+  // const userId = Number(req.user);
   const userId = req.user.userId;
 
   if (!title || !eventTypeId) {
@@ -183,18 +194,16 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.patch('api/events/:eventId', (req, res, next) => {
-  const { userId } = req.user;
-  const { eventId } = Number(req.params.eventId);
+app.patch('/api/events/:eventId', (req, res, next) => {
+  const userId = req.user.userId;
+  const eventId = Number(req.params.eventId);
+
   const { title, description } = req.body;
   if (!title || !description) {
     throw new ClientError(400, 'sorry, title and description are required');
   }
   const sql = `UPDATE "events"
-  SET "title" = $1,
-  "description" = $2
-  WHERE "eventId" = $3 AND "userId" = $4
-  RETURNING *;`;
+  set "updatedAt" = now(),"title" = $1, "description" = $2, from "events" where "eventId" = $3 where "userId" = $4;`;
   const params = [title, description, eventId, userId];
   db.query(sql, params)
     .then(result => {

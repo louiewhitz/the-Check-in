@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
@@ -7,6 +8,7 @@ import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
 import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
 import EditForm from '../components/edit-modal';
+import DeleteModal from '../components/delete';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,7 +19,7 @@ export default class Timeline extends React.Component {
       events: [],
       loading: true
     };
-    // this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +36,10 @@ export default class Timeline extends React.Component {
         })
       )
       .catch(err => console.error('Dang, not this time!', err));
+  }
+
+  handleClick(number) {
+    this.setState({ eventId: number });
   }
 
   render() {
@@ -79,7 +85,16 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
-  const { eventTypeId, title, description, createdAt } = props.event;
+  const { eventTypeId, title, description, createdAt, eventId } = props.event;
+
+  const handleClick = () => {
+    const response = {
+      eventId: props.event.eventId,
+      title: props.event.title,
+      description: props.event.description
+    };
+    return response;
+  };
 
   const postedOn = new Date(createdAt);
 
@@ -94,12 +109,18 @@ function AllEvents(props) {
           <span className="thisdate mx-1">{post}</span>
           {title}
           <span className="edit text-muted">
-            <FaTrashAlt
-              size={30}
-              className="mx-1"
-              style={{ fill: '#fa7199' }}
+            <DeleteModal
+              onClick={handleClick}
+              id={eventId}
+              title={title}
+              description={description}
             />
-            <EditForm />
+            <EditForm
+              onClick={handleClick}
+              id={eventId}
+              title={title}
+              description={description}
+            />
           </span>
         </h2>
 
