@@ -77,7 +77,11 @@ export default class Timeline extends React.Component {
 
             <section id="timeline">
               {this.state.events.map(event => {
-                return <AllEvents key={event.eventId} event={event} />;
+                return (
+                  <div key={event.eventId}>
+                    <AllEvents event={event} />
+                  </div>
+                );
               })}
             </section>
           </div>
@@ -86,15 +90,6 @@ export default class Timeline extends React.Component {
 }
 function AllEvents(props) {
   const { eventTypeId, title, description, createdAt, eventId } = props.event;
-
-  const handleClick = () => {
-    const response = {
-      eventId: props.event.eventId,
-      title: props.event.title,
-      description: props.event.description
-    };
-    return response;
-  };
 
   const postedOn = new Date(createdAt);
 
@@ -109,18 +104,10 @@ function AllEvents(props) {
           <span className="thisdate mx-1">{post}</span>
           {title}
           <span className="edit text-muted">
-            <DeleteModal
-              onClick={handleClick}
-              id={eventId}
-              title={title}
-              description={description}
-            />
-            <EditForm
-              onClick={handleClick}
-              id={eventId}
-              title={title}
-              description={description}
-            />
+            <DeleteModal id={eventId} title={title} description={description} />
+            <a href={`#timeline?eventId=${eventId}`}>
+              <EditForm id={eventId} title={title} description={description} />
+            </a>
           </span>
         </h2>
 

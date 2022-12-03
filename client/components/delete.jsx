@@ -46,7 +46,6 @@ export default class DeleteModal extends React.Component {
           description,
           createdAt
         });
-        console.log('description', description);
       });
   }
 

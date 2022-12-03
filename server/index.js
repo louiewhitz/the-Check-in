@@ -115,7 +115,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// app.use(authorizationMiddleware);
+app.use(authorizationMiddleware);
 
 app.get('/api/events', (req, res, next) => {
   const sql = `
@@ -144,14 +144,21 @@ app.get('/api/all-useridentification', (req, res, next) => {
 });
 
 app.get('/api/events/:eventId', (req, res, next) => {
-  const userId = req.user.userId;
+  const { userId } = req.user;
 
   const eventId = Number(req.params.eventId);
-  console.log('eventId', eventId);
+  if (!Number.isInteger(eventId) || eventId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${eventId} must be a positive integer`
+    );
+  }
+
+  const { title, description } = req.body;
   const sql = `
-  select "title", "description", "createdAt", "userId" from "events" where "eventId" = $1;
+  select "title", "description", "createdAt" from "events" where "eventId" = $1 and "userId" = $2;
   `;
-  const params = [eventId];
+  const params = [eventId, userId];
   db.query(sql, params)
     .then(result => {
       const data = result.rows;
@@ -165,7 +172,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     req.body;
 
   // const userId = Number(req.user);
-  const userId = req.user.userId;
+  const { userId } = req.user;
 
   if (!title || !eventTypeId) {
     throw new ClientError(400, 'title and event type are required');
@@ -195,15 +202,25 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
 });
 
 app.patch('/api/events/:eventId', (req, res, next) => {
-  const userId = req.user.userId;
-  const eventId = Number(req.params.eventId);
+  const { userId } = req.user;
 
+  const eventId = Number(req.params.eventId);
+  if (!Number.isInteger(eventId) || eventId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${eventId} must be a positive integer`
+    );
+  }
   const { title, description } = req.body;
+
   if (!title || !description) {
     throw new ClientError(400, 'sorry, title and description are required');
   }
   const sql = `UPDATE "events"
-  set "updatedAt" = now(),"title" = $1, "description" = $2, from "events" where "eventId" = $3 where "userId" = $4;`;
+  set "title" = $1,
+  "description" = $2
+   where "eventId" = $3 and "userId" = $4
+   returning *;`;
   const params = [title, description, eventId, userId];
   db.query(sql, params)
     .then(result => {

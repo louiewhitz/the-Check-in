@@ -18,8 +18,7 @@ export default class EditForm extends React.Component {
       description: '',
       show: false,
       isEditing: false,
-      createdAt: '',
-      active: null
+      eventId: null
     };
     this.handleChange = this.handleChange.bind(this);
 
@@ -29,14 +28,8 @@ export default class EditForm extends React.Component {
   }
 
   componentDidMount() {
-    const { user } = this.context;
+    const { user, route } = this.context;
 
-    // console.log('eventId', eventId);
-
-    // console.log('this.context', this.context);
-    // const eventId = this.props.id;
-
-    // console.log('eventId', eventId);
     const req = {
       method: 'GET',
       headers: {
@@ -45,28 +38,31 @@ export default class EditForm extends React.Component {
       user
     };
 
-    // const token = localStorage.getItem('auth-token');
-    fetch('/api/events', req)
+    fetch(`/api/events/${this.props.eventId}`, req)
       .then(res => res.json())
       .then(result => {
-        const { title, description, createdAt } = result[0];
+        const { title, description, createdAt, eventId } = result;
+        console.log('result', result);
         this.setState({
           title,
           description,
-          createdAt
+          createdAt,
+          eventId
         });
       });
   }
 
-  handleShow(event) {
-    event.stopPropagation();
-
-    // console.log(event, eventId);
+  handleShow() {
+    const { title, description, createdAt, eventId } = this.state;
     this.setState({
       show: true,
-      isEditing: true,
-      title: this.state.title,
-      description: this.state.description
+
+      // title: this.state.title,
+      // descriptio: this.state.description,
+
+      // title: this.state.title,
+      // description: this.state.description,
+      isEditing: false
     });
   }
 
@@ -79,17 +75,19 @@ export default class EditForm extends React.Component {
 
   handleChange(event) {
     const { name, value } = event.target;
-    console.log('event.target', event.target);
-    console.log('event', event);
-
     this.setState({
-      [name]: value
+      [name]: value,
+      isEditing: true,
+      eventId: this.state.eventId
     });
   }
 
   updateSubmit(event) {
     event.preventDefault();
+    console.log('submit event', event);
     const { user } = this.context;
+    const eventId = Number(this.props.eventId);
+    console.log('eventId', eventId);
     const req = {
       method: 'PATCH',
       headers: {
@@ -99,37 +97,33 @@ export default class EditForm extends React.Component {
       user,
       body: JSON.stringify(this.state)
     };
-    fetch(`/api/events${this.props.eventId}`, req)
-      .then(() => {
-        window.location.hash = '#timeline';
+    fetch(`/api/events${eventId}`, req)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
+        this.setState({
+          title: '',
+          description: '',
+          isEditing: false,
+          eventId: null
+        }).then(() => {
+          window.location.hash = `#timeline?eventId=${this.props.eventId}`;
+        });
       })
       .catch(err => console.error(err));
   }
 
   render() {
-    console.log('props', this.props);
-    console.log('props eventId', this.props.event);
-    const { title, description, show, isEditing, eventId } = this.state;
-    let titleVal = this.state.title;
-    let descVal = this.state.description;
+    // const { title, description, show, eventId } = this.state;
+    const { user } = this.context;
+    const { title, description, show, eventId } = this.state;
+    console.log('this.state', this.state);
 
-    if (this.state.onChange) {
-      titleVal = this.state.title.value;
-      descVal = this.state.description.value;
-    }
+    console.log('props in render', this.props);
 
-    // const buttonText =
-    //   this.context.route.params.get('mode') === 'edit'
-    //     ? 'Delete'
-    //     : 'Save Changes';
+    console.log('props in render', this.props);
 
     const { handleChange, updateSubmit } = this;
-
-    // if (this.state.onChange) {
-    //   titleVal = this.title.value;
-    //   console.log('titleVal', titleVal);
-    //   descVal = this.state.title.value;
-    // }
 
     return (
       <>
@@ -149,7 +143,11 @@ export default class EditForm extends React.Component {
                 name="title"
                 type="text"
                 onChange={handleChange}
-                value={titleVal}
+                value={
+                  title === this.isEditing
+                    ? this.props.title
+                    : this.state.title.value
+                }
                 placeholder="Title..."
                 className="form-control rounded bg-transparent px-4 py-2.5 font-bold text-heading"
               />
@@ -162,7 +160,11 @@ export default class EditForm extends React.Component {
               id="description"
               name="description"
               onChange={handleChange}
-              value={descVal}
+              value={
+                description === this.isEditing
+                  ? this.props.description
+                  : this.state.description.value
+              }
             />
           </Modal.Body>
           <Modal.Footer>
@@ -182,4 +184,5 @@ export default class EditForm extends React.Component {
     );
   }
 }
+
 EditForm.contextType = AppContext;

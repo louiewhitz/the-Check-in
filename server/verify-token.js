@@ -2,7 +2,7 @@ require('dotenv/config');
 const jwt = require('jsonwebtoken');
 
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYXV0b2RpZGFjdCIsImlhdCI6MTYwODE1NjM4Nn0.w9mORRpJ6Twlwr1pMdILyNqOyz7Auh8_rzcRUsexvy8';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxvdWlld2hpdHoiLCJ1c2VySWQiOjIsImlhdCI6MTY2OTY5MDExNX0.IFmUJuzS6v35H9ROMnlYgtNyhoi0mapy1PALARxMjSI';
 
 try {
   const payload = jwt.verify(token, process.env.TOKEN_SECRET);

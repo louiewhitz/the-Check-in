@@ -11,7 +11,7 @@ import HomeBase from './pages/home';
 import Notes from './pages/notes';
 import AppContext from './lib/app-context';
 import AuthPage from './pages/auth';
-import UpdateForm from './components/delete-and-edit';
+import EditForm from '../client/components/edit-modal';
 import { parseRoute } from './lib';
 
 export default class App extends React.Component {
@@ -77,7 +77,8 @@ export default class App extends React.Component {
       return <Calendar />;
     }
     if (route.path === 'edit') {
-      return <UpdateForm />;
+      const eventId = route.params.get('eventId');
+      return <EditForm eventId={eventId} />;
     }
   }
 
