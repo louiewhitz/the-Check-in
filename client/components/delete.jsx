@@ -7,68 +7,57 @@ import { RiDeleteBinFill } from 'react-icons/ri';
 export default class DeleteModal extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props in Constructor', this.props);
+
     this.state = {
-      title: '',
-      description: '',
-      show: false,
-      delete: false,
-      createdAt: ''
+      eventId: this.props.eventId,
+      show: false
     };
 
-    this.updateSubmit = this.updateSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
-  componentDidMount() {
-    const { user } = this.context;
-
-    // console.log('this.context', this.context);
-    // const eventId = this.props.id;
-
-    // console.log('eventId', eventId);
-    const req = {
-      method: 'GET',
-      headers: {
-        'X-Access-Token': localStorage.getItem('auth-token')
-      },
-      user
-    };
-
-    // const token = localStorage.getItem('auth-token');
-    fetch('/api/events', req)
-      .then(res => res.json())
-      .then(result => {
-        const { title, description, createdAt } = result[0];
-        this.setState({
-          title,
-          description,
-          createdAt
-        });
-      });
-  }
+  // const token = localStorage.getItem('auth-token');
 
   handleShow() {
     this.setState({
-      show: true,
-      delete: true
+      show: true
     });
   }
 
   handleClose() {
     this.setState({
-      show: false,
-      delete: false
+      show: false
     });
   }
 
-  updateSubmit(event) {
+  handleDelete(event) {
+    const { user } = this.context;
     event.preventDefault();
+    const req = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': localStorage.getItem('auth-token')
+      },
+      user
+    };
+
+    // const eventId = Number(this.props.eventId);
+    fetch(`/api/events/delete/${this.props.eventId}`, req)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({
+          show: false
+        });
+        this.props.loadEvents();
+      })
+      .catch(err => console.error(err));
   }
 
   render() {
-    const { eventId, show } = this.state;
+    const { show } = this.state;
 
     const modalTitle = 'Are you sure you want to delete this event?';
 
@@ -81,23 +70,24 @@ export default class DeleteModal extends React.Component {
             style={{ fill: '#fa7199' }}
           />
         </Button>
-        <Modal show={show} onHide={this.handleClose} centered id={eventId}>
-          <Modal.Header closeButton>
-            <Modal.Title>{modalTitle}</Modal.Title>
-          </Modal.Header>
+        <Modal show={show} onHide={this.handleClose} centered>
+          <form onSubmit={this.handleDelete} id={this.state.eventId}>
+            <Modal.Header closeButton>
+              <Modal.Title>{modalTitle}</Modal.Title>
+            </Modal.Header>
 
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            <Button
-              variant="primary"
-              onClick={this.handleClose}
-              onSubmit={this.props.updateSubmit}
-              type="submit">
-              Delete
-            </Button>
-          </Modal.Footer>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={this.handleClose}>
+                Close
+              </Button>
+              <Button
+                variant="primary"
+                onClick={this.handleClose}
+                type="submit">
+                Delete
+              </Button>
+            </Modal.Footer>
+          </form>
         </Modal>
       </>
     );

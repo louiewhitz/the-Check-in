@@ -230,6 +230,28 @@ app.patch('/api/events/:eventId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/events/delete/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+
+  const eventId = Number(req.params.eventId);
+
+  if (!Number.isInteger(eventId) || eventId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${eventId} must be a positive integer`
+    );
+  }
+  const sql = `delete
+  from "events" where "userId" = $1 and "eventId" = $2 returning *;`;
+  const params = [userId, eventId];
+  db.query(sql, params)
+    .then(result => {
+      const deleteEvent = result.rows;
+      res.json(deleteEvent);
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {

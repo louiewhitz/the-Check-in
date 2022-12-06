@@ -2,8 +2,6 @@
 import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
-import { FaTrashAlt } from 'react-icons/fa';
-import { RiEdit2Fill } from 'react-icons/ri';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
 import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
@@ -20,9 +18,10 @@ export default class Timeline extends React.Component {
       loading: true
     };
     this.handleClick = this.handleClick.bind(this);
+    this.loadEvents = this.loadEvents.bind(this);
   }
 
-  componentDidMount() {
+  loadEvents() {
     fetch('/api/events', {
       headers: {
         'X-Access-Token': localStorage.getItem('auth-token')
@@ -36,6 +35,10 @@ export default class Timeline extends React.Component {
         })
       )
       .catch(err => console.error('Dang, not this time!', err));
+  }
+
+  componentDidMount() {
+    this.loadEvents();
   }
 
   handleClick(number) {
@@ -79,7 +82,11 @@ export default class Timeline extends React.Component {
               {this.state.events.map(event => {
                 return (
                   <div key={event.eventId}>
-                    <AllEvents event={event} />
+                    <AllEvents
+                  key={event.eventId}
+                  event={event}
+                  loadEvents={this.loadEvents}
+                />
                   </div>
                 );
               })}
@@ -89,7 +96,7 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
-  const { eventTypeId, title, description, createdAt, eventId } = props.event;
+  const { eventTypeId, title, description, createdAt, eventId, updatedAt } = props.event;
 
   const postedOn = new Date(createdAt);
 
@@ -104,10 +111,19 @@ function AllEvents(props) {
           <span className="thisdate mx-1">{post}</span>
           {title}
           <span className="edit text-muted">
-            <DeleteModal id={eventId} title={title} description={description} />
-            <a href={`#timeline?eventId=${eventId}`}>
-              <EditForm id={eventId} title={title} description={description} />
-            </a>
+            <DeleteModal
+              eventId={eventId}
+              event={props.event}
+              loadEvents={props.loadEvents}
+            />
+
+            <EditForm
+              eventId={eventId}
+              title={title}
+              description={description}
+              updatedAt={updatedAt}
+              loadEvents={props.loadEvents}
+            />
           </span>
         </h2>
 

@@ -13,6 +13,7 @@ import AppContext from './lib/app-context';
 import AuthPage from './pages/auth';
 import EditForm from '../client/components/edit-modal';
 import { parseRoute } from './lib';
+import DeleteModal from '../client/components/delete';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -78,7 +79,12 @@ export default class App extends React.Component {
     }
     if (route.path === 'edit') {
       const eventId = route.params.get('eventId');
+
       return <EditForm eventId={eventId} />;
+    }
+    if (route.path === 'delete') {
+      const eventId = route.params.get('eventId');
+      return <DeleteModal eventId={eventId} />;
     }
   }
 
