@@ -10,6 +10,7 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const authorizationMiddleware = require('./authorization-middleware');
 const ClientError = require('./client-error');
+const Client = require('pg/lib/client');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -127,23 +128,41 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/events/:eventId', (req, res, next) => {
-  const eventId = Number(req.params.eventId);
-  if (!eventId) {
-    throw new ClientError(400, 'eventId must be a positive integer');
-  }
+app.get('/api/all-useridentification', (req, res, next) => {
+  const { userId } = req.body;
   const sql = `
-   select *
-     from "events"
-     where "eventId" = $1
+  select "userId"
+  from "users";
   `;
-  const params = [eventId];
+  db.query(sql)
+    .then(result => {
+      const users = [];
+      result.rows.forEach(user => users.push(user.userId));
+      res.status(200).json(users);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/events/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+
+  const eventId = Number(req.params.eventId);
+  if (!Number.isInteger(eventId) || eventId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${eventId} must be a positive integer`
+    );
+  }
+
+  const { title, description } = req.body;
+  const sql = `
+  select "title", "description", "createdAt" from "events" where "eventId" = $1 and "userId" = $2;
+  `;
+  const params = [eventId, userId];
   db.query(sql, params)
     .then(result => {
-      if (!result.rows[0]) {
-        throw new ClientError(404, `cannot find entry with eventId ${eventId}`);
-      }
-      res.json(result.rows[0]);
+      const data = result.rows;
+      res.json(data);
     })
     .catch(err => next(err));
 });
@@ -152,7 +171,8 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
   const { title, description, summary, eventTypeId, timelineId, scheduleId } =
     req.body;
 
-  const userId = req.user.userId;
+  // const userId = Number(req.user);
+  const { userId } = req.user;
 
   if (!title || !eventTypeId) {
     throw new ClientError(400, 'title and event type are required');
@@ -177,6 +197,57 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     .then(result => {
       const [newEvent] = result.rows;
       res.status(201).json(newEvent);
+    })
+    .catch(err => next(err));
+});
+
+app.patch('/api/events/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+
+  const eventId = Number(req.params.eventId);
+  if (!Number.isInteger(eventId) || eventId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${eventId} must be a positive integer`
+    );
+  }
+  const { title, description } = req.body;
+
+  if (!title || !description) {
+    throw new ClientError(400, 'sorry, title and description are required');
+  }
+  const sql = `UPDATE "events"
+  set "title" = $1,
+  "description" = $2
+   where "eventId" = $3 and "userId" = $4
+   returning *;`;
+  const params = [title, description, eventId, userId];
+  db.query(sql, params)
+    .then(result => {
+      const [editedEvent] = result.rows;
+      res.json(editedEvent);
+    })
+    .catch(err => next(err));
+});
+
+app.delete('/api/events/delete/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+
+  const eventId = Number(req.params.eventId);
+
+  if (!Number.isInteger(eventId) || eventId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${eventId} must be a positive integer`
+    );
+  }
+  const sql = `delete
+  from "events" where "userId" = $1 and "eventId" = $2 returning *;`;
+  const params = [userId, eventId];
+  db.query(sql, params)
+    .then(result => {
+      const deleteEvent = result.rows;
+      res.json(deleteEvent);
     })
     .catch(err => next(err));
 });

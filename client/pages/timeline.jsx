@@ -1,11 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
-import { FaTrashAlt } from 'react-icons/fa';
-import { RiEdit2Fill } from 'react-icons/ri';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
 import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
+import EditForm from '../components/edit-modal';
+import DeleteModal from '../components/delete';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,9 +17,11 @@ export default class Timeline extends React.Component {
       events: [],
       loading: true
     };
+    this.handleClick = this.handleClick.bind(this);
+    this.loadEvents = this.loadEvents.bind(this);
   }
 
-  componentDidMount() {
+  loadEvents() {
     fetch('/api/events', {
       headers: {
         'X-Access-Token': localStorage.getItem('auth-token')
@@ -32,6 +35,14 @@ export default class Timeline extends React.Component {
         })
       )
       .catch(err => console.error('Dang, not this time!', err));
+  }
+
+  componentDidMount() {
+    this.loadEvents();
+  }
+
+  handleClick(number) {
+    this.setState({ eventId: number });
   }
 
   render() {
@@ -69,7 +80,15 @@ export default class Timeline extends React.Component {
 
             <section id="timeline">
               {this.state.events.map(event => {
-                return <AllEvents key={event.eventId} event={event} />;
+                return (
+                  <div key={event.eventId}>
+                    <AllEvents
+                  key={event.eventId}
+                  event={event}
+                  loadEvents={this.loadEvents}
+                />
+                  </div>
+                );
               })}
             </section>
           </div>
@@ -77,7 +96,7 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
-  const { eventTypeId, title, description, createdAt } = props.event;
+  const { eventTypeId, title, description, createdAt, eventId, updatedAt } = props.event;
 
   const postedOn = new Date(createdAt);
 
@@ -92,15 +111,18 @@ function AllEvents(props) {
           <span className="thisdate mx-1">{post}</span>
           {title}
           <span className="edit text-muted">
-            <FaTrashAlt
-              size={30}
-              className="mx-1"
-              style={{ fill: '#fa7199' }}
+            <DeleteModal
+              eventId={eventId}
+              event={props.event}
+              loadEvents={props.loadEvents}
             />
-            <RiEdit2Fill
-              size={30}
-              className="mx-1"
-              style={{ fill: '#25aae1' }}
+
+            <EditForm
+              eventId={eventId}
+              title={title}
+              description={description}
+              updatedAt={updatedAt}
+              loadEvents={props.loadEvents}
             />
           </span>
         </h2>
