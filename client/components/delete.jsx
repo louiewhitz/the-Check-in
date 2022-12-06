@@ -66,7 +66,7 @@ export default class DeleteModal extends React.Component {
         <Button onClick={this.handleShow} id="show-delete">
           <RiDeleteBinFill
             size={30}
-            className="mx-1"
+            // className="mx-1"
             style={{ fill: '#fa7199' }}
           />
         </Button>

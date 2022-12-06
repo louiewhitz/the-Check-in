@@ -14,6 +14,7 @@ import AuthPage from './pages/auth';
 import EditForm from '../client/components/edit-modal';
 import { parseRoute } from './lib';
 import DeleteModal from '../client/components/delete';
+import AllPhotos from './pages/viewphoto';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -85,6 +86,9 @@ export default class App extends React.Component {
     if (route.path === 'delete') {
       const eventId = route.params.get('eventId');
       return <DeleteModal eventId={eventId} />;
+    }
+    if (route.path === 'viewphoto') {
+      return <AllPhotos />;
     }
   }
 
