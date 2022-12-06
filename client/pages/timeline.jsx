@@ -2,7 +2,7 @@
 import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
-import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
+import { IoAddCircle, IoCalendarSharp, IoCamera } from 'react-icons/io5';
 import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
 import EditForm from '../components/edit-modal';
@@ -96,7 +96,8 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
-  const { eventTypeId, title, description, createdAt, eventId, updatedAt } = props.event;
+  const { eventTypeId, title, description, createdAt, eventId, updatedAt } =
+    props.event;
 
   const postedOn = new Date(createdAt);
 
@@ -124,6 +125,7 @@ function AllEvents(props) {
               updatedAt={updatedAt}
               loadEvents={props.loadEvents}
             />
+            <IoCamera size={30} className="mx-1" style={{ fill: '#25aae1' }} />
           </span>
         </h2>
 

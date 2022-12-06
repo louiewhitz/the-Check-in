@@ -3,6 +3,10 @@
   box-sizing: border-box;
 }
 
+.bg-index {
+  background-color: #1a0959;
+}
+
 div.bg-light {
   width: 50px;
   height: 50px;
@@ -749,7 +753,4 @@ input[type='checkbox'] {
 #show-delete {
   border: none;
   background-color: transparent;
-}
-
-#show-delete {
 }
