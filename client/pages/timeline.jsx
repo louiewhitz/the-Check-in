@@ -7,6 +7,8 @@ import { format } from 'date-fns';
 import EventType from '../components/eventtypes';
 import EditForm from '../components/edit-modal';
 import DeleteModal from '../components/delete';
+import AllPhotos from './viewphoto';
+import { Button } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -96,10 +98,13 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
-  const { eventTypeId, title, description, createdAt, eventId, updatedAt } =
+  const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl } =
     props.event;
 
   const postedOn = new Date(createdAt);
+  const handleShow = () => {
+    return eventId;
+  };
 
   const post = format(postedOn, 'EEEE, ii, yy');
 
@@ -125,7 +130,8 @@ function AllEvents(props) {
               updatedAt={updatedAt}
               loadEvents={props.loadEvents}
             />
-            <IoCamera size={30} className="mx-1" style={{ fill: '#25aae1' }} />
+            <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
+
           </span>
         </h2>
 

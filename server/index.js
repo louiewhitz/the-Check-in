@@ -154,6 +154,30 @@ app.get('/api/events/:eventId', (req, res, next) => {
     );
   }
 
+  const { photoUrl } = req.body;
+  const sql = `
+  select "photoUrl" from "events" where "eventId" = $1 and "userId" = $2;
+  `;
+  const params = [eventId, userId];
+  db.query(sql, params)
+    .then(result => {
+      const [data] = result.rows;
+      res.json(data);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/events/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+
+  const eventId = Number(req.params.eventId);
+  if (!Number.isInteger(eventId) || eventId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${eventId} must be a positive integer`
+    );
+  }
+
   const { title, description } = req.body;
   const sql = `
   select "title", "description", "createdAt" from "events" where "eventId" = $1 and "userId" = $2;
