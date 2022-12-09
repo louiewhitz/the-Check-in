@@ -54,7 +54,7 @@ export default class Header extends React.Component {
                       </a>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#viewphoto">
+                      <a className="dropdown-item" href="#allphotos">
                         View Photos
                       </a>
                     </li>

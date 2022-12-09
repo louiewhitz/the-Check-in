@@ -15,6 +15,7 @@ import EditForm from '../client/components/edit-modal';
 import { parseRoute } from './lib';
 import DeleteModal from '../client/components/delete';
 import AllPhotos from './pages/viewphoto';
+import ViewAllImages from '../client/components/viewimg';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -88,7 +89,11 @@ export default class App extends React.Component {
       return <DeleteModal eventId={eventId} />;
     }
     if (route.path === 'viewphoto') {
-      return <AllPhotos />;
+      const eventId = route.params.get('eventId');
+      return <AllPhotos eventId={eventId}/>;
+    }
+    if (route.path === 'allphotos') {
+      return <ViewAllImages />;
     }
   }
 
