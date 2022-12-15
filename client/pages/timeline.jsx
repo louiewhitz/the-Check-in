@@ -9,6 +9,7 @@ import EditForm from '../components/edit-modal';
 import DeleteModal from '../components/delete';
 import AllPhotos from './viewphoto';
 import { Button } from 'react-bootstrap';
+// import LoadingSpinner from '../components/loading-spinner';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 

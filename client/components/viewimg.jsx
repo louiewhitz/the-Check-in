@@ -4,6 +4,7 @@ import AppContext from '../lib/app-context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import Redirect from './redirect';
+// import LoadingSpinner from './loading-spinner';
 
 const img = {
   height: '15rem',
@@ -26,6 +27,7 @@ export default class ViewAllImages extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
+    // this.loadSpin = this.loadSpin.bind(this);
   }
 
   loadEvents() {
@@ -61,6 +63,11 @@ export default class ViewAllImages extends React.Component {
     });
   }
 
+  // loadSpin() {
+  //   if (this.state.loading === true) {
+  //     return <LoadingSpinner />;
+  //   }
+  // }
   render() {
     const { user } = this.context;
 

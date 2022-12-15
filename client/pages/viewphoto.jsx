@@ -10,7 +10,7 @@ const img = {
 
 const style = {
 
-  width: '25rem',
+  width: '26rem',
   height: '100%'
 };
 
@@ -36,8 +36,8 @@ export default class AllPhotos extends React.Component {
         'Content-Type': 'application/json',
         'X-Access-Token': localStorage.getItem('auth-token')
       },
-      user,
-      body: JSON.stringify(this.state)
+      user
+      // body: JSON.stringify(this.state)
     };
 
     fetch(`/api/events/${this.props.eventId}`, req)

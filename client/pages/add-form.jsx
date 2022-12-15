@@ -4,6 +4,7 @@ import AppContext from '../lib/app-context';
 import { FaUserNurse, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
+// import LoadingSpinner from '../components/loading-spinner';
 
 export default class AddForm extends React.Component {
   constructor(props) {
@@ -209,6 +210,8 @@ export default class AddForm extends React.Component {
                       accept=".png, .jpg, .jpeg, .gif"
                     />
                   </div>
+                  {/* <LoadingSpinner /> */}
+
                   <div className="d-flex justify-content-end">
                     <button
                       className="btn btn-primary btn-md mt-2"
