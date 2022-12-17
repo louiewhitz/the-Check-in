@@ -9,7 +9,11 @@ import EditForm from '../components/edit-modal';
 import DeleteModal from '../components/delete';
 import AllPhotos from './viewphoto';
 import { Button } from 'react-bootstrap';
-// import LoadingSpinner from '../components/loading-spinner';
+import NetError from '../components/network-error';
+import LoadingSpinner from '../components/loading-spinner';
+import Axios from 'axios';
+import LoadUser from '../components/load-users';
+import AllUsers from '../components/all-users';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,10 +22,14 @@ export default class Timeline extends React.Component {
     super(props);
     this.state = {
       events: [],
-      loading: true
+      username: [],
+
+      loading: true,
+      networkError: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
+
   }
 
   loadEvents() {
@@ -37,11 +45,15 @@ export default class Timeline extends React.Component {
           loading: false
         })
       )
-      .catch(err => console.error('Dang, not this time!', err));
+      .catch(err => {
+        console.error('Dang, not this time!', err);
+        this.setState({ networkError: true });
+      });
   }
 
   componentDidMount() {
     this.loadEvents();
+
   }
 
   handleClick(number) {
@@ -55,18 +67,28 @@ export default class Timeline extends React.Component {
       return <Redirect to="#sign-in" />;
     }
 
+    if (this.state.networkError) {
+      return <NetError />;
+    }
+
+    if (this.state.loading) {
+      return <LoadingSpinner />;
+    }
+
     return this.state.loaing
-      ? (
-        <p>...Please hold on a sec, loading</p>
+      ? (<><LoadingSpinner />
+        <p className='text-white'>...Please hold on a sec, loading</p>
+      </>
         )
       : this.state.entries === 0
         ? (
-          <div className="container mt-nav">
+          <div className="container mt-nav text-white">
             <p>Sorry there are no events yet.</p>
           </div>
           )
         : (
           <div className="container">
+            {/* <LoadingSpinner /> */}
             <h1 className="text-center text-white">Timeline of Events </h1>
             <div className="row d-flex justify-content-evenly">
               <div className="col text-end">
@@ -80,6 +102,8 @@ export default class Timeline extends React.Component {
                 </a>
               </div>
             </div>
+            {/* <LoadUser /> */}
+            {/* <AllUsers /> */}
 
             <section id="timeline">
               {this.state.events.map(event => {
@@ -89,6 +113,9 @@ export default class Timeline extends React.Component {
                   key={event.eventId}
                   event={event}
                   loadEvents={this.loadEvents}
+                  // loadUsers={this.loadUsers}
+                  // user={event.userId}
+                  // username={this.username}
                 />
                   </div>
                 );
@@ -99,8 +126,9 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
-  const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl } =
+  const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl, username, userId } =
     props.event;
+  // console.log('props.event', props.event);
 
   const postedOn = new Date(createdAt);
   const handleShow = () => {
@@ -132,6 +160,7 @@ function AllEvents(props) {
               loadEvents={props.loadEvents}
             />
             <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
+            <LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} />
 
           </span>
         </h2>

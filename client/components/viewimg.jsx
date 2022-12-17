@@ -4,7 +4,7 @@ import AppContext from '../lib/app-context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import Redirect from './redirect';
-// import LoadingSpinner from './loading-spinner';
+import LoadingSpinner from './loading-spinner';
 
 const img = {
   height: '15rem',
@@ -31,6 +31,7 @@ export default class ViewAllImages extends React.Component {
   }
 
   loadEvents() {
+    this.setState({ loading: true });
     fetch('/api/events', {
       headers: {
         'X-Access-Token': localStorage.getItem('auth-token')
@@ -73,6 +74,10 @@ export default class ViewAllImages extends React.Component {
 
     if (!user) {
       return <Redirect to="#sign-in" />;
+    }
+
+    if (this.state.loading) {
+      return <LoadingSpinner />;
     }
 
     return this.state.loaing

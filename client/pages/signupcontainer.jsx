@@ -34,38 +34,13 @@ export default class SignUpContainer extends React.Component {
   }
 
   render() {
-    // console.log('this.state:', this.state);
+
     return (
       <div>
         <div className="container">
           <div className="form-block-wrapper" />
           <section className="form-block-wrapper">
-            {/* <header className="form-block__header">
-              <h1 className="text-white">
-                {this.state.currentPage === 'sign-up'
-                  ? 'Sign up'
-                  : 'Welcome Back'}
-              </h1>
 
-              <div className="form-block__toggle-block">
-                <span>
-                  {this.state.currentPage === 'sign-up' ? 'Already' : "Don't"}{' '}
-                  have an account? Click here &#8594;
-                </span>
-                <a
-                  href={
-                    this.state.currentPage === 'sign-up'
-                      ? '#sign-in'
-                      : '#sign-up'
-                  }
-                  id="form-toggler"
-                  onClick={this.toggleMode.bind(this)}
-                  className="toggle-button"
-                />
-                {this.state.currentPage === 'sign-up' ? 'login' : 'Register'}
-                <label htmlFor="form-toggler" className="circle" />
-              </div>
-            </header> */}
             <div>
               {this.state.currentPage === 'sign-up'
                 ? (

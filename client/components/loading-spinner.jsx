@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from '../pages/images-spin/fidget-spinner.svg';
 
 // import Spinner from 'react-bootstrap/Spinner';
@@ -7,15 +7,28 @@ import Image from '../pages/images-spin/fidget-spinner.svg';
 // }
 
 export default function LoadingSpinner(props) {
+  // const [show, setShow] = useState(false);
+  // const timeoutRef = useRef();
+
+  // useEffect(() => {
+  //   timeoutRef.current = window.setTimeout(() => {
+  //     setShow(false);
+  //   }, 1500);
+  //   return () => clearInterval(timeoutRef.current);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+  // }, []);
   return (
     <div>
       <div className='overlay'/>
       <div className="spin-container">
         <Image className='spin' />
-        {/* <div className="lds-circle">
-          <div />
-        </div> */}
-        <div>Loading</div>
+
       </div>
     </div>
   );

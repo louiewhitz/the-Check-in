@@ -58,6 +58,11 @@ export default class Header extends React.Component {
                         View Photos
                       </a>
                     </li>
+                    <li>
+                      <a className="dropdown-item" href="#allusers">
+                        All Users
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>

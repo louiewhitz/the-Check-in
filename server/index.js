@@ -82,21 +82,6 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/all-usernames', (req, res, next) => {
-  const { username } = req.body;
-  const sql = `
-  select "username"
-  from "users";
-  `;
-  db.query(sql)
-    .then(result => {
-      const users = [];
-      result.rows.forEach(user => users.push(user.username));
-      res.status(200).json(users);
-    })
-    .catch(err => next(err));
-});
-
 app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
   // console.log('req.file:', req.file);
   // https://www.npmjs.com/package/multer-s3#file-information
@@ -125,6 +110,22 @@ app.get('/api/events', (req, res, next) => {
   `;
   db.query(sql)
     .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/all-usernames', (req, res, next) => {
+  const { username } = req.body;
+  const { user } = req.user;
+  const sql = `
+  select "username"
+  from "users";
+  `;
+  db.query(sql)
+    .then(result => {
+      const users = [];
+      result.rows.forEach(user => users.push(user.username));
+      res.status(200).json(users);
+    })
     .catch(err => next(err));
 });
 
@@ -189,6 +190,44 @@ app.get('/api/events/:eventId', (req, res, next) => {
       res.json(data);
     })
     .catch(err => next(err));
+});
+
+app.get('/api/events/users/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+  const { username } = req.body;
+  const eventId = Number(req.params.eventId);
+  const sql = 'select "users"."username", "users"."userId" from "users" join "events" using ("userId") where "events"."eventId" = $1';
+  const params = [eventId];
+  db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(200, 'no users found');
+      }
+      const data = result.rows;
+      res.json(data);
+
+    })
+    .catch(err => next(err));
+
+});
+
+app.post('/api/events/users/:eventId', (req, res, next) => {
+  const { userId } = req.user;
+  const { username } = req.body;
+  const eventId = Number(req.params.eventId);
+  const sql = 'select "users"."username", "users"."userId" from "users" join "events" using ("userId") where "events"."eventId" = $1';
+  const params = [eventId];
+  db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(200, 'no users found');
+      }
+      const data = result.rows;
+      res.json(data);
+
+    })
+    .catch(err => next(err));
+
 });
 
 app.post('/api/events', uploadsMiddleware, (req, res, next) => {

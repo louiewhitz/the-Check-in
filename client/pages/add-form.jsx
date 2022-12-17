@@ -4,7 +4,8 @@ import AppContext from '../lib/app-context';
 import { FaUserNurse, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
-// import LoadingSpinner from '../components/loading-spinner';
+import LoadingSpinner from '../components/loading-spinner';
+import NetError from '../components/network-error';
 
 export default class AddForm extends React.Component {
   constructor(props) {
@@ -14,13 +15,18 @@ export default class AddForm extends React.Component {
       summary: '',
       eventTypeId: null,
       file: '../images/apod.jpeg',
-      title: ''
+      title: '',
+      userId: '',
+      loading: false,
+      networkError: false
+
     };
     this.fileInputRef = React.createRef();
     this.onChange = this.onChange.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.eventType = this.eventType.bind(this);
+
   }
 
   onChange(event) {
@@ -41,6 +47,7 @@ export default class AddForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({ loading: true });
 
     const formData = new FormData();
     const image = this.fileInputRef.current.files[0];
@@ -50,6 +57,7 @@ export default class AddForm extends React.Component {
     formData.append('title', this.state.title);
     formData.append('description', this.state.description);
     formData.append('image', image);
+    formData.append('userId', this.state.userId);
 
     fetch('/api/events', {
       method: 'POST',
@@ -59,9 +67,13 @@ export default class AddForm extends React.Component {
       body: formData
     })
       .then(() => {
+        this.setState({ loading: false });
         window.location.hash = '#timeline';
       })
-      .catch(err => console.error('Dang! Fetch FAIIIIILED', err));
+      .catch(err => {
+        console.error('Dang! Fetch FAIIIIILED', err);
+        this.setState({ networkError: true });
+      });
   }
 
   render() {
@@ -70,6 +82,15 @@ export default class AddForm extends React.Component {
     if (!user) {
       return <Redirect to="#sign-in" />;
     }
+
+    if (this.state.loading) {
+      return <LoadingSpinner />;
+    }
+
+    if (this.state.networkError) {
+      return <NetError />;
+    }
+
     return (
       <div className="container-md mx-auto">
         <div className="row d-flex justify-content-center align-items-center flex-wrap">
@@ -210,7 +231,6 @@ export default class AddForm extends React.Component {
                       accept=".png, .jpg, .jpeg, .gif"
                     />
                   </div>
-                  {/* <LoadingSpinner /> */}
 
                   <div className="d-flex justify-content-end">
                     <button

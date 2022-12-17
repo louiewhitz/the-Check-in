@@ -81,6 +81,8 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(authorizationMiddleware);
+
 app.get('/api/all-usernames', (req, res, next) => {
   const { username } = req.body;
   const sql = `
@@ -95,8 +97,6 @@ app.get('/api/all-usernames', (req, res, next) => {
     })
     .catch(err => next(err));
 });
-
-app.use(authorizationMiddleware);
 
 app.get('/api/events', (req, res, next) => {
   const sql = `
