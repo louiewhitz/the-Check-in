@@ -16,6 +16,8 @@ import { parseRoute } from './lib';
 import DeleteModal from '../client/components/delete';
 import AllPhotos from './pages/viewphoto';
 import ViewAllImages from '../client/components/viewimg';
+// import AllUsers from '../client/components/all-users';
+import LoadUser from '../client/components/load-users';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -95,6 +97,13 @@ export default class App extends React.Component {
     if (route.path === 'allphotos') {
       return <ViewAllImages />;
     }
+    if (route.path === 'allusers') {
+      const eventId = route.params.get('eventId');
+      return <LoadUser eventId={eventId}/>;
+    }
+    // if (route.path === 'this') {
+    //   return <AllUsers />;
+    // }
   }
 
   render() {

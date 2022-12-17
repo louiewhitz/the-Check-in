@@ -9,6 +9,11 @@ import EditForm from '../components/edit-modal';
 import DeleteModal from '../components/delete';
 import AllPhotos from './viewphoto';
 import { Button } from 'react-bootstrap';
+import NetError from '../components/network-error';
+import LoadingSpinner from '../components/loading-spinner';
+import Axios from 'axios';
+import LoadUser from '../components/load-users';
+import AllUsers from '../components/all-users';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,10 +22,14 @@ export default class Timeline extends React.Component {
     super(props);
     this.state = {
       events: [],
-      loading: true
+      username: [],
+
+      loading: true,
+      networkError: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
+
   }
 
   loadEvents() {
@@ -36,11 +45,15 @@ export default class Timeline extends React.Component {
           loading: false
         })
       )
-      .catch(err => console.error('Dang, not this time!', err));
+      .catch(err => {
+        console.error('Dang, not this time!', err);
+        this.setState({ networkError: true });
+      });
   }
 
   componentDidMount() {
     this.loadEvents();
+
   }
 
   handleClick(number) {
@@ -54,32 +67,41 @@ export default class Timeline extends React.Component {
       return <Redirect to="#sign-in" />;
     }
 
+    if (this.state.networkError) {
+      return <NetError />;
+    }
+
+    if (this.state.loading) {
+      return <LoadingSpinner />;
+    }
+
     return this.state.loaing
-      ? (
-        <p>...Please hold on a sec, loading</p>
+      ? (<><LoadingSpinner />
+        <p className='text-white'>...Please hold on a sec, loading</p>
+      </>
         )
       : this.state.entries === 0
         ? (
-          <div className="container mt-nav">
+          <div className="container mt-nav text-white">
             <p>Sorry there are no events yet.</p>
           </div>
           )
         : (
           <div className="container">
-            <h1 className="text-center text-white">Timeline of Events </h1>
+            {/* <LoadingSpinner /> */}
+            <h1 className="text-center timeline-color">Timeline of Events </h1>
             <div className="row d-flex justify-content-evenly">
               <div className="col text-end">
-                <a href="#addform">
-                  <IoAddCircle size={150} style={{ fill: 'greenyellow' }} />
+                <a href="#addform" id="addhref">
+                  <IoAddCircle size={150} />
                 </a>
               </div>
               <div className="col text-start">
                 <a href="#scheduling">
-                  <IoCalendarSharp size={150} style={{ fill: 'purple' }} />
+                  <IoCalendarSharp size={150} />
                 </a>
               </div>
             </div>
-
             <section id="timeline">
               {this.state.events.map(event => {
                 return (
@@ -88,6 +110,7 @@ export default class Timeline extends React.Component {
                   key={event.eventId}
                   event={event}
                   loadEvents={this.loadEvents}
+
                 />
                   </div>
                 );
@@ -98,8 +121,9 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
-  const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl } =
+  const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl, username, userId } =
     props.event;
+  // console.log('props.event', props.event);
 
   const postedOn = new Date(createdAt);
   const handleShow = () => {
@@ -135,7 +159,7 @@ function AllEvents(props) {
           </span>
         </h2>
 
-        <p>{description}</p>
+        <p>{description}<LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} /></p>
       </div>
     </article>
   );

@@ -6,7 +6,7 @@ export default class Header extends React.Component {
     const { user, handleSignOut } = this.context;
     return (
       <section className="mb-3">
-        <nav className="navbar navbar-dark bg-dark">
+        <nav className="navbar navbar-dark color-nav">
           <div className="container">
             <div className="row">
               <div className="col">
@@ -58,22 +58,30 @@ export default class Header extends React.Component {
                         View Photos
                       </a>
                     </li>
+                    <li>
+                      <a className="dropdown-item" href="#this">
+                        All Users
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col">
-                <h1 className="text-white text-center navbar-brand fs-1 fw-bold">
-                  The Check-in
+
+                <h1 className="text-center navbar-brand fs-1 fw-bold">
+
+                  <span className='timer'>0</span>The Check-in
                 </h1>
+
               </div>
             </div>
             <div className="row">
               <div className="col">
                 <div>
                   {user !== null && (
-                    <button className="btn btn-dark" onClick={handleSignOut}>
+                    <button className="btn btn-light bg-light" onClick={handleSignOut}>
                       Sign out
                       <i className="ms-2 fas fa-sign-out-alt" />
                     </button>
@@ -89,9 +97,7 @@ export default class Header extends React.Component {
                     </>
                   )}
                 </div>
-                <div className="timer border border-3 bg-light rounded-circle d-flex text-center">
-                  <span className="pt-2">0</span>
-                </div>
+
               </div>
             </div>
           </div>

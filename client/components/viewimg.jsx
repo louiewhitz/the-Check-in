@@ -4,6 +4,7 @@ import AppContext from '../lib/app-context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Row, Col, Container } from 'react-bootstrap';
 import Redirect from './redirect';
+import LoadingSpinner from './loading-spinner';
 
 const img = {
   height: '15rem',
@@ -26,9 +27,11 @@ export default class ViewAllImages extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
+    // this.loadSpin = this.loadSpin.bind(this);
   }
 
   loadEvents() {
+    this.setState({ loading: true });
     fetch('/api/events', {
       headers: {
         'X-Access-Token': localStorage.getItem('auth-token')
@@ -61,11 +64,20 @@ export default class ViewAllImages extends React.Component {
     });
   }
 
+  // loadSpin() {
+  //   if (this.state.loading === true) {
+  //     return <LoadingSpinner />;
+  //   }
+  // }
   render() {
     const { user } = this.context;
 
     if (!user) {
       return <Redirect to="#sign-in" />;
+    }
+
+    if (this.state.loading) {
+      return <LoadingSpinner />;
     }
 
     return this.state.loaing
@@ -82,7 +94,7 @@ export default class ViewAllImages extends React.Component {
           <div className="container">
 
             <div className="row">
-              <h1 className="text-center text-white">IMAGES</h1>
+              <h1 className="text-center timeline-color">IMAGES</h1>
               <section id="allphotos">
                 {this.state.events.map(event => {
                   return (

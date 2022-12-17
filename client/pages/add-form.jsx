@@ -4,6 +4,8 @@ import AppContext from '../lib/app-context';
 import { FaUserNurse, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
+import LoadingSpinner from '../components/loading-spinner';
+import NetError from '../components/network-error';
 
 export default class AddForm extends React.Component {
   constructor(props) {
@@ -13,13 +15,18 @@ export default class AddForm extends React.Component {
       summary: '',
       eventTypeId: null,
       file: '../images/apod.jpeg',
-      title: ''
+      title: '',
+      userId: '',
+      loading: false,
+      networkError: false
+
     };
     this.fileInputRef = React.createRef();
     this.onChange = this.onChange.bind(this);
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.eventType = this.eventType.bind(this);
+
   }
 
   onChange(event) {
@@ -40,6 +47,7 @@ export default class AddForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.setState({ loading: true });
 
     const formData = new FormData();
     const image = this.fileInputRef.current.files[0];
@@ -49,6 +57,7 @@ export default class AddForm extends React.Component {
     formData.append('title', this.state.title);
     formData.append('description', this.state.description);
     formData.append('image', image);
+    formData.append('userId', this.state.userId);
 
     fetch('/api/events', {
       method: 'POST',
@@ -58,9 +67,13 @@ export default class AddForm extends React.Component {
       body: formData
     })
       .then(() => {
+        this.setState({ loading: false });
         window.location.hash = '#timeline';
       })
-      .catch(err => console.error('Dang! Fetch FAIIIIILED', err));
+      .catch(err => {
+        console.error('Dang! Fetch FAIIIIILED', err);
+        this.setState({ networkError: true });
+      });
   }
 
   render() {
@@ -69,15 +82,24 @@ export default class AddForm extends React.Component {
     if (!user) {
       return <Redirect to="#sign-in" />;
     }
+
+    if (this.state.loading) {
+      return <LoadingSpinner />;
+    }
+
+    if (this.state.networkError) {
+      return <NetError />;
+    }
+
     return (
       <div className="container-md mx-auto">
         <div className="row d-flex justify-content-center align-items-center flex-wrap">
           <div className="col-sm" />
           <div className="col d-flex d-inline-flex align-self-center">
             <blockquote className="blockquote text-center">
-              <p className="text-white lead fs-3 lh-base text-center">
+              <h2 className="timeline-color lead fs-3 lh-base text-center">
                 Showcase your event, reset your timer, make a difference
-              </p>
+              </h2>
             </blockquote>
           </div>
           <div className="col-sm" />
@@ -159,7 +181,7 @@ export default class AddForm extends React.Component {
                     onChange={this.onChange}
                     value={this.state.summary}
                     placeholder="Other...."
-                    className="form-control rounded mt-3 bg-transparent px-4 py-2.5 text-light"
+                    className="form-control rounded mt-3 bg-light px-4 py-2.5 text-dark"
                   />
                 </div>
                 <div className="form-group col mt-3">
@@ -172,7 +194,7 @@ export default class AddForm extends React.Component {
                     onChange={this.onChange}
                     value={this.state.title}
                     placeholder="Title..."
-                    className="form-control rounded bg-transparent px-4 py-2.5 font-bold text-heading text-light"
+                    className="form-control rounded bg-light px-4 py-2.5 font-bold  text-dark"
                   />
                 </div>
               </div>
@@ -184,7 +206,7 @@ export default class AddForm extends React.Component {
                     Optional notes you think everyone should know
                   </label>
                   <textarea
-                    className="form-control border-2 border-muted-2 bg-transparent px-4 py-2.5 text-light"
+                    className="form-control border-2 border-muted-2 px-4 py-2.5 bg-light text-dark"
                     rows="5"
                     id="description"
                     name="description"
@@ -195,12 +217,9 @@ export default class AddForm extends React.Component {
               </div>
               <div className="row">
                 <div className="col justify-content-evenly">
-                  <div className="mb-3">
-                    <label htmlFor="formFile" className="form-label">
-                      image
-                    </label>
+                  <div className="mb-3 mt-2">
                     <input
-                      className="form-control text-white-50 bg-dark"
+                      className="form-control text-dark bg-light"
                       type="file"
                       id="formFile"
                       name="photoUrl"
@@ -209,9 +228,10 @@ export default class AddForm extends React.Component {
                       accept=".png, .jpg, .jpeg, .gif"
                     />
                   </div>
+
                   <div className="d-flex justify-content-end">
                     <button
-                      className="btn btn-primary btn-md mt-2"
+                      className="btn btn-info btn-md mt-1"
                       type="submit">
                       POST TO TIMELINE
                     </button>
