@@ -89,22 +89,19 @@ export default class Timeline extends React.Component {
         : (
           <div className="container">
             {/* <LoadingSpinner /> */}
-            <h1 className="text-center text-white">Timeline of Events </h1>
+            <h1 className="text-center timeline-color">Timeline of Events </h1>
             <div className="row d-flex justify-content-evenly">
               <div className="col text-end">
-                <a href="#addform">
-                  <IoAddCircle size={150} style={{ fill: 'greenyellow' }} />
+                <a href="#addform" id="addhref">
+                  <IoAddCircle size={150} />
                 </a>
               </div>
               <div className="col text-start">
                 <a href="#scheduling">
-                  <IoCalendarSharp size={150} style={{ fill: 'purple' }} />
+                  <IoCalendarSharp size={150} />
                 </a>
               </div>
             </div>
-            {/* <LoadUser /> */}
-            {/* <AllUsers /> */}
-
             <section id="timeline">
               {this.state.events.map(event => {
                 return (
@@ -113,9 +110,7 @@ export default class Timeline extends React.Component {
                   key={event.eventId}
                   event={event}
                   loadEvents={this.loadEvents}
-                  // loadUsers={this.loadUsers}
-                  // user={event.userId}
-                  // username={this.username}
+
                 />
                   </div>
                 );
@@ -160,12 +155,11 @@ function AllEvents(props) {
               loadEvents={props.loadEvents}
             />
             <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
-            <LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} />
 
           </span>
         </h2>
 
-        <p>{description}</p>
+        <p>{description}<LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} /></p>
       </div>
     </article>
   );

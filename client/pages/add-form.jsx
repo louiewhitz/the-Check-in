@@ -97,9 +97,9 @@ export default class AddForm extends React.Component {
           <div className="col-sm" />
           <div className="col d-flex d-inline-flex align-self-center">
             <blockquote className="blockquote text-center">
-              <p className="text-white lead fs-3 lh-base text-center">
+              <h2 className="timeline-color lead fs-3 lh-base text-center">
                 Showcase your event, reset your timer, make a difference
-              </p>
+              </h2>
             </blockquote>
           </div>
           <div className="col-sm" />
@@ -181,7 +181,7 @@ export default class AddForm extends React.Component {
                     onChange={this.onChange}
                     value={this.state.summary}
                     placeholder="Other...."
-                    className="form-control rounded mt-3 bg-transparent px-4 py-2.5 text-light"
+                    className="form-control rounded mt-3 bg-light px-4 py-2.5 text-dark"
                   />
                 </div>
                 <div className="form-group col mt-3">
@@ -194,7 +194,7 @@ export default class AddForm extends React.Component {
                     onChange={this.onChange}
                     value={this.state.title}
                     placeholder="Title..."
-                    className="form-control rounded bg-transparent px-4 py-2.5 font-bold text-heading text-light"
+                    className="form-control rounded bg-light px-4 py-2.5 font-bold  text-dark"
                   />
                 </div>
               </div>
@@ -206,7 +206,7 @@ export default class AddForm extends React.Component {
                     Optional notes you think everyone should know
                   </label>
                   <textarea
-                    className="form-control border-2 border-muted-2 bg-transparent px-4 py-2.5 text-light"
+                    className="form-control border-2 border-muted-2 px-4 py-2.5 bg-light text-dark"
                     rows="5"
                     id="description"
                     name="description"
@@ -217,12 +217,9 @@ export default class AddForm extends React.Component {
               </div>
               <div className="row">
                 <div className="col justify-content-evenly">
-                  <div className="mb-3">
-                    <label htmlFor="formFile" className="form-label">
-                      image
-                    </label>
+                  <div className="mb-3 mt-2">
                     <input
-                      className="form-control text-white-50 bg-dark"
+                      className="form-control text-dark bg-light"
                       type="file"
                       id="formFile"
                       name="photoUrl"
@@ -234,7 +231,7 @@ export default class AddForm extends React.Component {
 
                   <div className="d-flex justify-content-end">
                     <button
-                      className="btn btn-primary btn-md mt-2"
+                      className="btn btn-info btn-md mt-1"
                       type="submit">
                       POST TO TIMELINE
                     </button>

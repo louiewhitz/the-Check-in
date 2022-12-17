@@ -1,60 +1,46 @@
-// import React from 'react';
-// import AppContext from '../lib/app-context';
+// import React, { useState, useEffect, useContext } from 'react';
+// // import AppContext from '../lib/app-context';
 // import Redirect from './redirect';
-// export default class AllUsers extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       users: [],
-//       loading: true
-//     };
-//     this.load = this.load.bind(this);
-//   }
+// import axios from 'axios';
 
-//   load() {
-//     const { user } = this.context.user;
+// export default function AllUsers() {
 
-//     fetch('/api/all-usernames', {
-//       'X-Access-Token': localStorage.getItem('auth-token')
+//   const [data, setData] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState(null);
+//   useEffect(() => {
 
-//     }, user)
-//       .then(res => res.json())
-//       .then(users => {
-//         console.log(users);
+//     axios.get('/api/all-users', {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'X-Access-Token': localStorage.getItem('auth-token')
 
-//         this.setState({
-//           users,
-//           loading: false
-//         });
 //       }
-//       )
-//       .catch(err => {
-//         console.error('Dang, not this time!', err);
 
+//     })
+//       .then(response => {
+//         setData(response.data);
+//         console.log('🚀 ~ file: all-users.jsx:25 ~ useEffect ~ response.data', response.data);
+//       })
+
+//       .catch(error => {
+//         console.error('Error fetching Data', error);
+//         setError(error);
+//         console.log(error);
+//       })
+//       .finally(() => {
+//         setLoading(false);
 //       });
-//   }
+//   }, []);
 
-//   componentDidMount() {
-//     this.load();
-//   }
+//   return (
+//     <div>{data && data.map(users => {
+//       return (
 
-//   render() {
-//       console.log(this.state);
+//         <li className="text-white" key={users.userId}>{users.username}</li>
+//       );
 
-//     const { user } = this.context;
-
-//     if (!user) {
-//       return <Redirect to="#sign-in" />;
-//     }
-//     console.log(this.state);
-//     console.log(this.props);
-//     return (<section id="allusers">
-
-//       <div key={user.userId}>{user.username}</div>
-
-//     </section>);
-//   }
+//     })}</div>
+//   );
 
 // }
-
-// AllUsers.contextType = AppContext;

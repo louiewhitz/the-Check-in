@@ -129,6 +129,22 @@ app.get('/api/all-usernames', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/all-users', (req, res, next) => {
+  const { username } = req.body;
+  const { user } = req.user;
+  const sql = `
+  select *
+  from "users";
+  `;
+  db.query(sql)
+    .then(result => {
+      const users = [];
+      result.rows.forEach(user => users.push(user.username));
+      res.status(200).json(users);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/all-useridentification', (req, res, next) => {
   const { userId } = req.body;
   const sql = `

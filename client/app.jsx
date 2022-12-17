@@ -98,8 +98,12 @@ export default class App extends React.Component {
       return <ViewAllImages />;
     }
     if (route.path === 'allusers') {
-      return <LoadUser />;
+      const eventId = route.params.get('eventId');
+      return <LoadUser eventId={eventId}/>;
     }
+    // if (route.path === 'this') {
+    //   return <AllUsers />;
+    // }
   }
 
   render() {

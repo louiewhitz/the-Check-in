@@ -14,19 +14,19 @@ export default class HomeBase extends React.Component {
     return (
       <div className="container">
         <div className="container">
-          <p className="text-white text-center me-4">Add your event,</p>
-          <p className="text-white text-center ms-5">get the ball rolling</p>
+          <h1 className="timeline-color text-center me-4">Add your event,</h1>
+          <h2 className="timeline-color text-center ms-5">get the ball rolling</h2>
         </div>
         ;
         <div className="row d-flex justify-content-evenly">
           <div className="col text-end">
             <a href="#addform">
-              <IoAddCircle size={200} style={{ fill: 'greenyellow' }} />
+              <IoAddCircle size={200} />
             </a>
           </div>
           <div className="col text-start">
             <a href="#scheduling">
-              <IoCalendarSharp size={200} style={{ fill: 'purple' }} />
+              <IoCalendarSharp size={200} />
             </a>
           </div>
         </div>

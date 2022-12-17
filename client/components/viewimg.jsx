@@ -94,7 +94,7 @@ export default class ViewAllImages extends React.Component {
           <div className="container">
 
             <div className="row">
-              <h1 className="text-center text-white">IMAGES</h1>
+              <h1 className="text-center timeline-color">IMAGES</h1>
               <section id="allphotos">
                 {this.state.events.map(event => {
                   return (

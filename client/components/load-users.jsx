@@ -8,7 +8,8 @@ export default class LoadUser extends React.Component {
     super(props);
     this.state = {
       eventId: this.props.eventId,
-      userId: this.props.userId
+      userId: this.props.userId,
+      username: ''
 
     };
     this.loadUsers = this.loadUsers.bind(this);
@@ -16,6 +17,7 @@ export default class LoadUser extends React.Component {
 
   loadUsers() {
     const { userId } = this.context.user;
+
     const req = {
       method: 'POST',
       headers: { 'X-Access-Token': localStorage.getItem('auth-token') },
@@ -26,19 +28,22 @@ export default class LoadUser extends React.Component {
     fetch(`/api/events/users/${this.props.eventId}`, req)
       .then(response => response.json())
       .then(result => {
-        console.log(result);
+        const thisusername = result[0].username;
+        console.log('🚀 ~ file: load-users.jsx:32 ~ LoadUser ~ loadUsers ~ username', thisusername);
+        const userid = result[0].userId;
 
-        console.log(this.state);
+        const thisevent = this.props.eventId;
+
         this.setState({
           loading: false,
-          result
+          username: thisusername,
+          eventId: thisevent,
+          userId: userid
 
         });
-        // console.log('this state after setSTate', this.state);
-
-        // console.log(this.props);
 
       })
+
       .catch(err => {
         console.error('dang', err);
 
@@ -51,16 +56,19 @@ export default class LoadUser extends React.Component {
   }
 
   render() {
+
     // const res = this.state.result.username;
     // console.log("🚀 ~ file: load-users.jsx:55 ~ LoadUser ~ render ~ res ", res );
     const { user } = this.context;
-    const { username, userId } = this.state;
+    const { username, userId, eventId } = this.state;
+    console.log('🚀 ~ file: load-users.jsx:66 ~ LoadUser ~ render ~ this.state', this.state);
     // console.log('🚀 ~ file: load-users.jsx:56 ~ render ~ this.state', this.state);
 
     // console.log('🚀 ~ file: load-users.jsx:57 ~ LoadUser ~ render ~ this.state', this.state);
 
     return (
-      <div>Hello</div>
+
+      <span className='username'>{username}</span>
     );
   }
 }
