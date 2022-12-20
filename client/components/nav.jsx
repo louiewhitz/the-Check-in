@@ -58,11 +58,7 @@ export default class Header extends React.Component {
                         View Photos
                       </a>
                     </li>
-                    <li>
-                      <a className="dropdown-item" href="#this">
-                        All Users
-                      </a>
-                    </li>
+
                   </ul>
                 </div>
               </div>
@@ -91,7 +87,7 @@ export default class Header extends React.Component {
                       <a href="#sign-in" className="btn btn-primary">
                         Sign In
                       </a>
-                      <a href="#sign-up" className="btn btn-dark">
+                      <a href="#sign-up" className="btn btn-light">
                         Sign Up
                       </a>
                     </>

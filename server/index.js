@@ -113,6 +113,24 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/schedules', (req, res, next) => {
+  const { scheduleTime, title } = req.body;
+  const { userId } = req.user;
+
+  const sql = `
+    INSERT INTO "schedules" ("scheduleTime", "title", "timelineId")
+    VALUES ($1, $2, $3) returning *;
+  `;
+  const params = [scheduleTime, title, 1];
+
+  db.query(sql, params)
+    .then(result => {
+      const [newEvent] = result.rows;
+      res.status(201).json(newEvent);
+    })
+    .catch(err => next(err));
+});
+
 app.get('/api/all-usernames', (req, res, next) => {
   const { username } = req.body;
   const { user } = req.user;
@@ -140,21 +158,6 @@ app.get('/api/all-users', (req, res, next) => {
     .then(result => {
       const users = [];
       result.rows.forEach(user => users.push(user.username));
-      res.status(200).json(users);
-    })
-    .catch(err => next(err));
-});
-
-app.get('/api/all-useridentification', (req, res, next) => {
-  const { userId } = req.body;
-  const sql = `
-  select "userId"
-  from "users";
-  `;
-  db.query(sql)
-    .then(result => {
-      const users = [];
-      result.rows.forEach(user => users.push(user.userId));
       res.status(200).json(users);
     })
     .catch(err => next(err));
@@ -249,8 +252,6 @@ app.post('/api/events/users/:eventId', (req, res, next) => {
 app.post('/api/events', uploadsMiddleware, (req, res, next) => {
   const { title, description, summary, eventTypeId, timelineId, scheduleId } =
     req.body;
-
-  // const userId = Number(req.user);
   const { userId } = req.user;
 
   if (!title || !eventTypeId) {

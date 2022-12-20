@@ -120,7 +120,6 @@ export default class EditForm extends React.Component {
               <Button
                 variant="primary"
                 onClick={this.handleClose}
-                // onSubmit={updateSubmit}
                 type="submit">
                 Save Changes
               </Button>

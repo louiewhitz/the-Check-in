@@ -1,42 +1,66 @@
+/* eslint-disable no-console */
 import React, { useState, useContext } from 'react';
 import AppContext from '../lib/app-context';
 import Redirect from '../components/redirect';
 import { FaUserNurse, FaPhoneAlt } from 'react-icons/fa';
 import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
+import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';
+import axios from 'axios';
+// import LoadingSpinner from '../components/loading-spinner';
+// import NetErr from '../components/network-error';
 
-import DatePicker from 'react-datepicker';
-
-// const initialValues = {
-//   scheduleId: 0,
-//   title: '',
-//   startDate: 0,
-//   timelineId: 1,
-//   EventTypeId: 0
-// };
-
-const ScheduleMe = () => {
+const ScheduleMe = props => {
   const [date, setStartDate] = useState(new Date());
 
   const [eventTypeId, setEventTypeId] = useState(0);
   const [title, setTitle] = useState('');
-  const { user } = useContext(AppContext);
 
-  // const [value, setValues] = useState([]);
-  // const [eventName, setEventName] = useState('');
-  const handleDate = e => {
-    setStartDate(e.target.value);
+  const handletitle = event => {
+    setTitle(event.target.value);
   };
-  const handleTitle = e => {
-    setTitle(e.target.value);
-    // console.log(title);
+
+  const handleChange = date => {
+    setStartDate(date);
+
   };
 
   const eventType = number => {
-    // console.log(number);
+
     setEventTypeId(number);
     return setEventTypeId(number);
   };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('scheduleTime', date);
+    formData.append('timelineId', 1);
+    const headers = {
+      'X-Access-Token': localStorage.getItem('auth-token')
+    };
+
+    axios.post('/api/schedules', formData, { headers })
+      .then(response => {
+        // console.log(response.status);
+        // console.log(response.data);
+      })
+      .catch(error => {
+        if (error.response) {
+          // console.log(error.response);
+          // console.log('server responded');
+        } else if (error.request) {
+          // console.log('network error');
+        } else {
+          // console.log(error);
+        }
+      });
+
+  }
+
+  const { user } = useContext(AppContext);
 
   if (!user) {
     return <Redirect to="#sign-in" />;
@@ -48,14 +72,14 @@ const ScheduleMe = () => {
         <div className="col-sm" />
         <div className="col d-flex d-inline-flex align-self-center">
           <blockquote className="blockquote text-center">
-            <p className="text-white lead fs-3 lh-base text-center">
+            <p className="timeline-color lead fs-3 lh-base text-center">
               Schedule a future event:
             </p>
           </blockquote>
         </div>
         <div className="col-sm" />
       </div>
-      <form className="row" id="eventId">
+      <form className="row" id="scheduleId" onSubmit={handleSubmit}>
         <div className="form-holder">
           <div className="form-content">
             <div className="">
@@ -139,10 +163,10 @@ const ScheduleMe = () => {
                       required
                       name="title"
                       type="text"
-                      onChange={handleTitle}
+                      onChange={handletitle}
                       value={title}
                       placeholder="Title..."
-                      className="form-control rounded bg-transparent px-4 py-2.5 font-bold text-heading text-light"
+                      className="form-control rounded bg-transparent px-4 py-2.5 font-bold text-heading text-dark"
                     />
                   </div>
                 </div>
@@ -152,19 +176,24 @@ const ScheduleMe = () => {
                       <div className="form-group col mt-3">
                         <label
                           htmlFor="date"
-                          className="d-block fs-5 form-label"
+
                         />
-                        <DatePicker
-                          selected={date}
-                          onSelect={handleDate}
-                          onChange={date}
-                        />
+                        <div className='calendar-container'>
+                          <Calendar calendarType='US'
+                            selected={date}
+                            value={date}
+                            onChange={handleChange}
+
+                            id="date"
+                            name="date"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="d-flex justify-content-end">
-                  <button className="btn btn-primary btn-md mt-2" type="submit">
+                  <button className="btn btn-primary btn-md mt-2 shadow-lg" type="submit">
                     Schedule
                   </button>
                 </div>
