@@ -64,11 +64,6 @@ export default class ViewAllImages extends React.Component {
     });
   }
 
-  // loadSpin() {
-  //   if (this.state.loading === true) {
-  //     return <LoadingSpinner />;
-  //   }
-  // }
   render() {
     const { user } = this.context;
 
@@ -100,7 +95,7 @@ export default class ViewAllImages extends React.Component {
                   return (
                     <div key={event.eventId} className='fix'>
                       <ViewPhoto
-                  key={event.eventId}
+                  // key={event.eventId}
                   event={event}
                   loadEvents={this.loadEvents}
                 />

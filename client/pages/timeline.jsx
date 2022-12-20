@@ -13,7 +13,6 @@ import NetError from '../components/network-error';
 import LoadingSpinner from '../components/loading-spinner';
 import Axios from 'axios';
 import LoadUser from '../components/load-users';
-import AllUsers from '../components/all-users';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 

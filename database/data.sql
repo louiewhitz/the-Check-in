@@ -1,6 +1,6 @@
 
 insert into "users" ("firstName", "lastName", "hashedPassword", "username")
-  values ('Sally', 'May', 'dummy', 'marigold');
+  values ('Sample', 'User', '$argon2id$v=19$m=4096,t=3,p=1$G9NpC4BNpEs2tAlfjuVLaQ$vtmg8ueVwJGQrNnlCX4q8kYB6cQq/kfk+BaL4SBsRtg', 'Enjoy');
 
 insert into "timelines" ("timelineFor")
   values ('James');
