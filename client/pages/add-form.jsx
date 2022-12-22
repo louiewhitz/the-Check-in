@@ -19,10 +19,10 @@ export default class AddForm extends React.Component {
       file: '../images/apod.jpeg',
       title: '',
       userId: '',
-      timelineId: 1,
-      scheduleTime: new Date(),
+      // timelineId: 1,
+      // scheduleTime: new Date(),
       updatedAt: new Date(),
-      scheduleId: '',
+      // scheduleId: '',
       loading: false,
       networkError: false
 
@@ -33,7 +33,7 @@ export default class AddForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.eventType = this.eventType.bind(this);
     this.handleDate = this.handleDate.bind(this);
-    this.handleSchedule = this.handleSchedule.bind(this);
+    // this.handleSchedule = this.handleSchedule.bind(this);
 
   }
 
@@ -47,16 +47,16 @@ export default class AddForm extends React.Component {
 
   }
 
-  handleSchedule() {
-    const { userId } = this.context.user;
-    this.setState({
-      timelineId: 1,
-      schedultTime: new Date(),
-      scheduleId: 1,
-      userId
-    });
+  // handleSchedule() {
+  //   const { userId } = this.context.user;
+  //   this.setState({
+  //     timelineId: 1,
+  //     schedultTime: new Date(),
+  //     scheduleId: 1,
+  //     userId
+  //   });
 
-  }
+  // }
 
   onChange(event) {
     const { name, value } = event.target;
@@ -115,6 +115,7 @@ export default class AddForm extends React.Component {
   }
 
   render() {
+
 
     const { user } = this.context;
 
@@ -288,7 +289,7 @@ export default class AddForm extends React.Component {
 
                   </div>
                   <div className="d-flex justify-content-end">
-                    <label>Schedule instead?</label><a className="btn btn-primary" href="#viewcalendar" role="button" onClick={this.handleSchedule}>Schedule me!</a>
+                    {/* <label>Schedule instead?</label><a className="btn btn-primary" href="#viewcalendar" role="button" onClick={this.handleSchedule}>Schedule me!</a> */}
 
                     <button
                       className="btn btn-info btn-md mt-1"
