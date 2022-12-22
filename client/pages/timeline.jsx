@@ -22,7 +22,6 @@ export default class Timeline extends React.Component {
     this.state = {
       events: [],
       username: [],
-
       loading: true,
       networkError: false
     };
@@ -96,7 +95,7 @@ export default class Timeline extends React.Component {
                 </a>
               </div>
               <div className="col text-start">
-                <a href="#scheduling">
+                <a href="#viewcalendar">
                   <IoCalendarSharp size={150} />
                 </a>
               </div>
@@ -120,16 +119,20 @@ export default class Timeline extends React.Component {
   }
 }
 function AllEvents(props) {
+
   const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl, username, userId } =
     props.event;
-  // console.log('props.event', props.event);
+
+  const currentUser = props.event.userId;
+  const scheduled = new Date(updatedAt);
+  const addSched = format(scheduled, 'PPp');
 
   const postedOn = new Date(createdAt);
   const handleShow = () => {
     return eventId;
   };
 
-  const post = format(postedOn, 'EEEE, ii, yy');
+  const post = format(postedOn, 'PPp');
 
   return (
     <article>
@@ -140,19 +143,23 @@ function AllEvents(props) {
           <span className="thisdate mx-1">{post}</span>
           {title}
           <span className="edit text-muted">
+
             <DeleteModal
-              eventId={eventId}
-              event={props.event}
-              loadEvents={props.loadEvents}
-            />
+      eventId={eventId}
+      event={props.event}
+      loadEvents={props.loadEvents}
+    />
 
             <EditForm
-              eventId={eventId}
-              title={title}
-              description={description}
-              updatedAt={updatedAt}
-              loadEvents={props.loadEvents}
-            />
+      eventId={eventId}
+      title={title}
+      description={description}
+      updatedAt={updatedAt}
+      userId={userId}
+      loadEvents={props.loadEvents}
+
+    />
+
             <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
 
           </span>

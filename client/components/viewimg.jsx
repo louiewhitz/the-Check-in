@@ -95,7 +95,7 @@ export default class ViewAllImages extends React.Component {
                   return (
                     <div key={event.eventId} className='fix'>
                       <ViewPhoto
-                  // key={event.eventId}
+
                   event={event}
                   loadEvents={this.loadEvents}
                 />
@@ -111,6 +111,9 @@ export default class ViewAllImages extends React.Component {
 }
 function ViewPhoto(props) {
   const { photoUrl, eventId, title } = props.event;
+  if (!photoUrl) {
+    return null;
+  }
 
   return (<Container className='p-4'>
     <Row style={style}>

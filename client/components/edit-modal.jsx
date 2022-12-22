@@ -12,10 +12,13 @@ import AddForm from '../pages/add-form';
 export default class EditForm extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       eventId: this.props.eventId,
       title: this.props.title,
       description: this.props.description,
+      userId: this.props.userId,
+
       show: false,
       isEditing: false
     };
@@ -77,8 +80,13 @@ export default class EditForm extends React.Component {
   }
 
   render() {
-    const { title, description, show, eventId } = this.state;
-    const { user } = this.context;
+    const { title, description, show, eventId, userId } = this.state;
+
+    const contextUserId = this.context.user.userId;
+
+    if (contextUserId !== userId) {
+      return;
+    }
 
     const { handleChange, updateSubmit } = this;
 

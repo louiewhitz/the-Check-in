@@ -11,8 +11,9 @@ import axios from 'axios';
 // import LoadingSpinner from '../components/loading-spinner';
 // import NetErr from '../components/network-error';
 
-const ScheduleMe = props => {
+export default function ScheduleMe(props) {
   const [date, setStartDate] = useState(new Date());
+
 
   const [eventTypeId, setEventTypeId] = useState(0);
   const [title, setTitle] = useState('');
@@ -20,11 +21,13 @@ const ScheduleMe = props => {
   const handletitle = event => {
     setTitle(event.target.value);
   };
+  console.log('file: datepicker.jsx:23 ~ handletitle ~ title', title);
 
   const handleChange = date => {
     setStartDate(date);
 
   };
+  console.log('file: datepicker.jsx:30 ~ handleChange ~ date', date);
 
   const eventType = number => {
 
@@ -34,27 +37,35 @@ const ScheduleMe = props => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('scheduleTime', date);
-    formData.append('timelineId', 1);
+
+    console.log(title);
+    console.log(date);
+    const request = {
+      scheduleTime: date,
+      title
+    };
+    console.log('file: datepicker.jsx:45 ~ handleSubmit ~ request', request);
+
     const headers = {
-      'X-Access-Token': localStorage.getItem('auth-token')
+      'X-Access-Token': localStorage.getItem('auth-token'),
+      'Content-Type': 'multipart/form-data'
     };
 
-    axios.post('/api/schedules', formData, { headers })
+    axios.post('/api/schedules', request, headers)
+
       .then(response => {
-        // console.log(response.status);
-        // console.log(response.data);
+        console.log('response status', response.status);
+        console.log('response data', response.data);
       })
       .catch(error => {
         if (error.response) {
-          // console.log(error.response);
-          // console.log('server responded');
+          console.log(error.response);
+          console.log('server responded');
         } else if (error.request) {
-          // console.log('network error');
+          console.log('network error');
         } else {
-          // console.log(error);
+          console.log(error);
+          console.error('this is your error', error);
         }
       });
 
@@ -204,6 +215,4 @@ const ScheduleMe = props => {
       </form>
     </div>
   );
-};
-
-export default ScheduleMe;
+}

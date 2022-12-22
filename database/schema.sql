@@ -23,7 +23,7 @@ CREATE TABLE "public"."events" (
 	"description" TEXT,
 	"photoUrl" TEXT,
 	"createdAt" TIMESTAMPTZ NOT NULL default now(),
-	"updatedAt" TIMESTAMPTZ default null,
+	"updatedAt" TIMESTAMPTZ,
 	"userId" integer NOT NULL,
 	"eventTypeId" integer NOT NULL,
 	"timelineId" integer NOT NULL,
@@ -45,7 +45,9 @@ CREATE TABLE "public"."eventTypes" (
 CREATE TABLE "public"."schedules" (
 	"scheduleId" serial NOT NULL,
 	"title" TEXT NOT NULL,
-	"scheduleTime" TIMESTAMPTZ NOT NULL,
+	"startDate" DATE NOT NULL,
+	"startTime" TIME NOT NULL,
+	"endTime" TIME NOT NULL,
 	"timelineId" integer NOT NULL,
 	CONSTRAINT "schedules_pk" PRIMARY KEY ("scheduleId")
 ) WITH (

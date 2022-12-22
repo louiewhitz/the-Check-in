@@ -29,7 +29,6 @@ export default class LoadUser extends React.Component {
       .then(response => response.json())
       .then(result => {
         const thisusername = result[0].username;
-        console.log('🚀 ~ file: load-users.jsx:32 ~ LoadUser ~ loadUsers ~ username', thisusername);
         const userid = result[0].userId;
 
         const thisevent = this.props.eventId;
@@ -56,15 +55,8 @@ export default class LoadUser extends React.Component {
   }
 
   render() {
-
-    // const res = this.state.result.username;
-    // console.log("🚀 ~ file: load-users.jsx:55 ~ LoadUser ~ render ~ res ", res );
     const { user } = this.context;
     const { username, userId, eventId } = this.state;
-    console.log('🚀 ~ file: load-users.jsx:66 ~ LoadUser ~ render ~ this.state', this.state);
-    // console.log('🚀 ~ file: load-users.jsx:56 ~ render ~ this.state', this.state);
-
-    // console.log('🚀 ~ file: load-users.jsx:57 ~ LoadUser ~ render ~ this.state', this.state);
 
     return (
 

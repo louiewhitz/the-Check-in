@@ -40,7 +40,7 @@ export default class AllPhotos extends React.Component {
     };
 
     fetch(`/api/events/${this.props.eventId}`, req)
-      .then(response => response.json())
+      // .then(response => response.json())
       .then(result => {
 
         this.props.loadEvents();
@@ -57,6 +57,9 @@ export default class AllPhotos extends React.Component {
   }
 
   render() {
+    if (!this.state.photoUrl) {
+      return null;
+    }
 
     const { show } = this.state;
 
@@ -78,7 +81,7 @@ export default class AllPhotos extends React.Component {
           </Modal.Body>
           <Modal.Footer className='bg-secondary border-0'>
             <Button variant="info" onClick={this.handleClose} className='d-block'>
-              Back to TimeLine
+              Back to Timeline
             </Button>
           </Modal.Footer>
         </Modal>

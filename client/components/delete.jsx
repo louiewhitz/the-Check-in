@@ -10,6 +10,8 @@ export default class DeleteModal extends React.Component {
 
     this.state = {
       eventId: this.props.eventId,
+      userId: this.props.event.userId,
+
       show: false
     };
 
@@ -18,12 +20,12 @@ export default class DeleteModal extends React.Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
-  // const token = localStorage.getItem('auth-token');
-
   handleShow() {
+
     this.setState({
       show: true
     });
+
   }
 
   handleClose() {
@@ -44,7 +46,6 @@ export default class DeleteModal extends React.Component {
       user
     };
 
-    // const eventId = Number(this.props.eventId);
     fetch(`/api/events/delete/${this.props.eventId}`, req)
       .then(response => response.json())
       .then(result => {
@@ -57,7 +58,14 @@ export default class DeleteModal extends React.Component {
   }
 
   render() {
-    const { show } = this.state;
+
+    const { show, userId } = this.state;
+
+    const contextUserId = this.context.user.userId;
+
+    if (contextUserId !== userId) {
+      return;
+    }
 
     const modalTitle = 'Are you sure you want to delete this event?';
 
