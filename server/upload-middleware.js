@@ -23,13 +23,22 @@ const storage = multerS3({
   // ☝️ so that when the file is downloaded,
   // the proper Content-Type header is set in the response
   key: (req, file, done) => {
+    if (!file) {
+      return;
+    }
     const fileExtension = path.extname(file.originalname);
     done(null, `${Date.now()}${fileExtension.toLowerCase()}`);
   }
 });
 
 const uploadsMiddleware = multer({
-  storage
+  storage,
+  fileFilter: (req, file, done) => {
+    if (file) {
+      return done(null, true);
+    }
+    done(null, false);
+  }
 }).single('image');
 
 module.exports = uploadsMiddleware;

@@ -85,6 +85,10 @@ app.post('/api/auth/sign-in', (req, res, next) => {
 app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
   // console.log('req.file:', req.file);
   // https://www.npmjs.com/package/multer-s3#file-information
+  if (!req.file) {
+    // If there is no file, do nothing and return
+    return;
+  }
 
   const fileUrl = req.file.location; // The S3 url to access the uploaded file later
 
@@ -113,20 +117,21 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/schedules', (req, res, next) => {
-  const { scheduleTime, title } = req.body;
+app.post('/api/schedules/schedule-time', (req, res, next) => {
+  const { startDate, startTime, endTime, title, timelineId } = req.body;
   const { userId } = req.user;
 
-  const sql = `
-    INSERT INTO "schedules" ("scheduleTime", "title", "timelineId")
-    VALUES ($1, $2, $3) returning *;
+  const sql =
+  `
+    INSERT INTO "schedules" ("title", "startDate", "startTime", "endTime", "timelineId")
+    VALUES ($1, $2, $3, $4, $5) returning *;
   `;
-  const params = [scheduleTime, title, 1];
+  const params = [title, startDate, startTime, endTime, timelineId];
 
   db.query(sql, params)
     .then(result => {
-      const [newEvent] = result.rows;
-      res.status(201).json(newEvent);
+      const [scheduleEvent] = result.rows;
+      res.status(201).json(scheduleEvent);
     })
     .catch(err => next(err));
 });
@@ -248,19 +253,21 @@ app.post('/api/events/users/:eventId', (req, res, next) => {
     .catch(err => next(err));
 
 });
+// this is where we can add the schedule Id
 
 app.post('/api/events', uploadsMiddleware, (req, res, next) => {
-  const { title, description, summary, eventTypeId, timelineId, scheduleId } =
+  const { title, description, summary, eventTypeId, timelineId, updatedAt, scheduleId } =
     req.body;
   const { userId } = req.user;
 
   if (!title || !eventTypeId) {
     throw new ClientError(400, 'title and event type are required');
   }
-  const photoUrl = req.file.location;
+  const photoUrl = req.file ? req.file.location : null;
+
   const sql = `
-   insert into "events" ("title", "summary", "description", "photoUrl", "eventTypeId", "timelineId", "userId")
-    values ($1, $2, $3, $4, $5, $6, $7)
+   insert into "events" ("title", "summary", "description", "photoUrl", "eventTypeId", "timelineId", "updatedAt", "userId")
+    values ($1, $2, $3, COALESCE($4, NULL), $5, $6, $7, $8)
     returning *;
   `;
   const params = [
@@ -270,6 +277,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     photoUrl,
     eventTypeId,
     1,
+    updatedAt,
     userId
   ];
 

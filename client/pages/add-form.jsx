@@ -6,7 +6,9 @@ import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
 import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
-
+import DatePicker from 'react-multi-date-picker';
+import TimePicker from 'react-multi-date-picker/plugins/time_picker';
+import moment from 'moment';
 export default class AddForm extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +19,10 @@ export default class AddForm extends React.Component {
       file: '../images/apod.jpeg',
       title: '',
       userId: '',
+      timelineId: 1,
+      scheduleTime: new Date(),
+      updatedAt: new Date(),
+      scheduleId: '',
       loading: false,
       networkError: false
 
@@ -26,15 +32,41 @@ export default class AddForm extends React.Component {
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.eventType = this.eventType.bind(this);
+    this.handleDate = this.handleDate.bind(this);
+    this.handleSchedule = this.handleSchedule.bind(this);
+
+  }
+
+  handleDate(date) {
+    const formattedDate = moment(this.state.date).format('YYYY-MM-DD HH:mm:ss');
+
+    this.setState({
+
+      updatedAt: formattedDate
+    });
+
+  }
+
+  handleSchedule() {
+    const { userId } = this.context.user;
+    this.setState({
+      timelineId: 1,
+      schedultTime: new Date(),
+      scheduleId: 1,
+      userId
+    });
 
   }
 
   onChange(event) {
     const { name, value } = event.target;
+
     this.setState({ [name]: value });
+
   }
 
   onFileChange(event) {
+
     this.setState({
       file: URL.createObjectURL(event.target.files[0])
     });
@@ -46,11 +78,15 @@ export default class AddForm extends React.Component {
   }
 
   handleSubmit(event) {
+
     event.preventDefault();
+
     this.setState({ loading: true });
 
     const formData = new FormData();
     const image = this.fileInputRef.current.files[0];
+
+    const formattedDate = moment(this.state.date).format('YYYY-MM-DD HH:mm:ss');
 
     formData.append('summary', this.state.summary);
     formData.append('eventTypeId', this.state.eventTypeId);
@@ -58,6 +94,7 @@ export default class AddForm extends React.Component {
     formData.append('description', this.state.description);
     formData.append('image', image);
     formData.append('userId', this.state.userId);
+    formData.append('updatedAt', formattedDate);
 
     fetch('/api/events', {
       method: 'POST',
@@ -70,6 +107,7 @@ export default class AddForm extends React.Component {
         this.setState({ loading: false });
         window.location.hash = '#timeline';
       })
+
       .catch(err => {
         console.error('Dang! Fetch FAIIIIILED', err);
         this.setState({ networkError: true });
@@ -77,6 +115,7 @@ export default class AddForm extends React.Component {
   }
 
   render() {
+
     const { user } = this.context;
 
     if (!user) {
@@ -229,13 +268,35 @@ export default class AddForm extends React.Component {
                     />
                   </div>
 
+                  <div className="d-flex flex-row justify-content-between">
+
+                    <label htmlFor="updatedAt" className="d-block fs-5 form-label mx-1 text-muted" id="updatedAt">Click to enter a different time </label>
+                    <DatePicker key={this.state.scheduleId}
+                      id="updateAt"
+                      className="d-block mx-1"
+
+                      selected={this.state.updatedAt}
+
+                      onChange={this.handleDate}
+
+                        format="MM/DD/YYYY HH:mm:ss A"
+                        plugins={[
+                          <TimePicker key={this.state.scheduleId} position="right" hideSeconds
+      style={{ minWidth: '100px' }}/>
+                        ]}
+                      />
+
+                  </div>
                   <div className="d-flex justify-content-end">
+                    <label>Schedule instead?</label><a className="btn btn-primary" href="#viewcalendar" role="button" onClick={this.handleSchedule}>Schedule me!</a>
+
                     <button
                       className="btn btn-info btn-md mt-1"
                       type="submit">
                       POST TO TIMELINE
                     </button>
                   </div>
+
                 </div>
               </div>
             </div>

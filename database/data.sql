@@ -7,3 +7,9 @@ insert into "timelines" ("timelineFor")
 
 insert into "eventTypes" ("eventTypeId", "eventName")
   values(1,'walk'), (2, 'movie'), (3, 'phone'), (4, 'meal'), (5,'doctor'), (6, 'other');
+
+insert into "schedules" ("scheduleId", "title", "startDate", "startTime", "endTime", "timelineId")
+values(1, 'Meeting with family, everyone get ready!', '11-11-2022',
+  '9:30AM',
+  '10:30PM',
+  1)

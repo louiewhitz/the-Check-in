@@ -23,6 +23,14 @@ div.bg-light {
   color: rgb(238, 245, 20);
 }
 
+.rmdp-input {
+  height: 1.5em !important;
+}
+
+#scheduleTimeLabel {
+  font-size: 1rem !important;
+}
+
 #allphotos {
   display: flex;
   flex-wrap: wrap;
@@ -406,11 +414,36 @@ a {
 
 .calendar-container {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: center;
+  flex-direction: column;
+}
+
+.placeholderCal {
+  max-width: 50%;
+    padding: 10px 6.6667px;
+    background: none;
+   
+    line-height: 16px;
+    color: #222;
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgb(0 0 0 / 20%);
+
+}
+
+.calInput {
+  max-width: 50%;
+    padding: 10px 6.6667px;
+    background: none;
+    text-align: center;
+    line-height: 16px;
+    color: #222;
+    border-radius: 8px;
+    box-shadow: 0 12px 24px rgb(0 0 0 / 20%);
+   
+ 
 }
 .react-calendar {
-  
   max-width: 100%;
   background-color: #fff;
   color: #222;
@@ -418,9 +451,10 @@ a {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
+  margin-bottom: 2em;
 }
  
-.react-calendar__navigation button {
+/* .react-calendar__navigation button {
   color: #d4a713;
   min-width: 44px;
   background: none;
@@ -507,12 +541,14 @@ abbr[title] {
   background: #d4a713;
   color: white;
 }
+ */
 
 
-
-@media (min-width: 768px) {
+@media (min-width: 1028px) {
   .react-calendar {
-    width: 600px !important; /* larger width for viewports wider than 768px */
+    width: 900px !important;
+    height: 310px;
+   /* larger width for viewports wider than 768px */
   }
 }
 
@@ -901,8 +937,21 @@ section#timeline article div.inner .thisdate {
   margin: auto;
 }
 
+
+
 .spin-text {
   color: rgb(180, 180, 189);
   font-size: 1.5em;
   padding-top: 8%;
 }
+
+.myCalendar {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center
+  
+
+}
+
+  
