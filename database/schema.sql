@@ -49,6 +49,8 @@ CREATE TABLE "public"."schedules" (
 	"startTime" TIME NOT NULL,
 	"endTime" TIME NOT NULL,
 	"timelineId" integer NOT NULL,
+	"start" TIMESTAMP WITH TIME ZONE NOT NULL,
+  "end" TIMESTAMP WITH TIME ZONE NOT NULL,
 	CONSTRAINT "schedules_pk" PRIMARY KEY ("scheduleId")
 ) WITH (
   OIDS=FALSE

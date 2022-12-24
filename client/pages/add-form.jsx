@@ -9,6 +9,7 @@ import NetError from '../components/network-error';
 import DatePicker from 'react-multi-date-picker';
 import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 import moment from 'moment';
+
 export default class AddForm extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +20,7 @@ export default class AddForm extends React.Component {
       file: '../images/apod.jpeg',
       title: '',
       userId: '',
-      // timelineId: 1,
-      // scheduleTime: new Date(),
       updatedAt: new Date(),
-      // scheduleId: '',
       loading: false,
       networkError: false
 
@@ -39,24 +37,11 @@ export default class AddForm extends React.Component {
 
   handleDate(date) {
     const formattedDate = moment(this.state.date).format('YYYY-MM-DD HH:mm:ss');
-
     this.setState({
-
       updatedAt: formattedDate
     });
 
   }
-
-  // handleSchedule() {
-  //   const { userId } = this.context.user;
-  //   this.setState({
-  //     timelineId: 1,
-  //     schedultTime: new Date(),
-  //     scheduleId: 1,
-  //     userId
-  //   });
-
-  // }
 
   onChange(event) {
     const { name, value } = event.target;
@@ -115,7 +100,6 @@ export default class AddForm extends React.Component {
   }
 
   render() {
-
 
     const { user } = this.context;
 

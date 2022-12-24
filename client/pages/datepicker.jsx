@@ -8,12 +8,13 @@ import { BiCameraMovie } from 'react-icons/bi';
 import 'react-calendar/dist/Calendar.css';
 import Calendar from 'react-calendar';
 import axios from 'axios';
+import DatePicker from 'react-multi-date-picker';
+import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 // import LoadingSpinner from '../components/loading-spinner';
 // import NetErr from '../components/network-error';
 
 export default function ScheduleMe(props) {
   const [date, setStartDate] = useState(new Date());
-
 
   const [eventTypeId, setEventTypeId] = useState(0);
   const [title, setTitle] = useState('');
@@ -198,7 +199,28 @@ export default function ScheduleMe(props) {
                             id="date"
                             name="date"
                           />
+
                         </div>
+                        <label
+                      htmlFor="startTime"
+                      className="d-block fs-5 form-label">Start Time</label>
+                        <DatePicker
+                        className='start-end-time'
+  disableDayPicker
+  format="hh:mm:ss A"
+  plugins={[
+    <TimePicker key={1} className='start-end-time'/>
+  ]}
+/> <label
+                      htmlFor="endTime"
+                      className="d-block fs-5 form-label">End Time:</label>
+                        <DatePicker
+  disableDayPicker
+  format="hh:mm:ss A"
+  plugins={[
+    <TimePicker key={1} />
+  ]}
+/>
                       </div>
                     </div>
                   </div>

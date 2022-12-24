@@ -13,7 +13,7 @@ import NetError from '../components/network-error';
 import LoadingSpinner from '../components/loading-spinner';
 import Axios from 'axios';
 import LoadUser from '../components/load-users';
-
+import moment from 'moment';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class Timeline extends React.Component {
@@ -127,6 +127,8 @@ function AllEvents(props) {
   const scheduled = new Date(updatedAt);
   const addSched = format(scheduled, 'PPp');
 
+  const momUpdatedAt = moment(updatedAt).format('LLLL');
+
   const postedOn = new Date(createdAt);
   const handleShow = () => {
     return eventId;
@@ -138,12 +140,10 @@ function AllEvents(props) {
     <article>
       <div className="inner">
         <EventType eventTypeId={eventTypeId} />
-
         <h2 className="text-center">
           <span className="thisdate mx-1">{post}</span>
           {title}
           <span className="edit text-muted">
-
             <DeleteModal
       eventId={eventId}
       event={props.event}

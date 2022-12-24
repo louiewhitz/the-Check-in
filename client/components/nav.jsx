@@ -44,7 +44,7 @@ export default class Header extends React.Component {
                     </li>
 
                     <li>
-                      <a className="dropdown-item" href="#scheduling">
+                      <a className="dropdown-item" href="#schedule-event">
                         Schedule Event
                       </a>
                     </li>
@@ -56,11 +56,6 @@ export default class Header extends React.Component {
                     <li>
                       <a className="dropdown-item" href="#allphotos">
                         View Photos
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#viewcalendar">
-                        View Calendar
                       </a>
                     </li>
 

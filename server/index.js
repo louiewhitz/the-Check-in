@@ -117,16 +117,44 @@ app.get('/api/events', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/schedules/schedule-time', (req, res, next) => {
-  const { startDate, startTime, endTime, title, timelineId } = req.body;
+app.get('/api/schedules', (req, res, next) => {
+  const sql = `select *
+  from "schedules"
+  order by "scheduleId" desc;`;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.get('/api/schedules', (req, res, next) => {
   const { userId } = req.user;
+  const sql = `
+    select "title",
+            "startDate",
+            "startTime",
+            "endTime",
+            "end",
+            "start",
+          
+            "timelineId"
+      from "schedules"
+      where "scheduleId" = $1`;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+app.post('/api/schedules/schedule-time', (req, res, next) => {
+  const { startDate, startTime, endTime, title, timelineId, start, end } = req.body;
+  // const { userId } = req.user;
 
   const sql =
   `
-    INSERT INTO "schedules" ("title", "startDate", "startTime", "endTime", "timelineId")
-    VALUES ($1, $2, $3, $4, $5) returning *;
+    INSERT INTO "schedules" ("title", "startDate", "startTime", "endTime", "timelineId", "start", "end")
+    VALUES ($1, $2, $3, $4, $5, $6, $7) returning *;
   `;
-  const params = [title, startDate, startTime, endTime, timelineId];
+  const params = [title, startDate, startTime, endTime, timelineId, start, end];
 
   db.query(sql, params)
     .then(result => {

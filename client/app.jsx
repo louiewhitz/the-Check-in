@@ -1,11 +1,11 @@
 import React from 'react';
-import Calendar from './pages/calendar';
+
 import jwtDecode from 'jwt-decode';
 import Redirect from './components/redirect';
 import PageContainer from './components/page-container';
 import Header from './components/nav';
 import Timeline from './pages/timeline';
-import ScheduleMe from './pages/datepicker';
+
 import AddForm from './pages/add-form';
 import HomeBase from './pages/home';
 import Notes from './pages/notes';
@@ -16,7 +16,8 @@ import { parseRoute } from './lib';
 import DeleteModal from '../client/components/delete';
 import AllPhotos from './pages/viewphoto';
 import ViewAllImages from '../client/components/viewimg';
-// import AllUsers from '../client/components/all-users';
+import MyCalendar from '../client/components/calendar-tiles';
+
 import LoadUser from '../client/components/load-users';
 import ViewCalendar from './pages/viewcalendar';
 
@@ -73,14 +74,11 @@ export default class App extends React.Component {
     if (route.path === 'timeline') {
       return <Timeline />;
     }
-    if (route.path === 'scheduling') {
-      return <ScheduleMe />;
-    }
     if (route.path === 'notes') {
       return <Notes />;
     }
     if (route.path === 'calendar') {
-      return <Calendar />;
+      return <MyCalendar />;
     }
     if (route.path === 'edit') {
       const eventId = route.params.get('eventId');
@@ -102,7 +100,7 @@ export default class App extends React.Component {
       const eventId = route.params.get('eventId');
       return <LoadUser eventId={eventId}/>;
     }
-    if (route.path === 'viewcalendar') {
+    if (route.path === 'schedule-event') {
       return <ViewCalendar />;
     }
 
