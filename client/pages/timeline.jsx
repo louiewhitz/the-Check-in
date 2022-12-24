@@ -95,7 +95,7 @@ export default class Timeline extends React.Component {
                 </a>
               </div>
               <div className="col text-start">
-                <a href="#viewcalendar">
+                <a href="#schedule-event">
                   <IoCalendarSharp size={150} />
                 </a>
               </div>
