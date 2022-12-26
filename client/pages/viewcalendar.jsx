@@ -7,6 +7,9 @@ import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
+// import { format } from 'date-fns';
+// import parse from 'date-fns/parse';
+// import dates from 'react-big-calendar/lib/utils/dates';
 
 export default class ViewCalendar extends React.Component {
 
@@ -44,15 +47,22 @@ export default class ViewCalendar extends React.Component {
   }
 
   handleStartTimeChange(event) {
-    this.setState({ startTime: event.target.value });
+    const momentStart = moment(event.target.value, ' HH:mm');
+    const formattedStart = momentStart.format('YYYY-MM-DD HH:mm:ss');
+
+    this.setState({ startTime: formattedStart });
   }
 
   handleEndTimeChange(event) {
-    this.setState({ endTime: event.target.value });
+    const momentEnd = moment(event.target.value, 'HH:mm');
+    const formattedEnd = momentEnd.format('YYYY-MM-DD HH:mm:ss');
+
+    this.setState({ endTime: formattedEnd });
   }
 
   handleSubmit(event) {
     event.preventDefault();
+
     this.setState({ loading: true });
 
     fetch('/api/schedules/schedule-time', {
@@ -77,6 +87,7 @@ export default class ViewCalendar extends React.Component {
   }
 
   render() {
+    // console.log('this.state in add schedule', this.state);
 
     const { user } = this.context;
     if (!user) {

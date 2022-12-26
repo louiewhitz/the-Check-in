@@ -130,11 +130,13 @@ app.get('/api/schedules', (req, res, next) => {
   const { userId } = req.user;
   const sql = `
     select "title",
+            
+            
+            "end",
+            "start",
             "startDate",
             "startTime",
             "endTime",
-            "end",
-            "start",
           
             "timelineId"
       from "schedules"
