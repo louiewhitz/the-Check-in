@@ -28,7 +28,6 @@ CREATE TABLE "public"."events" (
 	"eventTypeId" integer NOT NULL,
 	"timelineId" integer NOT NULL,
 	"scheduleId" integer,
-
 	CONSTRAINT "events_pk" PRIMARY KEY ("eventId")
 ) WITH (
   OIDS=FALSE
@@ -45,12 +44,10 @@ CREATE TABLE "public"."eventTypes" (
 CREATE TABLE "public"."schedules" (
 	"scheduleId" serial NOT NULL,
 	"title" TEXT NOT NULL,
-	"startDate" DATE NOT NULL,
-	"startTime" TIME NOT NULL,
-	"endTime" TIME NOT NULL,
+	"start" TIMESTAMPTZ NOT NULL,
+	
 	"timelineId" integer NOT NULL,
-	"start" TIMESTAMP WITH TIME ZONE NOT NULL,
-  "end" TIMESTAMP WITH TIME ZONE NOT NULL,
+	"end" TIMESTAMPTZ NOT NULL,
 	CONSTRAINT "schedules_pk" PRIMARY KEY ("scheduleId")
 ) WITH (
   OIDS=FALSE

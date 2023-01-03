@@ -36,7 +36,7 @@ export default class ViewCalendar extends React.Component {
   handleDateChange(date) {
     const formatted = moment(date).format('YYYY-MM-DD');
     this.setState({
-      startDate: formatted,
+
       end: formatted,
       start: formatted
     });

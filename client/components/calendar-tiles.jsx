@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import IonDate from './ionDate';
 
 // import Toolbar from 'react-big-calendar/lib/Toolbar';
 // import moment from 'moment';
 // import AppContext from '../lib/app-context.js';
 // import { Col, Card } from 'react-bootstrap';
 import 'react-calendar/dist/Calendar.css';
-import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+import { Calendar, dateFnsLocalizer, Views, DateLocalizer  } from 'react-big-calendar';
 import DatePicker from 'react-multi-date-picker';
 
 import format from 'date-fns/format';
@@ -26,6 +27,10 @@ const locales = {
   'en-US': enUS
 };
 
+
+
+// const start = moment(schedules.startDate).toDate();
+
 const localizer = dateFnsLocalizer({
   format,
   parse,
@@ -37,62 +42,17 @@ const localizer = dateFnsLocalizer({
 function MyCalendar() {
 
   const [events, setEvents] = useState([]);
-  const [newEvent, setNewEvent] = useState({ title: '', start: new Date(), end: new Date(), timelineId: 1 });
+  const [newEvent, setNewEvent] = useState({ title: '', start: new Date(), end: '', startTime: '', endTime: '', timelineId: 1 });
   const [submit, setSubmitted] = useState(false);
 
+  const [allEvents, setAllEvents] = useState(events);
+
   function handleAddEvent(events, newEvent) {
-    newEvent.start = moment(newEvent.start).format('YYYY-MM-DD HH:mm');
-    newEvent.end = moment(newEvent.end).format('YYYY-MM-DD HH:mm');
-    newEvent.startDate = moment(newEvent.start).format('YYYY-MM-DD HH:mm');
+    setAllEvents({ ...allEvents, newEvent });
+   
 
-    // console.log(newEvent);
-
-    setNewEvent([...events, newEvent]);
-
+    console.log(newEvent);
   }
-
-  // function handleTitle(event) {
-  //   setTitle();
-  // }
-
-  const handleSubmit = e => {
-
-    // const thisEvent = { newEvent };
-
-    const formatStart = moment(newEvent.start).format('YYYY-MM-DD HH:mm:ss');
-
-    const formatEnd = moment(newEvent.end).format('YYYY-MM-DD HH:mm:ss');
-    // console.log('file: calendar-tiles.jsx:56 ~ handleSubmit ~ formatEn', formatEnd);
-    const body = {
-      timelineId: 1,
-      title: newEvent.title.value,
-      start: formatStart,
-      end: formatEnd
-    };
-    // console.log('file: calendar-tiles.jsx:62 ~ handleSubmit ~ body', body);
-
-    setSubmitted(true);
-    fetch('/api/schedules/schedule-time', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Access-Token': localStorage.getItem('auth-token')
-      },
-      body: JSON.stringify(body)
-    })
-      .then(res => res.json())
-      // .then(result => console.log(result))
-
-      .then(() => {
-
-        window.location.hash = '#calendar';
-      })
-      .catch(err => {
-        console.error('Dang! Fetch FAIIIIILED', err);
-
-      });
-
-  };
 
   useEffect(() => {
 
@@ -103,44 +63,68 @@ function MyCalendar() {
     })
       .then(response => response.json())
       .then(data => {
-        const events = data;
-
-        data.map(event => ({
-          startDate: new Date(event.startDate),
-          start: new Date(event.startDate + event.startTime),
-
-          end: new Date(event.startDate + 'T' + event.startTime),
-          title: event.title,
-          timelineId: event.timelineId,
-          scheduleId: event.scheduleId,
-          startTime: moment(event.startTime, 'HH:mm:ss'),
-          endTime: moment(event.endTime, 'HH:mm:ss')
-
-        }));
-
-        setEvents(events);
+        const allEvents = data;
+        setAllEvents(allEvents);
 
       });
 
   }, []);
 
+  const {views, ...otherProps} = useMemo(() => ({
+    views: {
+        month: true,
+        agenda: true
+    }
+}), [])
+
   return (
 
-    <div className='calendarApp'>
+    <div className='calendarApp row-sm'>
       <h1>Calendar</h1>
       <h2>Add New Event</h2>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Add Title" name="title" id="title" style={{ width: '20%', marginRight: '10px' }} value={newEvent.title} onChange={e => setNewEvent({ ...newEvent, title: e.target.value })} />
-          <DatePicker placeholderText="start Date" style={{ marginRight: '10px' }} selected={newEvent.start} onChange={start => setNewEvent({ ...newEvent, start })} />
-          <DatePicker placeholderText="End Date" selected={newEvent.end} onChange={end => setNewEvent({ ...newEvent, end })} />
-          <button style={{ marginTop: '10px' }} onClick={handleAddEvent} type="submit" value="Submit">Add Event</button>
-        </form>
-      </div>
+      <IonDate />
+     
       <Calendar
+      defaultDate={new Date()}
+
       localizer={localizer}
-      events={events}
+      events={allEvents }
+       onNavigate={(date, view) => {
+
+    fetch('/api/schedules', {
+      headers: {
+      method: 'POST',
+      'X-Access-Token': localStorage.getItem('auth-token')
+     
+      },
+       body: JSON.stringify({ date, view })
+    })
+      .then(response => response.json())
+      .then(data => {
+        const allEvents = data;
+        allEvents.map(event => {
+          const startTime = event.start;
+          const endTime = event.end;
+          const title = event.title;
+          const start = new Date(startTime);
+          const end = new date(endTime);
+  
+          // do something with the start and end time here
+        });
+  
+        setAllEvents(allEvents);
+      });
+  }}
+      
       showMultiDayTimes
+      allDay={false}
+  //      onSelectEvent={function noRefCheck(){}}
+  // onSelectSlot={function noRefCheck(){}}
+  selectable
+  step={60}
+  timeslots={4}
+  views={views}
+  popup
 
       startAccessor="start"
       endAccessor="end"

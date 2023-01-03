@@ -6,9 +6,38 @@
   background-color: #d5dedd53;
 }
 
+
 .color-nav {
   background-color: #6e0b64;
 }
+
+.align-center {
+  margin: auto;
+}
+.custom-header {
+  background-color: #538bff;
+}
+
+.input-picker {
+  text-align: right;
+  color: #808acf;
+  height: 46px !important;
+  line-height: 46px !important;
+  width: 29rem !important;
+}
+
+.input-picker > input {
+  text-align: left !important;
+}
+
+.align-left{
+  display:flex;
+  justify-content: end;
+   width: 29rem 
+}
+  .customInput::placeholder {
+    color: #b71bb7;
+  }
 
 /* Calendar Tiles */
 
@@ -53,15 +82,15 @@
   background-color: rgba(244, 228, 142, 0.319) !important;
 }
 
-.bubble  {
+.bubble {
   background: white;
   border: 1px solid #a0a096;
   line-height: 1.125em;
-  box-shadow: 0 12px 24px rgb(0 0 0 / 20%)
+  box-shadow: 0 12px 24px rgb(0 0 0 / 20%);
 }
 
 .paraDate {
-  padding: .9%;
+  padding: 0.9%;
   font-size: 1.5em;
   font-family: 'Alegreya Sans SC', sans-serif;
   text-shadow: 2px 2px 2px rgba(120, 118, 118, 0.648);
@@ -69,10 +98,9 @@
 }
 
 .date-buttons {
-   border: 1px solid #a0a096;
-    box-shadow: 0 12px 24px rgb(0 0 0 / 20%) !important;
-    margin: .4%;
-
+  border: 1px solid #a0a096;
+  box-shadow: 0 12px 24px rgb(0 0 0 / 20%) !important;
+  margin: 0.4%;
 }
 div.bg-light {
   width: 50px;
