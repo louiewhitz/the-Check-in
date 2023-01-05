@@ -1,6 +1,5 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
-import { format } from 'date-fns';
 
 import DtPicker from 'react-calendar-datetime-picker';
 import 'react-calendar-datetime-picker/dist/index.css';
@@ -13,39 +12,43 @@ export default class IonDate extends React.Component {
       networkError: false,
       timelineId: 1,
       title: ''
-    }
+
+    };
+
     this.setDate = this.setDate.bind(this);
-       this.handleTitle = this.handleTitle.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTitle = this.handleTitle.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.reload = this.reload.bind(this);
   }
+
   setDate(date) {
-    
+
     this.setState({
       start: date,
       end: date
-    })
-     
+    });
 
   }
 
-   handleTitle(e) {
+  handleTitle(e) {
     this.setState({
       title: e.target.value
     });
 
   }
 
-   handleSubmit(event) {
+  reload() {
+    window.location.reload();
+  }
 
-    console.log(this.state);
+  handleSubmit(event) {
+
     event.preventDefault();
     const { user } = this.context;
     const startDate = this.state.start.from;
-   
 
-
-    const endDate = this.state.end.to
-     const endYear = endDate.year;
+    const endDate = this.state.end.to;
+    const endYear = endDate.year;
 
     const endDay = endDate.day;
 
@@ -56,8 +59,6 @@ export default class IonDate extends React.Component {
     const endHour = endDate.hour;
 
     const endFin = `${endYear}/${endMonth}/${endDay} ${endHour}:${endMinute}`;
-   
- 
 
     const startYear = startDate.year;
 
@@ -70,26 +71,17 @@ export default class IonDate extends React.Component {
     const startHour = startDate.hour;
 
     const startFin = `${startYear}/${startMonth}/${startDay} ${startHour}:${startMinute}`;
-    const momentStart = new Date(startFin) 
+    const momentStart = new Date(startFin);
 
-    const momentEnd = new Date(endFin)
+    const momentEnd = new Date(endFin);
     const end = momentEnd.toISOString();
-  
+
     const newStart = new Date(momentStart);
     const start = newStart.toISOString();
-    console.log("file: ionDate.jsx:85 ~ IonDate ~ handleSubmit ~ lastStart ", start );
-   
-    console.log("file: ionDate.jsx:64 ~ IonDate ~ handleSubmit ~ startFin", startFin);
+
     const timelineId = this.state.timelineId;
     const title = this.state.title;
-    const body = { title, start, end, timelineId }
- 
- 
-  console.log("file: ionDate.jsx:94 ~ IonDate ~ handleSubmit ~ body", body);
-
-
-
-    console.log(this.state);
+    const body = { title, start, end, timelineId };
 
     fetch('/api/schedules/schedule-time', {
       method: 'POST',
@@ -97,23 +89,22 @@ export default class IonDate extends React.Component {
         'Content-Type': 'application/json',
         'X-Access-Token': localStorage.getItem('auth-token')
       },
-      user, 
+      user,
       body: JSON.stringify(body)
     })
-      .then(res => res.json())
+      .then(res => res.json());
 
-   }
+  }
 
+  // required style={{ width: '20%', marginRight: '10px' }}
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
 
- render() {
-   console.log(this.state)
+          <input type="text" placeholder="Add Title" name="title" id="title" className='input-picker' value={this.state.title} onChange={this.handleTitle} />
 
-  return (
-    <div>
-      <form onSubmit={this.handleSubmit}>
-       <input type="text" placeholder="Add Title" name="title" id="title" required style={{ width: '20%', marginRight: '10px' }} value={this.state.title} onChange={this.handleTitle} />
-
-    <DtPicker
+          <DtPicker
     type="range"
     local="en"
     placeholder='Select a date and time'
@@ -121,20 +112,18 @@ export default class IonDate extends React.Component {
     showTimeInput={true}
     showWeekend
     autoClose={false}
-    clearBtn={true}
+
     fromLabel='From'
       toLabel='To'
-      
- 
-     onChange={this.setDate} /> 
-     <div className='align-left'>
-      <button style={{ marginTop: '10px' }}  type="submit" className='btn btn-primary' value="Submit">Add Event</button>
+
+     onChange={this.setDate} />
+          <div className='align-left'>
+            <button style={{ marginTop: '10px' }} type="submit" className='btn btn-primary btn-color' value="Submit" onClick={this.reload}>Add Event</button>
+          </div>
+        </form>
       </div>
-         </form>
-     </div>
-    
-  
-  );
+
+    );
   }
 }
 IonDate.contextType = AppContext;

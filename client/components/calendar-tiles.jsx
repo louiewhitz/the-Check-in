@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo } from 'react';
 import IonDate from './ionDate';
+// import CustomToolbar from './custom-toolbar';
+import PropTypes from 'prop-types';
 
-// import Toolbar from 'react-big-calendar/lib/Toolbar';
+import Toolbar from 'react-big-calendar/lib/Toolbar';
 // import moment from 'moment';
 // import AppContext from '../lib/app-context.js';
 // import { Col, Card } from 'react-bootstrap';
 import 'react-calendar/dist/Calendar.css';
-import { Calendar, dateFnsLocalizer, Views, DateLocalizer  } from 'react-big-calendar';
+import { Calendar, dateFnsLocalizer, Views, DateLocalizer, Navigate } from 'react-big-calendar';
 import DatePicker from 'react-multi-date-picker';
 
 import format from 'date-fns/format';
@@ -20,16 +22,12 @@ import moment from 'moment';
 import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-// import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
+
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 // const timezeone = require('moment-timezone');
 const locales = {
   'en-US': enUS
 };
-
-
-
-// const start = moment(schedules.startDate).toDate();
 
 const localizer = dateFnsLocalizer({
   format,
@@ -49,7 +47,6 @@ function MyCalendar() {
 
   function handleAddEvent(events, newEvent) {
     setAllEvents({ ...allEvents, newEvent });
-   
 
     console.log(newEvent);
   }
@@ -70,52 +67,34 @@ function MyCalendar() {
 
   }, []);
 
-  const {views, ...otherProps} = useMemo(() => ({
+  const { views, ...otherProps } = useMemo(() => ({
     views: {
-        month: true,
-        agenda: true
+      month: true,
+      agenda: true
     }
-}), [])
+  }), []);
+
+  function addEvent(event) {
+    const newEvents = [...allEvents, event];
+    setEvents(newEvents);
+  }
 
   return (
 
-    <div className='calendarApp row-sm'>
+    <div className='calendarApp'>
       <h1>Calendar</h1>
       <h2>Add New Event</h2>
       <IonDate />
-     
+
       <Calendar
       defaultDate={new Date()}
+      components={{ CustomToolbar }}
+      addEvent={addEvent}
 
       localizer={localizer}
       events={allEvents }
-       onNavigate={(date, view) => {
+       navigate={false}
 
-    fetch('/api/schedules', {
-      headers: {
-      method: 'POST',
-      'X-Access-Token': localStorage.getItem('auth-token')
-     
-      },
-       body: JSON.stringify({ date, view })
-    })
-      .then(response => response.json())
-      .then(data => {
-        const allEvents = data;
-        allEvents.map(event => {
-          const startTime = event.start;
-          const endTime = event.end;
-          const title = event.title;
-          const start = new Date(startTime);
-          const end = new date(endTime);
-  
-          // do something with the start and end time here
-        });
-  
-        setAllEvents(allEvents);
-      });
-  }}
-      
       showMultiDayTimes
       allDay={false}
   //      onSelectEvent={function noRefCheck(){}}
@@ -131,6 +110,45 @@ function MyCalendar() {
       style={{ height: 500 }}
     />
     </div>
+  );
+}
+
+function CustomToolbar(toolbar) {
+
+  const goToBack = () => {
+    toolbar.date.setMonth(toolbar.date.getMonth() - 1);
+    toolbar.onNavigate('prev');
+  };
+
+  const goToNext = () => {
+    toolbar.date.setMonth(toolbar.date.getMonth() + 1);
+    toolbar.onNavigate('next');
+  };
+
+  const goToCurrent = () => {
+    const now = new Date();
+    toolbar.date.setMonth(now.getMonth());
+    toolbar.date.setYear(now.getFullYear());
+    toolbar.onNavigate('current');
+  };
+
+  const label = () => {
+    const date = moment(toolbar.date);
+    return (
+      <span><b>{date.format('MMMM')}</b><span> {date.format('YYYY')}</span></span>
+    );
+  };
+
+  return (
+    <div className={Calendar['toolbar-container']}>
+      <label className={Calendar['label-date']}>{label()}</label>
+
+      <div className={Calendar['back-next-buttons']}>
+        <button className={Calendar['btn-back']} onClick={goToBack}>&#8249;</button>
+        <button className={Calendar['btn-current']} onClick={goToCurrent}>today</button>
+        <button className={Calendar['btn-next']} onClick={goToNext}>&#8250;</button>
+      </div>
+    </div >
   );
 }
 

@@ -19,15 +19,45 @@
 }
 
 .input-picker {
-  text-align: right;
-  color: #808acf;
+  text-align: left;
+  font-size: 16px;
+  padding: 14px 10px;
+  margin-bottom: 15px;
+  padding-left: 1rem;
+ 
+  border: 1px solid rgba(255, 255, 255, 0.1);
   height: 46px !important;
   line-height: 46px !important;
   width: 29rem !important;
+  border-radius: 20px;
+  padding-left: 0;
+  font-size: 1.5em !important;
+  
 }
 
+.btn-color {
+    border-radius: 20px !important;
+}
+
+
+
 .input-picker > input {
-  text-align: left !important;
+  text-align: center;
+  font-size: 16px;
+  padding: 14px 10px;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 46px !important;
+  line-height: 46px !important;
+  width: 29rem !important;
+  border: 2px solid rgb(166, 164, 164);
+  border-radius: 20px !important;
+  margin: 0 !important;
+  font-size: 1em !important;
+   background: rgba(246, 197, 238, 0.25) !important;
+
+  
 }
 
 .align-left{
@@ -36,7 +66,7 @@
    width: 29rem 
 }
   .customInput::placeholder {
-    color: #b71bb7;
+    color: #ba22ba;
   }
 
 /* Calendar Tiles */
