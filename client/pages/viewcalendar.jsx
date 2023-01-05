@@ -7,10 +7,6 @@ import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
-// import { format } from 'date-fns';
-// import parse from 'date-fns/parse';
-// import dates from 'react-big-calendar/lib/utils/dates';
-
 export default class ViewCalendar extends React.Component {
 
   constructor(props) {

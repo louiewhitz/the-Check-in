@@ -42,7 +42,6 @@ export default class Header extends React.Component {
                         Add event
                       </a>
                     </li>
-
                     <li>
                       <a className="dropdown-item" href="#calendar">
                         Schedule Event
@@ -58,34 +57,15 @@ export default class Header extends React.Component {
                         View Photos
                       </a>
                     </li>
-                    {/* <li>
-                      <a className="dropdown-item" href="#class-calendar">
-                        Class Calendar
-                      </a>
-                    </li> */}
-                    {/* <li>
-                      <a className="dropdown-item" href="#new-calendar">
-                        New Calendar
-                      </a>
-                    </li> */}
-                    <li>
-                      <a className="dropdown-item" href="#ion-date">
-                        Ion
-                      </a>
-                    </li>
-
                   </ul>
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col">
-
                 <h1 className="text-center navbar-brand fs-1 fw-bold">
-
                   <span className='timer'>0</span>The Check-in
                 </h1>
-
               </div>
             </div>
             <div className="row">
