@@ -25,7 +25,7 @@ export default class HomeBase extends React.Component {
             </a>
           </div>
           <div className="col text-start">
-            <a href="#schedule-event">
+            <a href="#calendar">
               <IoCalendarSharp size={200} />
             </a>
           </div>

@@ -130,11 +130,13 @@ app.get('/api/schedules', (req, res, next) => {
   const { userId } = req.user;
   const sql = `
     select "title",
-            "startDate",
-            "startTime",
-            "endTime",
+            
+            
             "end",
             "start",
+            
+            "startTime",
+            "endTime",
           
             "timelineId"
       from "schedules"
@@ -146,15 +148,15 @@ app.get('/api/schedules', (req, res, next) => {
 });
 
 app.post('/api/schedules/schedule-time', (req, res, next) => {
-  const { startDate, startTime, endTime, title, timelineId, start, end } = req.body;
+  const { start, title, timelineId, end } = req.body;
   // const { userId } = req.user;
 
   const sql =
   `
-    INSERT INTO "schedules" ("title", "startDate", "startTime", "endTime", "timelineId", "start", "end")
-    VALUES ($1, $2, $3, $4, $5, $6, $7) returning *;
+    INSERT INTO "schedules" ("title", "start", "timelineId", "end")
+    VALUES ($1, $2, $3, $4) returning *;
   `;
-  const params = [title, startDate, startTime, endTime, timelineId, start, end];
+  const params = [title, start, timelineId, end];
 
   db.query(sql, params)
     .then(result => {

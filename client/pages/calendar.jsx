@@ -1,162 +1,126 @@
-// import React from 'react';
-// import AppContext from '../lib/app-context';
-// import Redirect from '../components/redirect';
-// import 'react-calendar/dist/Calendar.css';
-// import { Calendar, momentLocalizer } from 'react-big-calendar';
-// import axios from 'axios';
+import React, { useState, useRef, useEffect } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import IonDate from '../components/ionDate';
+import moment from 'moment';
+import DatePicker, { DateObject } from 'react-multi-date-picker';
+import TimePicker from 'react-multi-date-picker/plugins/time_picker';
+import DatePanel from 'react-multi-date-picker/plugins/date_panel';
 
-// import 'react-big-calendar/lib/css/react-big-calendar.css';
-// import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-// import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-// import NetError from '../components/network-error';
-// import LoadingSpinner from '../components/loading-spinner';
-// import { Col, Card } from 'react-bootstrap';
-// import Toolbar from 'react-big-calendar/lib/Toolbar';
+export default function NewCalendar() {
+  const [events, setEvents] = React.useState([]);
+  const localizer = momentLocalizer(moment);
+  const [time, setTime] = useState();
+  console.log('file: calendar.jsx:12 ~ NewCalendar ~ time', time);
 
-// import moment from 'moment';
-// const views = ['day', 'week', 'month', 'agenda'];
-// const localizer = momentLocalizer(moment);
+  //   const [time, startTime] = useState(null);
+  //   const [endTime, setEndTime] = useState(null);
+  const [title, setTitle] = useState('');
+  console.log('file: calendar.jsx:15 ~ NewCalendar ~ title', title);
 
-// const handleChange = () => {
-//   console.log('this block code executed');
-// };
+  useEffect(() => {
+    async function fetchEvents() {
+      const response = await fetch('/api/schedules', {
+        headers: {
+          'X-Access-Token': localStorage.getItem('auth-token')
+        }
+      });
+      const events = await response.json();
+      setEvents(events);
+    }
+    fetchEvents();
+  }, []);
+  const [date, setDate] = useState();
+  const [endDate, setEndDate] = useState();
+  console.log('file: calendar.jsx:44 ~ NewCalendar ~ endDate', endDate);
 
-// export default class NewCalendar extends React.Component {
-//   constructor(props) {
-//     super(props);
+  console.log('file: calendar.jsx:43 ~ NewCalendar ~ date', date);
 
-//     this.state = {
-//       schedules: [],
+  // function checkConsole() {
+  //   console.log('clicked');
+  // }
 
-//       loading: true,
-//       networkError: false
-//     };
-//     this.loadEvents = this.loadEvents.bind(this);
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleNavigation = this.handleNavigation.bind(this);
+  // function checkSelect(event) {
+  //   console.log(event.target);
+  // }
 
-//   }
+  function MyPlugin() {
+    return 'my first plugin !';
+  }
+  const newDate = new DateObject('YYYY-MM-DD HH:MM:SS');
+  const [dateObj, setDateObj] = useState(
+    [
+      new Date(),
+      new DateObject('YYYY-MM-DD HH:MM:ss')
 
-//   handleNavigation(date, view, action) {
-//     console.log(date, view, action);
+    ]
+  );
+  console.log('file: calendar.jsx:42 ~ NewCalendar ~ dateObj', dateObj);
+  function handleSubmit(event) {
+    event.preventDefault();
+    const start = moment(dateObj.dateFocused).format('YYYY-MM-DD');
+    const end = moment(dateObj.dateClicked).format('YYYY-MM-DD');
+    const title = event.title;
 
-//   }
+    // if (date && time && title) {
+    //   const start = new Date(date + ' ' + time);
+    //   const end = new Date(start.getTime() + 3600000);
+    //   const newEvent = { start, end, title };
+    //   setEvents([...events, newEvent]);
 
-//   handleChange() {
-//     console.log('block of code to be executed');
-//   }
+    // }
 
-//   loadEvents() {
-//     const self = this;
-//     axios.get('/api/schedules', {
-//       headers: {
-//         'X-Access-Token': localStorage.getItem('auth-token')
-//       }
-//     })
-//       .then(response => {
+    // const handleChange = (dateFocused, dateClicked) => {
+    //   setDateObj({ dateFocused, dateClicked });
+    // };
+  }
 
-//         const schedules = response.data;
-//         console.log('file: calendar.jsx:59 ~ NewCalendar ~ loadEvents ~ schedules', schedules);
-//         const start = moment(schedules.startDate).toDate();
+  function handleStartDate(date) {
 
-//         for (let i = 0; i < schedules.length; i++) {
-//           schedules[i].start = moment.utc(schedules[i].start).toDate();
-//           console.log('file: calendar.jsx:77 ~ NewCalendar ~ loadEvents ~ schedules[i].start', schedules[i].start);
-//           schedules[i].startDate = moment(schedules[i].startDate).toDate();
-//           schedules[i].startTime = moment(schedules[i].startTime, 'HH:mm').format('hh:mm A');
-//           schedules[i].endTime = moment(schedules[i].endTime, 'HH:mm').format('hh:mm A');
+  }
+  return (
+    <div className="react-big-calendar">
+      <h1>Calendar</h1>
+      <h2>Add New Event</h2>
+      <IonDate />
+      <div> <form onSubmit={handleSubmit}>
+        <input type="text" value={title} placeholder='Add Title' onChange={e => setTitle(e.target.value)} />
+        <DatePicker multiple
+         format="MM-DD-YYYY MM:SS:HH"
+         range
 
-//           schedules[i].end = moment.utc(schedules[i].end).toDate();
+        onClose={() => setDateObj({})}
+    onChange={(date, endDate) => {
+      const formattedDate = moment(date).format('YYYY-MM-DD HH:MM:SS');
+      setDate(formattedDate);
+      const formatEnd = moment(endDate).format('YYYY-MM-DD HH:MM:SS');
+      setEndDate(formatEnd);
+      setDateObj({ formattedDate, endDate });
 
-//         }
+    }}
 
-//         self.setState({
-//           schedules,
+      plugins={[
+        // eslint-disable-next-line react/jsx-key
+        <TimePicker position="bottom" />,
+        // eslint-disable-next-line react/jsx-key
+        <DatePanel markFocused />
+      ]}
+       
 
-//           loading: false
-//         });
+  />
 
-//         console.log('self state', this.state);
+        <button type="submit" style={{ marginLeft: '20px' }}>Add Event</button>
+      </form></div>
 
-//       })
-//       .catch(function (error) {
-//         console.error(error);
-//       });
+      <Calendar
+      showMultiDayTimes
 
-//   }
+      localizer={localizer}
+      events={events}
+      startAccessor="start"
+      endAccessor="end"
+    />
+    </div>
+  );
+}
 
-//   componentDidMount() {
-//     this.loadEvents();
 
-//   }
-
-//   render() {
-
-//     console.log('file: calendar.jsx:104 ~ NewCalendar ~ render ~ this.state', this.state);
-
-//     // const { title, startTime, endTime, startDate, scheduleId } = this.state;
-
-//     // console.log('file: calendar.jsx:98 ~ NewCalendar ~ render ~ this.state', this.state);
-
-//     // console.log('file: calendar.jsx:86 ~ NewCalendar ~ render ~ schedules', schedules);
-//     const { user } = this.context;
-
-//     if (!user) {
-//       return <Redirect to="#sign-in" />;
-//     }
-
-//     if (this.state.networkError) {
-//       return <NetError />;
-//     }
-
-//     if (this.state.loading) {
-//       return <LoadingSpinner />;
-//     }
-//     const localizer = momentLocalizer(moment);
-
-//     return (
-//       <div>
-//         <Calendar id="calendar"
-//         localizer={localizer}
-//         views={views}
-//         startAccessor="start"
-//         endAccessor="end"
-//     >    {this.state.schedules.map(schedule => {
-
-//       return (
-//         <Card key={schedule.scheduleId}>
-//           <BigCalendar
-//                   key={schedule.scheduleId}
-//                   schedule={schedule}
-//                   loadEvents={this.loadEvents}
-//                   localizer={localizer}
-
-//                 />
-//         </Card>
-//       );
-//     })}
-
-//         </Calendar>
-//     </div>);
-
-//   }
-
-// }
-// // const EventComponent = ({ schedules, change }) => (props) => {
-// //   return (
-// //     <div className="customEventTile" title="This is EventTile">
-// //       <h5>{props.event.title}</h5>
-// //       <button onClick={props.change}>Do Something</button>
-// //     </div>
-// //   );
-// // };
-
-// function BigCalendar(props) {
-//   console.log('file: calendar.jsx:160 ~ BigCalendar ~ props', props);
-
-//   return (<div className='tex-dark'>Hi</div>
-
-//   );
-
-// }
-// NewCalendar.contextType = AppContext;

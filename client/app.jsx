@@ -5,7 +5,7 @@ import Redirect from './components/redirect';
 import PageContainer from './components/page-container';
 import Header from './components/nav';
 import Timeline from './pages/timeline';
-
+import IonDate from '../client/components/ionDate';
 import AddForm from './pages/add-form';
 import HomeBase from './pages/home';
 import Notes from './pages/notes';
@@ -17,7 +17,6 @@ import DeleteModal from '../client/components/delete';
 import AllPhotos from './pages/viewphoto';
 import ViewAllImages from '../client/components/viewimg';
 import MyCalendar from '../client/components/calendar-tiles';
-
 import LoadUser from '../client/components/load-users';
 import ViewCalendar from './pages/viewcalendar';
 
@@ -102,6 +101,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'schedule-event') {
       return <ViewCalendar />;
+    }
+    if (route.path === 'ion-date') {
+      return <IonDate />;
     }
 
   }
