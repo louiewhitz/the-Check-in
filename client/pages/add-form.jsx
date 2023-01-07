@@ -9,6 +9,9 @@ import NetError from '../components/network-error';
 import DatePicker from 'react-multi-date-picker';
 import TimePicker from 'react-multi-date-picker/plugins/time_picker';
 import moment from 'moment';
+import AddNewTimeline from '../components/new-timeline-form';
+import SelectTimeline from '../components/pick-timeline';
+import Row from 'react-bootstrap/Row';
 
 export default class AddForm extends React.Component {
   constructor(props) {
@@ -40,14 +43,11 @@ export default class AddForm extends React.Component {
     this.setState({
       updatedAt: formattedDate
     });
-
   }
 
   onChange(event) {
     const { name, value } = event.target;
-
     this.setState({ [name]: value });
-
   }
 
   onFileChange(event) {
@@ -131,7 +131,11 @@ export default class AddForm extends React.Component {
         <form className="row" id="eventId" onSubmit={this.handleSubmit}>
           <div className="form-holder">
             <div className="form-content">
+
               <div className="">
+                <div className="mb-3 d-flex justify-content-center align-items-center">
+                  <div className='col'><AddNewTimeline /></div><div className='col'><SelectTimeline /></div>
+                </div>
                 <div className="col d-flex justify-content-evenly flex-wrap">
                   <button
                     className="circle-one btn btn-hover border rounded-circle btn-active d-flex p-2"

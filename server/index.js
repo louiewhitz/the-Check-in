@@ -318,6 +318,32 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     })
     .catch(err => next(err));
 });
+app.post('/api/timeline/timeline-id', (req, res, next) => {
+  const { timelineFor } = req.body;
+
+  const sql =
+  `
+    INSERT INTO "timelines" ("timelineFor")
+    VALUES ($1) returning *;
+  `;
+  const params = [timelineFor];
+
+  db.query(sql, params)
+    .then(result => {
+      const [newTimeline] = result.rows[0];
+      res.status(201).json(newTimeline);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/timelines', (req, res, next) => {
+  const sql = `select *
+  from "timelines"
+  order by "timelineId" desc;`;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
 
 app.patch('/api/events/:eventId', (req, res, next) => {
   const { userId } = req.user;

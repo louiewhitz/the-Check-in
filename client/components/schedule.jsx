@@ -4,7 +4,7 @@ import { IoCalendarSharp } from 'react-icons/io5';
 export default class ScheduleButton extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+
     this.handleSchedule = this.handleScheduled.bind(this);
     this.state = {
       isClicked: false,
@@ -20,8 +20,7 @@ export default class ScheduleButton extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state);
+
     if (!this.state.isClicked) {
       return null;
     } else {
