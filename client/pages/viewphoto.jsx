@@ -45,9 +45,7 @@ export default class AllPhotos extends React.Component {
 
         this.props.loadEvents();
       })
-
       .catch(err => console.error(err));
-
   }
 
   handleClose() {
@@ -62,7 +60,6 @@ export default class AllPhotos extends React.Component {
     }
 
     const { show } = this.state;
-
     return (
       <>
         <Button onClick={this.handleShow} id="show-modal">
@@ -74,7 +71,6 @@ export default class AllPhotos extends React.Component {
               <Card.Img variant='top'
               src={this.state.photoUrl}
               style={img}
-
             />
               <Card.Body className="bg-transparent"><Card.Title>{this.state.title}</Card.Title></Card.Body>
             </Card>

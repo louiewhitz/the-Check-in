@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import AppContext from '../lib/app-context';
-// import Redirect from '../lib/redirect';
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -29,11 +27,8 @@ export default class SignUp extends React.Component {
   }
 
   handleSubmit(event) {
-    // console.log('state:', this.state);
-    // console.log('submit props', this.props);
     event.preventDefault();
 
-    // axios is used for an api call
     axios
       .post('/api/auth/sign-up', {
         username: this.state.username,
@@ -52,13 +47,11 @@ export default class SignUp extends React.Component {
       })
 
       .catch(err => {
-        console.log('res.err:', err);
+        console.error('res.err:', err);
       });
   }
 
   render() {
-    console.log('this.state', this.state);
-    console.log('prpos in render', this.props);
 
     const { action } = this.props;
     const { handleChange, handleSubmit } = this;

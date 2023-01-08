@@ -25,7 +25,6 @@ export default class SignIn extends React.Component {
   }
 
   handleSubmit(event) {
-    // console.log('this.state', this.state);
     event.preventDefault();
     const { action } = this.props;
     const req = {
@@ -50,22 +49,13 @@ export default class SignIn extends React.Component {
   }
 
   render() {
-    console.log('this.state', this.state);
-    console.log('prpos in sign in ', this.props);
-
     const user = this.context.user;
-    console.log('user ', user);
-
     if (user) return <Redirect to="" />;
-
     const { action } = this.props;
     const { handleChange, handleSubmit } = this;
-
     const alternatActionText =
       action === 'sign-up' ? 'Sign in instead' : 'Register now';
-
     const submitButtonText = action === 'sign-up' ? 'Register' : 'Log In';
-
     return (
       <div>
         <div className="form-block-wrapper" />
@@ -73,7 +63,7 @@ export default class SignIn extends React.Component {
           <header className="form-block__header">
             <h1 className="text-white">Welcome</h1>
             <div className="form-block__toggle-block">
-              <span>Don't have an account? Click here &#8594;</span>
+              <span>Don`&apos;`t have an account? Click here &#8594;</span>
               <a
                 href="#sign-up"
                 id="form-toggler"

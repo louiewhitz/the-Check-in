@@ -83,7 +83,6 @@ export default class ViewCalendar extends React.Component {
   }
 
   render() {
-    // console.log('this.state in add schedule', this.state);
 
     const { user } = this.context;
     if (!user) {

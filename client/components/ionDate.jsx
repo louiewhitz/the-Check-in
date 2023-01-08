@@ -95,13 +95,10 @@ export default class IonDate extends React.Component {
         onChange={this.setDate} />
           </div>
           <div className='col'>
-
             <button type="submit" className='btn btn-info' value="Submit" onClick={this.reload}>Schedule</button>
           </div>
-
         </form>
       </div>
-
     );
   }
 }

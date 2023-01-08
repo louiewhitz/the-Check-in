@@ -1,8 +1,6 @@
 import React from 'react';
 import SignIn from '../components/signin';
-
 import SignUp from '../components/signup';
-
 export default class SignUpContainer extends React.Component {
   constructor(props) {
     super(props);

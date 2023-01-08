@@ -27,7 +27,6 @@ export default class ViewAllImages extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
-    // this.loadSpin = this.loadSpin.bind(this);
   }
 
   loadEvents() {
@@ -123,7 +122,6 @@ function ViewPhoto(props) {
           <Card.Img variant='top'
               src={photoUrl}
               style={img}
-            //   className="rounded-top img-fluid img"
             />
           <Card.Body><Card.Title>{title}</Card.Title></Card.Body>
         </Card>

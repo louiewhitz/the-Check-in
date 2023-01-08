@@ -1,13 +1,8 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React from 'react';
 import AppContext from '../lib/app-context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, Button } from 'react-bootstrap';
 import { RiEdit2Fill } from 'react-icons/ri';
-
-import Redirect from './redirect';
-import AddForm from '../pages/add-form';
 
 export default class EditForm extends React.Component {
   constructor(props) {
@@ -18,7 +13,6 @@ export default class EditForm extends React.Component {
       title: this.props.title,
       description: this.props.description,
       userId: this.props.userId,
-
       show: false,
       isEditing: false
     };
@@ -54,7 +48,6 @@ export default class EditForm extends React.Component {
     event.preventDefault();
 
     const { user } = this.context;
-    console.log('this.context in submit', this.context);
 
     const req = {
       method: 'PATCH',
@@ -69,7 +62,6 @@ export default class EditForm extends React.Component {
     fetch(`/api/events/${this.props.eventId}`, req)
       .then(response => response.json())
       .then(result => {
-        console.log(result);
         this.setState({
           show: false
         });
@@ -80,7 +72,7 @@ export default class EditForm extends React.Component {
   }
 
   render() {
-    const { title, description, show, eventId, userId } = this.state;
+    const { show, userId } = this.state;
 
     const contextUserId = this.context.user.userId;
 

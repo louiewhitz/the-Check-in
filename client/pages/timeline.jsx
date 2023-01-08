@@ -135,7 +135,6 @@ function AllEvents(props) {
   };
 
   const post = format(postedOn, 'PPp');
-
   return (
     <article>
       <div className="inner">
