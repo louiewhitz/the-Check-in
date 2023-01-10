@@ -25,7 +25,7 @@ export default function EventType(props) {
             <BiCameraMovie
               size={60}
               style={{ fill: '#FFA500' }}
-              className="ps-1"
+              className="mx-1"
             />
           </span>
         </span>

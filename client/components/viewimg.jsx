@@ -2,19 +2,10 @@ import React from 'react';
 
 import AppContext from '../lib/app-context';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Row, Col, Container } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Redirect from './redirect';
 import LoadingSpinner from './loading-spinner';
-
-const img = {
-  height: '15rem',
-  objectFit: 'cover'
-};
-
-const style = {
-  width: '18rem',
-  height: '100%'
-};
+import Image from 'react-bootstrap/Image';
 
 export default class ViewAllImages extends React.Component {
   constructor(props) {
@@ -114,21 +105,15 @@ function ViewPhoto(props) {
     return null;
   }
 
-  return (<Container className='p-4'>
-    <Row style={style}>
-
-      <Col>
-        <Card eventId={eventId} className='my-3'>
-          <Card.Img variant='top'
+  return (
+    <Card eventId={eventId} style={{ width: '18rem', margin: '0.5rem' }}>
+      <Image variant='top'
               src={photoUrl}
-              style={img}
+              fluid='true'
             />
-          <Card.Body><Card.Title>{title}</Card.Title></Card.Body>
-        </Card>
-      </Col>
+      <Card.Body><Card.Title>{title}</Card.Title></Card.Body>
+    </Card>
 
-    </Row>
-  </Container>
   );
 }
 ViewAllImages.contextType = AppContext;

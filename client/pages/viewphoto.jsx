@@ -2,16 +2,8 @@ import React from 'react';
 import { IoCamera } from 'react-icons/io5';
 import AppContext from '../lib/app-context';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Card, Button, Modal } from 'react-bootstrap';
-const img = {
-  height: '20rem',
-  objectFit: 'cover'
-};
-
-const style = {
-  width: '26rem',
-  height: '100%'
-};
+import { Button, Modal } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 
 export default class AllPhotos extends React.Component {
   constructor(props) {
@@ -36,11 +28,11 @@ export default class AllPhotos extends React.Component {
         'X-Access-Token': localStorage.getItem('auth-token')
       },
       user
-      // body: JSON.stringify(this.state)
+
     };
 
     fetch(`/api/events/${this.props.eventId}`, req)
-      // .then(response => response.json())
+
       .then(result => {
 
         this.props.loadEvents();
@@ -65,22 +57,29 @@ export default class AllPhotos extends React.Component {
         <Button onClick={this.handleShow} id="show-modal">
           <IoCamera size={30} style={{ fill: '#25aae1' }} />
         </Button>
-        <Modal show={show} onHide={this.handleClose} centered className=' d-flex justify-contect-center align-items-center text-center'>
-          <Modal.Body className='bg-transparent'>
-            <Card eventId={this.state.eventId} className='d-flex justify-content-center bg-light border-0' style={ style }>
-              <Card.Img variant='top'
+        <Modal show={show} onHide={this.handleClose} size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      eventId={this.state.eventId}>
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              {this.state.title}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body eventId={this.state.eventId}>
+            <Image variant='top'
+                fluid='true'
               src={this.state.photoUrl}
-              style={img}
             />
-              <Card.Body className="bg-transparent"><Card.Title>{this.state.title}</Card.Title></Card.Body>
-            </Card>
+
           </Modal.Body>
-          <Modal.Footer className='bg-secondary border-0'>
+          <Modal.Footer classNname=' border-0'>
             <Button variant="info" onClick={this.handleClose} className='d-block'>
               Back to Timeline
             </Button>
           </Modal.Footer>
         </Modal>
+
       </>
     );
   }

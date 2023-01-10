@@ -8,6 +8,7 @@ import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
 import moment from 'moment';
 
+
 export default class AddForm extends React.Component {
   constructor(props) {
     super(props);
@@ -27,15 +28,15 @@ export default class AddForm extends React.Component {
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.eventType = this.eventType.bind(this);
-    this.handleDate = this.handleDate.bind(this);
+    // this.handleDate = this.handleDate.bind(this);
   }
 
-  handleDate(date) {
-    const formattedDate = moment(this.state.date).format('YYYY-MM-DD HH:mm:ss');
-    this.setState({
-      updatedAt: formattedDate
-    });
-  }
+  // handleDate(date) {
+  //   const formattedDate = moment(this.state.date).format('YYYY-MM-DD HH:mm:ss');
+  //   this.setState({
+  //     updatedAt: formattedDate
+  //   });
+  // }
 
   onChange(event) {
     const { name, value } = event.target;
@@ -63,15 +64,12 @@ export default class AddForm extends React.Component {
     const formData = new FormData();
     const image = this.fileInputRef.current.files[0];
 
-    // const formattedDate = moment(this.state.date).format('YYYY-MM-DD HH:mm:ss');
-
     formData.append('summary', this.state.summary);
     formData.append('eventTypeId', this.state.eventTypeId);
     formData.append('title', this.state.title);
     formData.append('description', this.state.description);
     formData.append('image', image);
     formData.append('userId', this.state.userId);
-    // formData.append('updatedAt', formattedDate);
 
     fetch('/api/events', {
       method: 'POST',

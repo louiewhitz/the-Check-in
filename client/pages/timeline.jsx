@@ -86,7 +86,7 @@ export default class Timeline extends React.Component {
           )
         : (
           <div className="container">
-            {/* <LoadingSpinner /> */}
+
             <h1 className="text-center timeline-color">Timeline of Events </h1>
             <div className="row d-flex justify-content-evenly">
               <div className="col text-end">
@@ -120,53 +120,62 @@ export default class Timeline extends React.Component {
 }
 function AllEvents(props) {
 
-  const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl, username, userId } =
+  const { eventTypeId, title, description, createdAt, eventId, photoUrl, username, userId } =
     props.event;
 
   const currentUser = props.event.userId;
-  const scheduled = new Date(updatedAt);
-  const addSched = format(scheduled, 'PPp');
-
-  const momUpdatedAt = moment(updatedAt).format('LLLL');
 
   const postedOn = new Date(createdAt);
   const handleShow = () => {
     return eventId;
   };
 
-  const post = format(postedOn, 'PPp');
+  const post = format(postedOn, 'Pp');
   return (
-    <article>
-      <div className="inner">
-        <EventType eventTypeId={eventTypeId} />
-        <h2 className="text-center">
-          <span className="thisdate mx-1">{post}</span>
-          {title}
-          <span className="edit text-muted">
-            <DeleteModal
+    <div className='container'>
+      <article>
+        <div className="inner">
+          <div className='col'>
+            <EventType eventTypeId={eventTypeId} />
+          </div>
+          <div className='row header-color justify-between flex-wrap'>
+
+            <div className="col">
+              <h2 className="text-start">{post}</h2>
+            </div>
+            <div className='col text-center'>
+              <h2>{title}</h2>
+            </div>
+            <div className="col text-muted text-end">
+              <DeleteModal
       eventId={eventId}
       event={props.event}
       loadEvents={props.loadEvents}
     />
 
-            <EditForm
+              <EditForm
       eventId={eventId}
       title={title}
       description={description}
-      updatedAt={updatedAt}
+
       userId={userId}
       loadEvents={props.loadEvents}
 
     />
 
-            <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
+              <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
 
-          </span>
-        </h2>
+            </div>
+          </div>
+          <div className='row description-color'>
+            <div className='col'>
 
-        <p>{description}<LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} /></p>
-      </div>
-    </article>
+              <p>{description}<LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} /></p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
   );
 }
 
