@@ -60,7 +60,7 @@ export default class LoadUser extends React.Component {
 
     return (
 
-      <span className='username'>{username}</span>
+      <h2 className='username text-end'>{username}</h2>
     );
   }
 }

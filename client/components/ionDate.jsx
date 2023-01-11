@@ -75,14 +75,14 @@ export default class IonDate extends React.Component {
 
   render() {
     return (
-      <div>
-        <form className='row mb-3' onSubmit={this.handleSubmit}>
-          <div className='col'>
-            <input type="text" placeholder="Add Title" name="title" id="title" className='input-title form-control' value={this.state.title} onChange={this.handleTitle} />
+      <div >
+        <form className='row-sm mb-3 d-flex' onSubmit={this.handleSubmit}>
+          <div className='col-xs  d-flex title-schedule'>
+            <input type="text" placeholder="Add Title" name="title" className='add-calendar-schedule' value={this.state.title} onChange={this.handleTitle} />
           </div>
-          <div className='col'>
+          <div className='col-xs bg-none'>
             <DtPicker
-          className="form-control"
+        className=""
         type="range"
         local="en"
         placeholder='Select Date/Time'
@@ -94,8 +94,8 @@ export default class IonDate extends React.Component {
         toLabel='To'
         onChange={this.setDate} />
           </div>
-          <div className='col'>
-            <button type="submit" className='btn btn-info' value="Submit" onClick={this.reload}>Schedule</button>
+          <div className='col-xs'>
+            <button type="submit" className='btn btn-info mx-1' value="Submit" onClick={this.reload}>Schedule</button>
           </div>
         </form>
       </div>
