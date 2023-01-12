@@ -7,7 +7,7 @@ import LoadingSpinner from './loading-spinner';
 
 const img = {
   height: '15rem',
-  objectFit: 'cover'
+  objectFit: 'scale-down'
 };
 
 export default class ViewAllImages extends React.Component {
@@ -109,14 +109,12 @@ function ViewPhoto(props) {
   }
 
   return (
-
     <Card eventId={eventId} className='m-2 style'>
       <Card.Img variant='top'
               src={photoUrl}
                style={img}
-
             />
-      <Card.Body><Card.Title>{title}</Card.Title></Card.Body>
+      <Card.Body><Card.Title className='small-text'>{title}</Card.Title></Card.Body>
     </Card>
 
   );

@@ -54,8 +54,8 @@ export default class AllPhotos extends React.Component {
     const { show } = this.state;
     return (
       <>
-        <Button onClick={this.handleShow} id="show-modal">
-          <IoCamera size={30} style={{ fill: '#25aae1' }} />
+        <Button onClick={this.handleShow} id="show-modal" className='pt-0 align-text-top '>
+          <IoCamera size={20} style={{ fill: '#25aae1', paddingTop: '0%' }} className='pt-0' />
         </Button>
         <Modal show={show} onHide={this.handleClose} size="lg"
       aria-labelledby="contained-modal-title-vcenter"

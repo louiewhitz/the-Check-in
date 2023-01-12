@@ -101,13 +101,13 @@ export default class ViewCalendar extends React.Component {
       <form id='scheduleId' onSubmit={this.handleSubmit}>
         <div className='container d-flex flex-column'>
 
-          <div className='myCalendar container'>
+          <div className='my-calendar container'>
 
             <div className='calendar-container'>
               <div className="row d-flex justify-content-center">
                 <div className="col">
                   <input
-          className='placeholderCal'
+          className='placeholder-cal'
           type="text"
           value={this.state.title}
           onChange={this.handleTitleChange}
@@ -122,7 +122,7 @@ export default class ViewCalendar extends React.Component {
                   </label>
                   <input
           type="time"
-          className='calInput'
+          className='cal-input'
           value={this.state.startTime}
           onChange={this.handleStartTimeChange}
           placeholder="Start time"
@@ -136,7 +136,7 @@ export default class ViewCalendar extends React.Component {
                   </label>
                   <input
           type="time"
-          className='calInput'
+          className='cal-input'
           value={this.state.endTime}
           onChange={this.handleEndTimeChange}
           placeholder="End time"
@@ -153,10 +153,10 @@ export default class ViewCalendar extends React.Component {
               <Button as="input" type="reset" value="Reset" className='btn-warning date-buttons'/>
 
               <div className='bubble'>
-                <p className='paraDate'>Selected date: {this.state.startDate.toString()}</p>
-                <p className='paraDate'>Event title: {this.state.title}</p>
-                <p className='paraDate'>Start time: {this.state.startTime}</p>
-                <p className='paraDate'>End time: {this.state.endTime}</p>
+                <p className='para-date'>Selected date: {this.state.startDate.toString()}</p>
+                <p className='para-date'>Event title: {this.state.title}</p>
+                <p className='para-date'>Start time: {this.state.startTime}</p>
+                <p className='para-date'>End time: {this.state.endTime}</p>
               </div>
 
             </div>

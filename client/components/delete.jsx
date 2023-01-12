@@ -64,9 +64,9 @@ export default class DeleteModal extends React.Component {
     const modalTitle = 'Are you sure you want to delete this event?';
     return (
       <>
-        <Button onClick={this.handleShow} id="show-delete">
+        <Button onClick={this.handleShow} id="show-delete" className='my-0'>
           <RiDeleteBinFill
-            size={30}
+            size={20}
 
             style={{ fill: '#fa7199' }}
           />

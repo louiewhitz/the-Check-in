@@ -137,24 +137,14 @@ function AllEvents(props) {
           <div className='col'>
             <EventType eventTypeId={eventTypeId} />
           </div>
-          <div className='row no-gutters header-color justify-content-evenly d-flex clearfix '>
-            <div className='col justify-between'>
+          <div className='row no-gutters header-color justify-content-between d-flex clearfix '>
+            <div className='col justify-evenly ps-1'>
 
               <p className="text-start text-color">{post}</p>
-            </div> <div className='col   background-purp'> <LoadUser clasName='text-end background-purp' eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} />
+
             </div>
-
-            <p className='title-color text-center align-self-center px-1'>{title}</p>
-
-          </div>
-          <div className='row description-color flex-wrap'>
-            <div className='col text-wrap'>
-
-              <p>{description}</p> </div>
-          </div>
-          <div className='row description-color '>
-            <div className="col-xs p-2 text-end d-flex justify-content-end">
-              <DeleteModal
+            <div className='col align-self-center p-0'> <LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} /></div>
+            <div className='col background-purp d-flex justify-content-end '>   <DeleteModal
       eventId={eventId}
       event={props.event}
       loadEvents={props.loadEvents}
@@ -173,7 +163,16 @@ function AllEvents(props) {
               <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
 
             </div>
+
+            <p className='title-color text-center p-0'>{title}</p>
+
           </div>
+          <div className='row description-color flex-wrap'>
+            <div className='col text-wrap'>
+
+              <p>{description}</p> </div>
+          </div>
+
         </div>
       </article>
     </div>

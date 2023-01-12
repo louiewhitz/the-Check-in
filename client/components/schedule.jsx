@@ -20,7 +20,6 @@ export default class ScheduleButton extends React.Component {
   }
 
   render() {
-
     if (!this.state.isClicked) {
       return null;
     } else {

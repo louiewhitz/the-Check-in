@@ -6,8 +6,6 @@ import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
 import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
-import moment from 'moment';
-
 
 export default class AddForm extends React.Component {
   constructor(props) {
