@@ -1,11 +1,14 @@
 import React from 'react';
-
 import AppContext from '../lib/app-context';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
 import Redirect from './redirect';
 import LoadingSpinner from './loading-spinner';
-import Image from 'react-bootstrap/Image';
+
+const img = {
+  height: '15rem',
+  objectFit: 'cover'
+};
 
 export default class ViewAllImages extends React.Component {
   constructor(props) {
@@ -106,10 +109,12 @@ function ViewPhoto(props) {
   }
 
   return (
-    <Card eventId={eventId} style={{ width: '18rem', margin: '0.5rem' }}>
-      <Image variant='top'
+
+    <Card eventId={eventId} className='m-2 style'>
+      <Card.Img variant='top'
               src={photoUrl}
-              fluid='true'
+               style={img}
+
             />
       <Card.Body><Card.Title>{title}</Card.Title></Card.Body>
     </Card>

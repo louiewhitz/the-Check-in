@@ -1,7 +1,7 @@
 
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo } from 'react';
-import IonDate from './ionDate';
+import IonDate from './date-time-picker';
 import PropTypes from 'prop-types';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
 import 'react-calendar/dist/Calendar.css';

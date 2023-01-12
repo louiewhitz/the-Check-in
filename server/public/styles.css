@@ -3,7 +3,7 @@
 }
 
 .bg-index {
-  background-color: #d5dedd53;
+  background-color: #d0d4d353;
 }
 
 .home-page-form-holder {
@@ -13,6 +13,12 @@
     align-items: center;
     text-align: left;
     min-height: 20vh;
+}
+
+.style {
+  width: 18rem;
+  height: 100%;
+  margin-top: 2rem;
 }
 
 .color-nav {
@@ -27,7 +33,6 @@
 }
 
 .input-picker {
- 
     font-size: 1rem !important;
     font-weight: 400 !important;;
     line-height: 1.5 !important;
@@ -232,13 +237,37 @@ div.bg-light {
   /* margin-top: 0.3em; */
 
   font-family: 'La Belle Aurore', cursive;
-  font-size: 1.4em !important;
+  /* font-size: 1.5rem !important; */
 
-  text-shadow: 0px 0px 7px   rgb(248, 246, 128) !important;
-  color: rgb(247, 249, 135) !important;
+  text-shadow: 0px 0px 7px   rgb(220, 248, 7) !important;
+  color: rgb(227, 234, 128) !important;
 
   text-align: right;
 }
+
+
+.text-color {
+  color: rgb(242, 242, 137)!important;
+  background: none !important;
+  font-size: 0.8rem !important;
+ font-family: 'IBM Plex Mono', monospace;
+  
+}
+
+.title-color {
+  
+padding: 0px !important;
+    margin: 0 !important;
+    font-size: 0.9em !important;
+
+    color: rgb(240, 240, 232)!important;
+    background: none !important;
+    /* letter-spacing: 0.1em; */
+
+
+
+}
+
 
 .marg-inline {
   margin-left: 1em !important;
@@ -270,6 +299,10 @@ input::-webkit-calendar-picker-indicator {
 
 .add-gradient {
   background: linear-gradient(180deg, #64d72f 0%, #45c6d8 100%) !important;
+}
+
+.object-fit {
+  object-fit: cover !important;
 }
 
 .timer {
@@ -743,12 +776,6 @@ section#timeline article div.inner {
   box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
 }
 
-.movie-class {
-  background-image: url('/client/pages/images-spin/movie.svg');
-  width: 2rem;
-  height: 2rem;
-
-}
 
 .meal {
   width: 75px;
@@ -861,6 +888,7 @@ section#timeline article div.inner span.date span {
 }
 
 
+
 .header-color {
  padding: 0.2rem;
   margin: 0;
@@ -869,8 +897,19 @@ section#timeline article div.inner span.date span {
   background-color: #6e0b64d4;
   letter-spacing: -1px;
   border-radius: 6px 6px 0 0;
- 
+  --bs-gutter-x: 1rem;
 }
+
+ /* .header-color > * {
+  flex-shrink: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5) !important;
+    margin-top: var(--bs-gutter-y) !important;
+}  */
+
+
 section#timeline article div.inner span.date span.other {
   font-size: 18px;
 }
@@ -878,12 +917,13 @@ section#timeline article div.inner span.date span.other {
 
 
 section#timeline article div.inner h2 {
-  padding: 0.5rem;
+  /* padding: 0.2rem; */
   margin: 0;
   color: rgb(236, 243, 244);
-  font-size: 1em;
+  font-size: 1.2em;
+  letter-spacing: 0.01em;
  
-  letter-spacing: -1px;
+  /* letter-spacing: -1px; */
   border-radius: 6px 6px 0 0;
   position: relative;
 }
@@ -892,9 +932,9 @@ section#timeline article div.inner h2 {
 
 section#timeline article div.inner p {
   /* padding: 0.2em; */
-  padding:0 0.3em 0 0;
+  padding:0 0.2em 0 0;
   margin: 0;
-  font-size: 14px;
+font-size: 0.8;
   background: #fafcfc;
   color: #0a0a0b;
   border-radius: 0 0 6px 6px;
@@ -904,13 +944,11 @@ section#timeline article div.inner p {
 .description-color {
    padding: 0.2em;
   margin: 0;
-  font-size: 14px;
+  font-size: 0.9rem;
   background: #fafcfc;
   color: #0a0a0b;
   border-radius: 0 0 6px 6px;
 }
-
-
 
 
 
@@ -976,31 +1014,29 @@ section#timeline article div.inner p {
   display: none;
 }
 
-.spin {
-  position: fixed;
-  z-index: 999;
-  height: 2em;
-  width: 2em;
-  overflow: show;
-  margin: auto;
+.spin-container {
+ position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 16, 16, 0.558);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.spin > svg{
+  margin: auto !important;
+ 
+
+  overflow: show;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #7f7f837f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
+
+
+
 
 .spin-text {
   color: rgb(180, 180, 189);

@@ -5,7 +5,7 @@ import Redirect from './components/redirect';
 import PageContainer from './components/page-container';
 import Header from './components/nav';
 import Timeline from './pages/timeline';
-import IonDate from '../client/components/ionDate';
+import IonDate from '../client/components/date-time-picker';
 import AddForm from './pages/add-form';
 import HomeBase from './pages/home';
 import Notes from './pages/notes';

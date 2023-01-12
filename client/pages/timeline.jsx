@@ -108,7 +108,6 @@ export default class Timeline extends React.Component {
                   key={event.eventId}
                   event={event}
                   loadEvents={this.loadEvents}
-
                 />
                   </div>
                 );
@@ -138,20 +137,18 @@ function AllEvents(props) {
           <div className='col'>
             <EventType eventTypeId={eventTypeId} />
           </div>
-          <div className='row header-color justify-content-evenly '>
+          <div className='row no-gutters header-color justify-content-evenly d-flex clearfix '>
+            <div className='col justify-between'>
 
-            <div className="col-sm">
-              <h2 className="text-start">{post}</h2>
+              <p className="text-start text-color">{post}</p>
+            </div> <div className='col   background-purp'> <LoadUser clasName='text-end background-purp' eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} />
             </div>
-            <div className='col justify-content-center'>
-              <h2 className='text-center'>{title}</h2>
-            </div>
-            <div className='col-sm background-purp'> <LoadUser clasName='text-end background-purp' eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} />
-            </div>
+
+            <p className='title-color text-center align-self-center px-1'>{title}</p>
 
           </div>
           <div className='row description-color flex-wrap'>
-            <div className='col'>
+            <div className='col text-wrap'>
 
               <p>{description}</p> </div>
           </div>
