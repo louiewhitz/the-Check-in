@@ -1,6 +1,7 @@
+
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo } from 'react';
-import IonDate from './ionDate';
+import IonDate from './date-time-picker';
 import PropTypes from 'prop-types';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
 import 'react-calendar/dist/Calendar.css';
@@ -63,8 +64,8 @@ function MyCalendar() {
 
   return (
     <div className='calendarApp'>
-      <h1>Calendar</h1>
-      <h2>Add New Event</h2>
+      <h1 className='timeline-color'>Calendar</h1>
+      <h2 className='mb-3 timeline-color'>Add New Event</h2>
       <IonDate />
       <Calendar
       defaultDate={new Date()}

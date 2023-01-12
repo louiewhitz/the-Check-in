@@ -75,13 +75,17 @@ export default class IonDate extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Add Title" name="title" id="title" className='input-picker' value={this.state.title} onChange={this.handleTitle} />
-          <DtPicker
+      <div >
+        <form className='row-sm mb-3 d-flex' onSubmit={this.handleSubmit}>
+          <div className='col-xs  d-flex title-schedule'>
+            <input type="text" placeholder="Add Title" name="title" className='add-calendar-schedule' value={this.state.title} required onChange={this.handleTitle} />
+          </div>
+          <div className='col-xs bg-none mx-2'>
+            <DtPicker
+        className=""
         type="range"
         local="en"
-        placeholder='Select a date and time'
+        placeholder='Select Date/Time'
         withTime={true}
         showTimeInput={true}
         showWeekend
@@ -89,12 +93,12 @@ export default class IonDate extends React.Component {
         fromLabel='From'
         toLabel='To'
         onChange={this.setDate} />
-          <div className='align-left'>
-            <button style={{ marginTop: '10px' }} type="submit" className='btn btn-info btn-lg btn-color' value="Submit" onClick={this.reload}>Schedule</button>
+          </div>
+          <div className='col-xs'>
+            <button type="submit" className='btn btn-info  mx-1' value="Submit" onClick={this.reload}>Schedule</button>
           </div>
         </form>
       </div>
-
     );
   }
 }

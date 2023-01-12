@@ -86,7 +86,7 @@ export default class Timeline extends React.Component {
           )
         : (
           <div className="container">
-            {/* <LoadingSpinner /> */}
+
             <h1 className="text-center timeline-color">Timeline of Events </h1>
             <div className="row d-flex justify-content-evenly">
               <div className="col text-end">
@@ -108,7 +108,6 @@ export default class Timeline extends React.Component {
                   key={event.eventId}
                   event={event}
                   loadEvents={this.loadEvents}
-
                 />
                   </div>
                 );
@@ -120,14 +119,10 @@ export default class Timeline extends React.Component {
 }
 function AllEvents(props) {
 
-  const { eventTypeId, title, description, createdAt, eventId, updatedAt, photoUrl, username, userId } =
+  const { eventTypeId, title, description, createdAt, eventId, photoUrl, username, userId } =
     props.event;
 
   const currentUser = props.event.userId;
-  const scheduled = new Date(updatedAt);
-  const addSched = format(scheduled, 'PPp');
-
-  const momUpdatedAt = moment(updatedAt).format('LLLL');
 
   const postedOn = new Date(createdAt);
   const handleShow = () => {
@@ -135,39 +130,52 @@ function AllEvents(props) {
   };
 
   const post = format(postedOn, 'PPp');
-
   return (
-    <article>
-      <div className="inner">
-        <EventType eventTypeId={eventTypeId} />
-        <h2 className="text-center">
-          <span className="thisdate mx-1">{post}</span>
-          {title}
-          <span className="edit text-muted">
-            <DeleteModal
+    <div className='container'>
+      <article>
+        <div className="inner">
+          <div className='col'>
+            <EventType eventTypeId={eventTypeId} />
+          </div>
+          <div className='row no-gutters header-color justify-content-between d-flex clearfix '>
+            <div className='col justify-evenly ps-1'>
+
+              <p className="text-start text-color">{post}</p>
+
+            </div>
+            <div className='col align-self-center p-0'> <LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} /></div>
+            <div className='col background-purp d-flex justify-content-end '>   <DeleteModal
       eventId={eventId}
       event={props.event}
       loadEvents={props.loadEvents}
     />
 
-            <EditForm
+              <EditForm
       eventId={eventId}
       title={title}
       description={description}
-      updatedAt={updatedAt}
+
       userId={userId}
       loadEvents={props.loadEvents}
 
     />
 
-            <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
+              <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} />
 
-          </span>
-        </h2>
+            </div>
 
-        <p>{description}<LoadUser eventId={eventId} userId={userId} username={username} loadUsers={props.loadUsers} /></p>
-      </div>
-    </article>
+            <p className='title-color text-center p-0'>{title}</p>
+
+          </div>
+          <div className='row description-color flex-wrap'>
+            <div className='col text-wrap'>
+
+              <p>{description}</p> </div>
+          </div>
+
+        </div>
+      </article>
+    </div>
   );
 }
 

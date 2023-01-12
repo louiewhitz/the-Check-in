@@ -17,7 +17,7 @@ export default class HomeBase extends React.Component {
           <h1 className="timeline-color text-center me-4">Add your event,</h1>
           <h2 className="timeline-color text-center ms-5">get the ball rolling</h2>
         </div>
-        ;
+
         <div className="row d-flex justify-content-evenly">
           <div className="col text-end">
             <a href="#addform">
