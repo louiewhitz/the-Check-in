@@ -7,7 +7,7 @@ export default class Header extends React.Component {
     return (
       <section className="mb-3 ">
         <nav className="navbar navbar-dark color-nav">
-          <div className="container-fluid">
+          <div className="container">
             <div className="row">
               <div className="col">
                 <div className="dropdown">

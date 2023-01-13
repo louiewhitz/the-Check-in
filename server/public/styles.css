@@ -45,7 +45,6 @@
   border: 1px solid #ced4da !important;
   appearance: none;
   appearance: none;
-  appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
 }
@@ -120,12 +119,10 @@
 .rbc-calendar *::before,
 .rbc-calendar *::after {
   box-sizing: inherit;
-  box-sizing: inherit;
 }
 
 .rbc-day-bg {
   -webkit-box-flex: 1;
-  flex: 1 0 0%;
   flex: 1 0 0%;
   cursor: pointer;
 }
@@ -203,20 +200,27 @@ div.bg-light {
 .text-color {
   color: rgb(242, 242, 137) !important;
   background: none !important;
-  font-size: 0.8rem !important;
+  font-size: 0.9rem !important;
   font-family: "IBM Plex Mono", monospace;
 }
 
+.mg {
+  margin-left: 0 !important;
+}
+
 .title-color {
-  padding: 0 !important;
   margin: 0 !important;
-  font-size: 0.9em !important;
   color: rgb(240, 240, 232) !important;
   background: none !important;
 }
 
 .marg-inline {
   margin-left: 1em !important;
+}
+
+.padding-gutter {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 
 .padding-right {
@@ -226,6 +230,18 @@ div.bg-light {
 .fix > .p-4 {
   display: flex;
   height: auto;
+}
+
+.react-calendar-datetime-picker .time .time > input {
+  width: 2rem !important;
+}
+
+.react-calendar-datetime-picker .calender-modal {
+  width: 19rem !important;
+  height: 27rem !important;
+  left: -95.75px !important;
+
+  /* bottom: 0px !important; */
 }
 
 .navbar-brand {
@@ -835,7 +851,7 @@ section#timeline article div.inner span.date span {
 }
 
 .header-color {
-  padding: 0.2rem;
+  padding: 0.1rem;
   margin: 0;
   color: rgb(236, 243, 244);
   font-size: 1em;
@@ -851,16 +867,18 @@ section#timeline article div.inner span.date span.other {
 }
 
 section#timeline article div.inner h2 {
+  display: flex;
   padding-top: 0 !important;
   color: rgb(236, 243, 244);
   font-size: 1.2em;
   letter-spacing: 0.01em;
   border-radius: 6px 6px 0 0;
+  text-align: center;
+  justify-content: center;
+  align-items: start !important;
 }
 
 section#timeline article div.inner p {
-  padding: 0 0.2em 0 0;
-  margin: 0;
   font-size: 0.8;
   background: #fafcfc;
   color: #0a0a0b;
@@ -927,6 +945,7 @@ section#timeline article div.inner p {
   border: none;
   background-color: transparent;
   padding: 0;
+  display: flex;
 }
 
 .show {
