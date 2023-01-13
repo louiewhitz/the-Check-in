@@ -82,7 +82,7 @@ export default class IonDate extends React.Component {
           </div>
           <div className='col-xs bg-none mx-2'>
             <DtPicker
-        className=""
+        className="col"
         type="range"
         local="en"
         placeholder='Select Date/Time'
@@ -92,6 +92,7 @@ export default class IonDate extends React.Component {
         autoClose={false}
         fromLabel='From'
         toLabel='To'
+        anchorTo='bottom'
         onChange={this.setDate} />
           </div>
           <div className='col-xs'>

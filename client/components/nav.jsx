@@ -5,7 +5,7 @@ export default class Header extends React.Component {
   render() {
     const { user, handleSignOut } = this.context;
     return (
-      <section className="mb-3">
+      <section className="mb-3 ">
         <nav className="navbar navbar-dark color-nav">
           <div className="container">
             <div className="row">
