@@ -7,7 +7,7 @@ import LoadingSpinner from './loading-spinner';
 
 const img = {
   height: '15rem',
-  objectFit: 'scale-down'
+  objectFit: 'cover'
 };
 
 export default class ViewAllImages extends React.Component {
