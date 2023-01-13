@@ -44,7 +44,6 @@
   background-clip: padding-box !important;
   border: 1px solid #ced4da !important;
   appearance: none;
-  appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
 }
@@ -74,7 +73,6 @@
   border: 1px solid rgb(211, 206, 206) !important;
   appearance: none;
   appearance: none;
-  appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
 }
@@ -94,7 +92,6 @@
   background-color: #fff !important;
   background-clip: padding-box !important;
   border: none !important;
-  appearance: none;
   appearance: none;
   appearance: none;
   border-radius: 0.25rem;
@@ -194,14 +191,19 @@ div.bg-light {
   overflow: visible;
   text-shadow: 0 0 10px rgb(220, 248, 7) !important;
   color: rgb(227, 234, 128) !important;
-  text-align: right;
 }
 
 .text-color {
   color: rgb(242, 242, 137) !important;
+  font-weight: 900 !important;
   background: none !important;
-  font-size: 0.9rem !important;
+  font-size: 1rem !important;
   font-family: "IBM Plex Mono", monospace;
+}
+
+input .time > input {
+  font-size: 1rem !important;
+  padding: 0.3em !important;
 }
 
 .mg {
@@ -234,6 +236,7 @@ div.bg-light {
 
 .react-calendar-datetime-picker .time .time > input {
   width: 2rem !important;
+  font-size: 2em !important;
 }
 
 .react-calendar-datetime-picker .calender-modal {

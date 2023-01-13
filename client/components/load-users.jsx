@@ -60,7 +60,7 @@ export default class LoadUser extends React.Component {
 
     return (
 
-      <h2 className='username text-center align-top '>{username}</h2>
+      <h2 className='username text-center align-top fs-4'>{username}</h2>
     );
   }
 }

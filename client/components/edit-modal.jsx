@@ -85,7 +85,7 @@ export default class EditForm extends React.Component {
     return (
       <>
         <Button onClick={this.handleShow} id="show-modal" className='align-top'>
-          <RiEdit2Fill size={20} style={{ fill: '#25aae1', paddingTop: '0%' }} />
+          <RiEdit2Fill size={25} style={{ fill: '#25aae1', paddingTop: '0%' }} />
         </Button>
         <Modal show={show} onHide={this.handleClose} centered>
           <form onSubmit={updateSubmit} id={this.state.eventId}>
