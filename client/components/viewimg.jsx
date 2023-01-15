@@ -6,7 +6,7 @@ import Redirect from './redirect';
 import LoadingSpinner from './loading-spinner';
 
 const img = {
-  height: '15rem',
+  height: '20rem',
   objectFit: 'cover'
 };
 
