@@ -49,7 +49,7 @@ export default class App extends React.Component {
     const { user, token } = result;
     window.localStorage.setItem('auth-token', token);
     this.setState({ user });
-    return <Redirect to="timeline" />;
+    return <Redirect to= 'timeline' />;
   }
 
   handleSignOut() {
