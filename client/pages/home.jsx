@@ -4,7 +4,23 @@ import AppContext from '../lib/app-context';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
 
 export default class HomeBase extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+
+    };
+
+  }
+
+  componentDidMount() {
+    if (!this.context.user) {
+      return <Redirect to="sign-in" />;
+    }
+  }
+
   render() {
+
     const { user } = this.context;
 
     if (!user) {
