@@ -69,7 +69,7 @@ export default class AuthForm extends React.Component {
   }
 
   signedIn(event) {
-    this.setState({ username: 'Enjoy', password: '123456' });
+    this.setState({ username: 'Welcome', password: '123456' });
     event.preventDefault();
   }
 
