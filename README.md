@@ -3,6 +3,9 @@
 # The Check-In
 The Check-In is a web app designed to help users keep track of and stay connected with a loved one they may be concerned about. Whether it be an elderly family member or anyone else, The Check-In allows users to add events to a shared timeline, schedule future meetups, and share images with others.
 
+### Try the live demo [here](https://the-check-in.louisawhitaker.com)
+* Press **'Click to try!'** for quick sign in on sign-in page.
+
 ### Web App in Action:
 ![Kapture 2023-01-20 at 20 13 20](https://user-images.githubusercontent.com/99847558/213844389-05299800-5e11-469c-97a6-41dad6468f03.gif)
 ![Kapture 2023-01-20 at 20 15 57](https://user-images.githubusercontent.com/99847558/213844399-e2bcf96d-6be6-4005-9ebd-bca6bd2e8a25.gif)
