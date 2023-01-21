@@ -91,12 +91,12 @@ export default class Timeline extends React.Component {
             <div className="row d-flex justify-content-evenly">
               <div className="col text-end">
                 <a href="#addform" id="addhref">
-                  <IoAddCircle size={150} />
+                  <IoAddCircle size={150} className="icon-shadow"/>
                 </a>
               </div>
               <div className="col text-start">
                 <a href="#calendar">
-                  <IoCalendarSharp size={150} />
+                  <IoCalendarSharp size={150} className="icon-shadow" />
                 </a>
               </div>
             </div>
@@ -137,7 +137,7 @@ function AllEvents(props) {
           <div className='col'>
             <EventType eventTypeId={eventTypeId} />
           </div>
-          <div className='row no-gutters padding-gutter header-color justify-content-between d-flex align-items-start align-top'>
+          <div className='row no-gutters padding-gutter header-color justify-content-between d-flex align-items-start align-top box-shadow'>
             <div className='col align-self-start padding-gutter'>
 
               <p className=" text-color ps-2">{post}</p>
@@ -163,10 +163,10 @@ function AllEvents(props) {
               <AllPhotos eventId={eventId} title={title} photoUrl={photoUrl} loadEvents={props.loadEvents} className='pe-1' />
 
             </div>
-            <div className='row padding-gutter no-gutters mg justify-content-center align-items-center'> <div className='col p-0 align-self-center '><p className='title-color  text-center pt-2 '>{title}</p></div></div>
+            <div className='row padding-gutter no-gutters mg justify-content-center align-items-center'> <div className='col p-0 align-self-center  '><p className='title-color  text-center pt-2 '>{title}</p></div></div>
 
           </div>
-          <div className='row description-color flex-wrap'>
+          <div className='row description-color flex-wrap box-shadow'>
             <div className='col text-wrap'>
 
               <p>{description}</p> </div>

@@ -8,7 +8,6 @@ export default class HomeBase extends React.Component {
     super(props);
     this.state = {
       user: null
-
     };
 
   }
@@ -37,12 +36,12 @@ export default class HomeBase extends React.Component {
         <div className="row d-flex justify-content-evenly">
           <div className="col text-end">
             <a href="#addform">
-              <IoAddCircle size={200} />
+              <IoAddCircle size={200} className="icon-shadow"/>
             </a>
           </div>
           <div className="col text-start">
             <a href="#calendar">
-              <IoCalendarSharp size={200} />
+              <IoCalendarSharp size={200} className="icon-shadow" />
             </a>
           </div>
         </div>

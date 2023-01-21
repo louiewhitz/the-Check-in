@@ -195,7 +195,7 @@ export default class AddForm extends React.Component {
                     onChange={this.onChange}
                     value={this.state.summary}
                     placeholder="Other...."
-                    className="form-control rounded mt-3 bg-light px-4 py-2.5 text-dark"
+                    className="form-control rounded mt-3 bg-light px-4 py-2.5 text-dark shadow"
                   />
                 </div>
                 <div className="form-group col mt-3">
@@ -208,7 +208,7 @@ export default class AddForm extends React.Component {
                     onChange={this.onChange}
                     value={this.state.title}
                     placeholder="Title..."
-                    className="form-control rounded bg-light px-4 py-2.5 font-bold  text-dark"
+                    className="form-control rounded bg-light px-4 py-2.5 font-bold  text-dark shadow"
                   />
                 </div>
               </div>
@@ -220,7 +220,7 @@ export default class AddForm extends React.Component {
                     Optional notes you think everyone should know
                   </label>
                   <textarea
-                    className="form-control border-2 border-muted-2 px-4 py-2.5 bg-light text-dark"
+                    className="form-control border-2 border-muted-2 px-4 py-2.5 bg-light text-dark shadow p-3 mb-2"
                     rows="5"
                     id="description"
                     name="description"
@@ -233,7 +233,7 @@ export default class AddForm extends React.Component {
                 <div className="col justify-content-evenly">
                   <div className="mb-3 mt-2">
                     <input
-                      className="form-control text-dark bg-light"
+                      className="form-control text-dark bg-light shadow"
                       type="file"
                       id="formFile"
                       name="photoUrl"
@@ -244,7 +244,7 @@ export default class AddForm extends React.Component {
                   </div>
                   <div className="d-flex justify-content-end">
                     <button
-                      className="btn btn-info btn-md mt-1"
+                      className="btn btn-info btn-md mt-1 shadow p-2 mb-5 rounded"
                       type="submit">
                       POST TO TIMELINE
                     </button>
