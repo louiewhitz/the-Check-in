@@ -1,9 +1,9 @@
-![logo](https://github.com/louiewhitz/the-Check-in/blob/main/server/public/logo.png
-)
+![logo](https://user-images.githubusercontent.com/99847558/213883036-aa6c2a0b-54b6-4542-939f-e6314c173209.png)
+
 # The Check-In
 The Check-In is a web app designed to help users keep track of and stay connected with a loved one they may be concerned about. Whether it be an elderly family member or anyone else, The Check-In allows users to add events to a shared timeline, schedule future meetups, and share images with others.
 
-### Try the live demo [here](https://the-check-in.louisawhitaker.com)
+### Try the live demo [here](https://the-check-in.louisawhitaker.com/)
 * Press **'Click to try!'** for quick sign in on sign-in page.
 
 ### Web App in Action:
@@ -124,6 +124,6 @@ We welcome contributions to this project. If you are interested in contributing,
 - AWS-S3 bucket
 
 
-License
-The Check-In is licensed under the MIT License.
+### License
+The Check-In is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
