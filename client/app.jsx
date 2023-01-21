@@ -8,7 +8,7 @@ import Timeline from './pages/timeline';
 import IonDate from '../client/components/date-time-picker';
 import AddForm from './pages/add-form';
 import HomeBase from './pages/home';
-import Notes from './pages/notes';
+
 import AppContext from './lib/app-context';
 import AuthPage from './pages/auth';
 import EditForm from '../client/components/edit-modal';
@@ -73,9 +73,7 @@ export default class App extends React.Component {
     if (route.path === 'timeline') {
       return <Timeline />;
     }
-    if (route.path === 'notes') {
-      return <Notes />;
-    }
+
     if (route.path === 'calendar') {
       return <MyCalendar />;
     }
