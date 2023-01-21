@@ -1,6 +1,7 @@
 
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
+import AppContext from '../lib/app-context.js';
 import IonDate from './date-time-picker';
 import PropTypes from 'prop-types';
 import Toolbar from 'react-big-calendar/lib/Toolbar';
@@ -29,12 +30,17 @@ const localizer = dateFnsLocalizer({
 });
 
 function MyCalendar() {
+
+  const { user } = useContext(AppContext);
+
   const [events, setEvents] = useState([]);
-  const [newEvent, setNewEvent] = useState({ title: '', start: new Date(), end: '', startTime: '', endTime: '', timelineId: 1 });
+  const [newEvent, setNewEvent] = useState({ title: '', start: new Date(), end: '', startTime: '', endTime: '', timelineId: 1, user: user.username });
+
   const [submit, setSubmitted] = useState(false);
   const [allEvents, setAllEvents] = useState(events);
   function handleAddEvent(events, newEvent) {
     setAllEvents({ ...allEvents, newEvent });
+
   }
   useEffect(() => {
     fetch('/api/schedules', {
@@ -45,6 +51,7 @@ function MyCalendar() {
       .then(response => response.json())
       .then(data => {
         const allEvents = data;
+
         setAllEvents(allEvents);
       });
 
@@ -76,13 +83,14 @@ function MyCalendar() {
       navigate={false}
       showMultiDayTimes
       allDay={false}
-      selectable
+      selectable={true}
       step={60}
       timeslots={4}
       views={views}
       popup
       startAccessor="start"
       endAccessor="end"
+      user={user}
       style={{ height: 700 }}
     />
     </div>

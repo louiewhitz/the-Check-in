@@ -79,6 +79,7 @@ export default class IonDate extends React.Component {
         <form className='row-sm mb-3 d-flex' onSubmit={this.handleSubmit}>
           <div className='col-xs  d-flex title-schedule'>
             <input type="text" placeholder="Add Title" name="title" className='add-calendar-schedule shadow' value={this.state.title} required onChange={this.handleTitle} />
+
           </div>
           <div className='col-xs bg-none mx-2 shadow'>
             <DtPicker
