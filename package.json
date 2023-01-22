@@ -14,7 +14,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.110.0",
     "argon2": "^0.29.1",
-    "axios": "^1.2.1",
+    "axios": "^1.2.2",
     "bootstrap": "^5.1.0",
     "core-js": "^3.27.0",
     "date-fns": "^2.29.3",
