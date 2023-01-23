@@ -1,7 +1,7 @@
 ![logo](https://user-images.githubusercontent.com/99847558/213883036-aa6c2a0b-54b6-4542-939f-e6314c173209.png)
 
 # The Check-In
-The Check-In is a web app designed to help users keep track of and stay connected with a loved one they may be concerned about. Whether it be an elderly family member or anyone else, The Check-In allows users to add events to a shared timeline, schedule future meetups, and share images with others.
+Check-in is a full stack web application built using the PERN (PostgreSQL, Express.js, React.js, Node.js) stack. It allows users to share information and schedule events for people they care about, such as elderly relatives or friends. The app allows users to track and manage the schedule of care for those in their network, ensuring that everyone is informed and on the same page. With the Check-in, coordinating care for loved ones is made easy and efficient.
 
 ### Try the live demo [here](https://the-check-in.louisawhitaker.com/)
 * Press **'Click to try!'** for quick sign in on sign-in page.
