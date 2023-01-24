@@ -81,9 +81,9 @@ export default class IonDate extends React.Component {
             <input type="text" placeholder="Add Title" name="title" className='add-calendar-schedule shadow' value={this.state.title} required onChange={this.handleTitle} />
 
           </div>
-          <div className='col-xs bg-none mx-2 shadow'>
+          <div className='col-xs bg-white mx-2 shadow rounded'>
             <DtPicker
-        className="col shadow"
+        className="col border-0"
         type="range"
         local="en"
         placeholder='Select Date/Time'

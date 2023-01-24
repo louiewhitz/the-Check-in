@@ -66,12 +66,11 @@ export default class AllPhotos extends React.Component {
               {this.state.title}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body eventId={this.state.eventId}>
+          <Modal.Body eventId={this.state.eventId} className='text-center'>
             <Image variant='top'
                 fluid='true'
               src={this.state.photoUrl}
             />
-
           </Modal.Body>
           <Modal.Footer classNname=' border-0'>
             <Button variant="info" onClick={this.handleClose} className='d-block'>

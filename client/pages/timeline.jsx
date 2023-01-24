@@ -23,7 +23,8 @@ export default class Timeline extends React.Component {
       events: [],
       username: [],
       loading: true,
-      networkError: false
+      networkError: false,
+      user: null
     };
     this.handleClick = this.handleClick.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
@@ -51,7 +52,6 @@ export default class Timeline extends React.Component {
 
   componentDidMount() {
     this.loadEvents();
-
   }
 
   handleClick(number) {
@@ -69,52 +69,63 @@ export default class Timeline extends React.Component {
       return <NetError />;
     }
 
-    if (this.state.loading) {
-      return <LoadingSpinner />;
-    }
-
     return this.state.loaing
-      ? (<><LoadingSpinner />
-        <p className='text-white'>...Please hold on a sec, loading</p>
-      </>
+      ? (
+        <LoadingSpinner />
         )
-      : this.state.entries === 0
-        ? (
-          <div className="container mt-nav text-white">
-            <p>Sorry there are no events yet.</p>
-          </div>
-          )
-        : (
-          <div className="container">
+      : !this.state.events.length
+          ? (
+            <div className="container mt-nav">
+              <div className="row">
+                <h1 className="text-center timeline-color">Timeline of Events </h1>
+                <h4 className="no-events  no-events">Sorry, no events have been recorded. Click to add an event to the timeline or schedule an event in the calendar.</h4>
+              </div>
+              <div className="row d-flex justify-content-evenly">
+                <div className="col text-end">
+                  <a href="#addform" id="addhref">
+                    <IoAddCircle size={150} className="icon-shadow"/>
+                  </a>
+                </div>
+                <div className="col text-start">
+                  <a href="#calendar">
+                    <IoCalendarSharp size={150} className="icon-shadow" />
+                  </a>
+                </div>
+              </div>
 
-            <h1 className="text-center timeline-color">Timeline of Events </h1>
-            <div className="row d-flex justify-content-evenly">
-              <div className="col text-end">
-                <a href="#addform" id="addhref">
-                  <IoAddCircle size={150} className="icon-shadow"/>
-                </a>
-              </div>
-              <div className="col text-start">
-                <a href="#calendar">
-                  <IoCalendarSharp size={150} className="icon-shadow" />
-                </a>
-              </div>
             </div>
-            <section id="timeline">
-              {this.state.events.map(event => {
-                return (
-                  <div key={event.eventId}>
-                    <AllEvents
+            )
+          : (
+            <div className="container">
+
+              <h1 className="text-center timeline-color">Timeline of Events </h1>
+              <div className="row d-flex justify-content-evenly">
+                <div className="col text-end">
+                  <a href="#addform" id="addhref">
+                    <IoAddCircle size={150} className="icon-shadow"/>
+                  </a>
+                </div>
+                <div className="col text-start">
+                  <a href="#calendar">
+                    <IoCalendarSharp size={150} className="icon-shadow" />
+                  </a>
+                </div>
+              </div>
+              <section id="timeline">
+                {this.state.events.map(event => {
+                  return (
+                    <div key={event.eventId}>
+                      <AllEvents
                   key={event.eventId}
                   event={event}
                   loadEvents={this.loadEvents}
                 />
-                  </div>
-                );
-              })}
-            </section>
-          </div>
-          );
+                    </div>
+                  );
+                })}
+              </section>
+            </div>
+            );
   }
 }
 function AllEvents(props) {

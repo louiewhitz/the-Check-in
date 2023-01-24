@@ -30,9 +30,7 @@ const localizer = dateFnsLocalizer({
 });
 
 function MyCalendar() {
-
   const { user } = useContext(AppContext);
-
   const [events, setEvents] = useState([]);
   const [newEvent, setNewEvent] = useState({ title: '', start: new Date(), end: '', startTime: '', endTime: '', timelineId: 1, user: user.username });
 
@@ -51,7 +49,6 @@ function MyCalendar() {
       .then(response => response.json())
       .then(data => {
         const allEvents = data;
-
         setAllEvents(allEvents);
       });
 
@@ -79,7 +76,7 @@ function MyCalendar() {
       components={{ CustomToolbar }}
       addEvent={addEvent}
       localizer={localizer}
-      events={allEvents }
+      events={allEvents}
       navigate={false}
       showMultiDayTimes
       allDay={false}

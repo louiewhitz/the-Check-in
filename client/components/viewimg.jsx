@@ -61,51 +61,56 @@ export default class ViewAllImages extends React.Component {
     const { user } = this.context;
 
     if (!user) {
-      return <Redirect to="#sign-in" />;
-    }
-
-    if (this.state.loading) {
-      return <LoadingSpinner />;
+      return <Redirect to="sign-in" />;
     }
 
     return this.state.loaing
       ? (
-        <p>...Please hold on a sec, loading</p>
+        <LoadingSpinner />
         )
-      : this.state.entries === 0
-        ? (
-          <div className="container mt-nav">
-            <p>Sorry there are no events yet.</p>
-          </div>
-          )
-        : (
-          <div className="container">
+      : !this.state.events.length
+          ? (
+            <div className="container mt-nav">
+              <div className="row">
+                <h1 className="text-center timeline-color">IMAGES</h1>
+                <h4 className="no-events">Sorry, there are no images yet. If you or anyone in your party add an event to the timeline, all images will be displayed here.</h4>
+              </div>
+            </div>
+            )
+          : (
+            <div className="container">
 
-            <div className="row">
-              <h1 className="text-center timeline-color">IMAGES</h1>
-              <section id="allphotos">
-                {this.state.events.map(event => {
-                  return (
-                    <div key={event.eventId} className='fix'>
-                      <ViewPhoto
+              <div className="row">
+                <h1 className="text-center timeline-color">IMAGES</h1>
+                <section id="allphotos">
+                  {this.state.events.map(event => {
+                    return (
+                      <div key={event.eventId} className='fix'>
+                        <ViewPhoto
 
                   event={event}
                   loadEvents={this.loadEvents}
                 />
-                    </div>
-                  );
-                })}
-              </section>
+                      </div>
+                    );
+                  })}
+                </section>
+              </div>
             </div>
-          </div>
-          );
+            );
   }
 
 }
 function ViewPhoto(props) {
-  const { photoUrl, eventId, title } = props.event;
-  if (!photoUrl) {
-    return null;
+  const { photoUrl, eventId, title, event } = props.event;
+
+  if (!event) {
+    <div className="container mt-nav">
+      <div className="row">
+        <h1 className="text-center timeline-color">IMAGES</h1>
+        <p>Sorry there are no images yet.</p>
+      </div>
+    </div>;
   }
 
   return (

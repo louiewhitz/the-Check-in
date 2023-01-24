@@ -50,7 +50,8 @@
   margin-left: 0.01rem !important;
   background-color: #fff !important;
   background-clip: padding-box !important;
-  border: 1px solid #ced4da !important;
+
+  /* border: 1px solid #ced4da !important; */
   appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
@@ -78,7 +79,7 @@
   color: #212529;
   background-color: #fff !important;
   background-clip: padding-box !important;
-  border: 1px solid rgb(211, 206, 206) !important;
+  border: none !important;
   appearance: none;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
@@ -141,14 +142,6 @@
   box-shadow: 0 12px 24px rgb(0 0 0 / 20%);
 }
 
-.para-date {
-  padding: 0.9%;
-  font-size: 1.5em;
-  font-family: "Alegreya Sans SC", sans-serif;
-  text-shadow: 2px 2px 2px rgba(120, 118, 118, 0.648);
-  color: rgb(86, 5, 5);
-}
-
 .date-buttons {
   border: 1px solid #a0a096;
   box-shadow: 0 12px 24px rgb(0 0 0 / 20%) !important;
@@ -184,6 +177,33 @@ div.bg-light {
 
 .btn {
   padding: 0;
+}
+
+.button-error {
+  color: rgb(86, 5, 5);
+  text-shadow: 3px 3px 10px rgba(120, 118, 118, 0.648);
+}
+
+.title-descript-add-form {
+  color: rgba(75, 4, 4, 0.927);
+  text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+.add-form-title {
+  color: rgba(75, 4, 4, 0.927);
+  text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
+  padding-bottom: 0 !important;
+}
+
+.form-group > .add-form-title {
+  padding-bottom: 0 !important;
+}
+
+.no-events {
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 800;
+  color: rgb(86, 5, 5);
+  text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-color {
@@ -448,7 +468,7 @@ a {
   box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
 }
 
-.btn-hover.color-7 {
+/* .btn-hover.color-7 {
   background-image:
     linear-gradient(
       to right,
@@ -458,19 +478,7 @@ a {
       #f24645
     );
   box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
-}
-
-.btn-hover.color-8 {
-  background-image:
-    linear-gradient(
-      to right,
-      #29323c,
-      #485563,
-      #2b5876,
-      #4e4376
-    );
-  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
-}
+} */
 
 .btn-hover.color-9 {
   background-image:
