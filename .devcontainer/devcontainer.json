@@ -14,7 +14,8 @@
 		"jawandarajbir.react-vscode-extension-pack",
 		"ms-vsliveshare.vsliveshare",
 		"ms-vsliveshare.vsliveshare-audio",
-		"redhat.fabric8-analytics"
+		"redhat.fabric8-analytics",
+		"vincaslt.highlight-matching-tag"
 	]
     }
   },

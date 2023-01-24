@@ -32,7 +32,11 @@ export default class IonDate extends React.Component {
   }
 
   reload() {
-    window.location.reload();
+    if (window.location.pathname === '#calendar') {
+      window.location.reload();
+    } else {
+      window.location.hash = '#calendar';
+    }
   }
 
   handleSubmit(event) {
@@ -70,23 +74,27 @@ export default class IonDate extends React.Component {
       user,
       body: JSON.stringify(body)
     })
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(() => {
+        this.setState({ loading: false });
+        window.location.hash = '#calendar';
+      });
   }
 
   render() {
     return (
-      <div >
-        <form className='row-sm mb-3 d-flex' onSubmit={this.handleSubmit}>
-          <div className='col-xs  d-flex title-schedule'>
-            <input type="text" placeholder="Add Title" name="title" className='add-calendar-schedule shadow' value={this.state.title} required onChange={this.handleTitle} />
+      <div className=''>
+        <form className=' mb-3 d-flex ' onSubmit={this.handleSubmit}>
+          <div className='col-sm  d-flex title-schedule '>
+            <input type="text" placeholder="Title" name="title" className='add-calendar-schedule shadow' value={this.state.title} required onChange={this.handleTitle} />
 
           </div>
-          <div className='col-xs bg-white mx-2 shadow rounded'>
+          <div className='col bg-white mx-1 shadow rounded position-relative'>
             <DtPicker
-        className="col border-0"
+        className=""
         type="range"
         local="en"
-        placeholder='Select Date/Time'
+        placeholder='Date/time'
         withTime={true}
         showTimeInput={true}
         showWeekend
@@ -96,8 +104,8 @@ export default class IonDate extends React.Component {
         anchorTo='bottom'
         onChange={this.setDate} />
           </div>
-          <div className='col-xs'>
-            <button type="submit" className='btn btn-info shadow  mx-1' value="Submit" onClick={this.reload}>Schedule</button>
+          <div className='col d-flex  '>
+            <button type="submit" className='btn btn-info btn-md shadow text-dark px-1 ml-3 ' value="Submit" onClick={this.reload}>SCHEDULE</button>
           </div>
         </form>
       </div>

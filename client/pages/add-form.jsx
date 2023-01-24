@@ -6,6 +6,8 @@ import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
 import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
+// eslint-disable-next-line no-unused-vars
+import IonDate from '../components/date-time-picker';
 
 export default class AddForm extends React.Component {
   constructor(props) {
@@ -104,7 +106,7 @@ export default class AddForm extends React.Component {
       <div className="container-md mx-auto">
         <div className="row d-flex justify-content-center align-items-center flex-wrap">
           <div className="col-sm" />
-          <div className="col d-flex d-inline-flex align-self-center">
+          <div className="col-lg d-flex d-inline-flex align-self-center">
             <blockquote className="blockquote text-center">
               <h2 className="timeline-color lead fs-3 lh-base text-center">
                 Showcase your event, reset your timer, make a difference
@@ -185,7 +187,7 @@ export default class AddForm extends React.Component {
               <div className="row">
 
                 <div className="form-group col mt-3 d-flex">
-                  <label htmlFor="title" className="d-block fs-5 col-form-label add-form-title pe-3">Title:</label>
+                  <label htmlFor="title" className="d-block fs-5 col-form-label add-form-title " />
                   <input
                     id="title"
                     required
@@ -193,9 +195,8 @@ export default class AddForm extends React.Component {
                     type="text"
                     onChange={this.onChange}
                     value={this.state.title}
-                    placeholder='Please enter a title...'
-
-                    className="form-control rounded bg-light px-4 py-2.5 font-bold  text-dark shadow"
+                    placeholder='Add a title...'
+                    className="form-control border rounded bg-light px-1.2 py-2 font-bold text-dark shadow"
                   />
                 </div>
               </div>
@@ -207,7 +208,7 @@ export default class AddForm extends React.Component {
                     Optional notes you think everyone should know
                   </label>
                   <textarea
-                    className="form-control border-2 border-muted-2 px-4 py-2.5 bg-light text-dark shadow p-3 mb-2"
+                    className="form-control border px-1.2 py-1 bg-light text-dark shadow p-3 mb-2"
                     rows="5"
                     id="description"
                     name="description"
@@ -232,17 +233,32 @@ export default class AddForm extends React.Component {
                   <div className="d-flex justify-content-end">
                     { this.state.buttonError && <div className="col-sm button-error">Please select an event type above.</div> }
                     <button
-                      className="btn btn-info btn-md mt-1 shadow p-2 mb-5 rounded"
+                      className="btn btn-info text-dark btn-md mt-1 shadow pt-2  rounded"
                       type="submit" required>
                       POST TO TIMELINE
                     </button>
                   </div>
                 </div>
+                <div className='row yy d-flex flex-wrap '>
+                  <div className='col d-flex'><h3 className='fs-5 title-descript-add-form text-left ps-1 xx'>Schedule Insead?</h3></div>
+
+                </div>
+                {/* <div className='row'>
+                  <div className='col'>
+                    <IonDate />
+
+                  </div>
+                </div> */}
+
               </div>
+
             </div>
+
           </div>
+
         </form>
       </div>
+
     );
   }
 }
