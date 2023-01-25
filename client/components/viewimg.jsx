@@ -97,9 +97,9 @@ export default class ViewAllImages extends React.Component {
   }
 }
 function ViewPhoto(props) {
-  const { photoUrl, eventId, title, event } = props.event;
+  const { photoUrl, eventId, title } = props.event;
 
-  if (!event) {
+  if (!photoUrl) {
     return null;
   }
 

@@ -104,7 +104,7 @@ export default class AddForm extends React.Component {
       <div className="container-md mx-auto">
         <div className="row d-flex justify-content-center align-items-center flex-wrap">
           <div className="col-sm" />
-          <div className="col-lg d-flex d-inline-flex align-self-center">
+          <div className="col d-flex d-inline-flex align-self-center">
             <blockquote className="blockquote text-center">
               <h2 className="timeline-color lead fs-3 lh-base text-center">
                 Showcase your event, reset your timer, make a difference
@@ -113,7 +113,6 @@ export default class AddForm extends React.Component {
           </div>
           <div className="col-sm" />
         </div>
-
         <form className="row" id="eventId" onSubmit={this.handleSubmit}>
           <div className="form-holder">
             <div className="form-content">
