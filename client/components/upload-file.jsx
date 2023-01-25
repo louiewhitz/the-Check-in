@@ -8,7 +8,6 @@ const FileUploader = ({ onFileSelect }) => {
   return (
     <div className="mb-3 file-uploader">
       <label htmlFor="formFile">Default file input</label>
-
       <input
         className="form-control text-white-50 bg-dark"
         type="file"

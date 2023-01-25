@@ -27,7 +27,7 @@ app.use(staticMiddleware);
 
 app.post('/api/auth/sign-up', (req, res, next) => {
   const { username, firstName, lastName, password } = req.body;
-  // console.log('REQ.BODY:', req.body);
+
   if (!username || !password || !lastName || !firstName) {
     throw new ClientError(400, 'username and password are required fields');
   }
@@ -94,7 +94,7 @@ app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
 
   /* "logic" */
 
-  res.end(); // this is just here so my request doesn't hang
+  res.end();
 });
 
 app.use((err, req, res, next) => {

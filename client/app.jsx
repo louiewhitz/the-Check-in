@@ -1,5 +1,4 @@
 import React from 'react';
-
 import jwtDecode from 'jwt-decode';
 import Redirect from './components/redirect';
 import PageContainer from './components/page-container';
@@ -8,7 +7,6 @@ import Timeline from './pages/timeline';
 import IonDate from '../client/components/date-time-picker';
 import AddForm from './pages/add-form';
 import HomeBase from './pages/home';
-
 import AppContext from './lib/app-context';
 import AuthPage from './pages/auth';
 import EditForm from '../client/components/edit-modal';
@@ -18,7 +16,6 @@ import AllPhotos from './pages/viewphoto';
 import ViewAllImages from '../client/components/viewimg';
 import MyCalendar from '../client/components/calendar-tiles';
 import LoadUser from '../client/components/load-users';
-import ViewCalendar from './pages/viewcalendar';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -97,13 +94,10 @@ export default class App extends React.Component {
       const eventId = route.params.get('eventId');
       return <LoadUser eventId={eventId}/>;
     }
-    if (route.path === 'schedule-event') {
-      return <ViewCalendar />;
-    }
+
     if (route.path === 'ion-date') {
       return <IonDate />;
     }
-
   }
 
   render() {

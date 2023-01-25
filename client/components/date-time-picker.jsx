@@ -38,25 +38,24 @@ export default class IonDate extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     const { user } = this.context;
+
     const startDate = this.state.start.from;
     const endDate = this.state.end.to;
+
     const endYear = endDate.year;
     const endDay = endDate.day;
-    const endMonth = endDate.month;
+    const endMonth = endDate.month - 1;
     const endMinute = endDate.minute;
     const endHour = endDate.hour;
-    const endFin = `${endYear}/${endMonth}/${endDay} ${endHour}:${endMinute}`;
+    const end = new Date(endYear, endMonth, endDay, endHour, endMinute);
+
     const startYear = startDate.year;
     const startDay = startDate.day;
-    const startMonth = startDate.month;
+    const startMonth = startDate.month - 1;
     const startMinute = startDate.minute;
     const startHour = startDate.hour;
-    const startFin = `${startYear}/${startMonth}/${startDay} ${startHour}:${startMinute}`;
-    const momentStart = new Date(startFin);
-    const momentEnd = new Date(endFin);
-    const end = momentEnd.toISOString();
-    const newStart = new Date(momentStart);
-    const start = newStart.toISOString();
+    const start = new Date(startYear, startMonth, startDay, startHour, startMinute);
+
     const timelineId = this.state.timelineId;
     const title = this.state.title;
     const body = { title, start, end, timelineId };
@@ -70,23 +69,27 @@ export default class IonDate extends React.Component {
       user,
       body: JSON.stringify(body)
     })
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(() => {
+        this.setState({ loading: false });
+        window.location.hash = '#calendar';
+      });
   }
 
   render() {
     return (
-      <div >
-        <form className='row-sm mb-3 d-flex' onSubmit={this.handleSubmit}>
-          <div className='col-xs  d-flex title-schedule'>
-            <input type="text" placeholder="Add Title" name="title" className='add-calendar-schedule shadow' value={this.state.title} required onChange={this.handleTitle} />
+      <div className='container-md mx-0 px-0 justify-content-center'>
+        <form className='row-sm mb-3 d-flex ' onSubmit={this.handleSubmit}>
+          <div className='col  d-flex title-schedule '>
+            <input type="text" placeholder="Title" name="title" className='add-calendar-schedule shadow' value={this.state.title} required onChange={this.handleTitle} />
 
           </div>
-          <div className='col-xs bg-none mx-2 shadow'>
+          <div className='col bg-white mx-1 shadow rounded '>
             <DtPicker
-        className="col shadow"
+        className=""
         type="range"
         local="en"
-        placeholder='Select Date/Time'
+        placeholder='Date/time'
         withTime={true}
         showTimeInput={true}
         showWeekend
@@ -96,8 +99,8 @@ export default class IonDate extends React.Component {
         anchorTo='bottom'
         onChange={this.setDate} />
           </div>
-          <div className='col-xs'>
-            <button type="submit" className='btn btn-info shadow  mx-1' value="Submit" onClick={this.reload}>Schedule</button>
+          <div className='col d-flex'>
+            <button type="submit" className='btn btn-info btn-md shadow text-dark px-1 ml-3 ' value="Submit" onClick={this.reload}>SCHEDULE</button>
           </div>
         </form>
       </div>

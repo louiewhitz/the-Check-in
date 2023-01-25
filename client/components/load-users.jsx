@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
+
 import React from 'react';
 import AppContext from '../lib/app-context';
-// import AddForm from '../pages/add-form';
 export default class LoadUser extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +8,6 @@ export default class LoadUser extends React.Component {
       eventId: this.props.eventId,
       userId: this.props.userId,
       username: ''
-
     };
     this.loadUsers = this.loadUsers.bind(this);
   }
@@ -40,14 +37,10 @@ export default class LoadUser extends React.Component {
           userId: userid
 
         });
-
       })
-
       .catch(err => {
         console.error('dang', err);
-
       });
-
   }
 
   componentDidMount() {
@@ -55,11 +48,8 @@ export default class LoadUser extends React.Component {
   }
 
   render() {
-    const { user } = this.context;
-    const { username, userId, eventId } = this.state;
-
+    const { username } = this.state;
     return (
-
       <h2 className='username text-center align-top fs-4'>{username}</h2>
     );
   }

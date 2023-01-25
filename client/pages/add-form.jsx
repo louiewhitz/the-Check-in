@@ -14,6 +14,7 @@ export default class AddForm extends React.Component {
       description: '',
       summary: '',
       eventTypeId: null,
+      buttonError: false,
       file: '../images/apod.jpeg',
       title: '',
       userId: '',
@@ -26,15 +27,7 @@ export default class AddForm extends React.Component {
     this.onFileChange = this.onFileChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.eventType = this.eventType.bind(this);
-    // this.handleDate = this.handleDate.bind(this);
   }
-
-  // handleDate(date) {
-  //   const formattedDate = moment(this.state.date).format('YYYY-MM-DD HH:mm:ss');
-  //   this.setState({
-  //     updatedAt: formattedDate
-  //   });
-  // }
 
   onChange(event) {
     const { name, value } = event.target;
@@ -49,42 +42,46 @@ export default class AddForm extends React.Component {
   }
 
   eventType(number) {
-    this.setState({ eventTypeId: number });
+    this.setState({ eventTypeId: number, buttonError: false });
     return this.number;
   }
 
   handleSubmit(event) {
 
     event.preventDefault();
+    if (!this.state.eventTypeId) {
+      this.setState({ buttonError: true });
+    } else {
 
-    this.setState({ loading: true });
+      this.setState({ loading: true });
 
-    const formData = new FormData();
-    const image = this.fileInputRef.current.files[0];
+      const formData = new FormData();
+      const image = this.fileInputRef.current.files[0];
 
-    formData.append('summary', this.state.summary);
-    formData.append('eventTypeId', this.state.eventTypeId);
-    formData.append('title', this.state.title);
-    formData.append('description', this.state.description);
-    formData.append('image', image);
-    formData.append('userId', this.state.userId);
+      formData.append('summary', this.state.summary);
+      formData.append('eventTypeId', this.state.eventTypeId);
+      formData.append('title', this.state.title);
+      formData.append('description', this.state.description);
+      formData.append('image', image);
+      formData.append('userId', this.state.userId);
 
-    fetch('/api/events', {
-      method: 'POST',
-      headers: {
-        'X-Access-Token': localStorage.getItem('auth-token')
-      },
-      body: formData
-    })
-      .then(() => {
-        this.setState({ loading: false });
-        window.location.hash = '#timeline';
+      fetch('/api/events', {
+        method: 'POST',
+        headers: {
+          'X-Access-Token': localStorage.getItem('auth-token')
+        },
+        body: formData
       })
+        .then(() => {
+          this.setState({ loading: false });
+          window.location.hash = '#timeline';
+        })
 
-      .catch(err => {
-        console.error('Dang! Fetch FAIIIIILED', err);
-        this.setState({ networkError: true });
-      });
+        .catch(err => {
+          console.error('Dang! Fetch FAIIIIILED', err);
+          this.setState({ networkError: true });
+        });
+    }
   }
 
   render() {
@@ -107,7 +104,7 @@ export default class AddForm extends React.Component {
       <div className="container-md mx-auto">
         <div className="row d-flex justify-content-center align-items-center flex-wrap">
           <div className="col-sm" />
-          <div className="col d-flex d-inline-flex align-self-center">
+          <div className="col-lg d-flex d-inline-flex align-self-center">
             <blockquote className="blockquote text-center">
               <h2 className="timeline-color lead fs-3 lh-base text-center">
                 Showcase your event, reset your timer, make a difference
@@ -116,6 +113,7 @@ export default class AddForm extends React.Component {
           </div>
           <div className="col-sm" />
         </div>
+
         <form className="row" id="eventId" onSubmit={this.handleSubmit}>
           <div className="form-holder">
             <div className="form-content">
@@ -186,20 +184,9 @@ export default class AddForm extends React.Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col form-group pt-2">
-                  <label htmlFor="other" className="d-block fs-5 form-label" />
-                  <input
-                    id="summary"
-                    name="summary"
-                    type="text"
-                    onChange={this.onChange}
-                    value={this.state.summary}
-                    placeholder="Other...."
-                    className="form-control rounded mt-3 bg-light px-4 py-2.5 text-dark shadow"
-                  />
-                </div>
-                <div className="form-group col mt-3">
-                  <label htmlFor="title" className="d-block fs-5 form-label" />
+
+                <div className="form-group col mt-3 d-flex">
+                  <label htmlFor="title" className="d-block fs-5 col-form-label add-form-title " />
                   <input
                     id="title"
                     required
@@ -207,8 +194,8 @@ export default class AddForm extends React.Component {
                     type="text"
                     onChange={this.onChange}
                     value={this.state.title}
-                    placeholder="Title..."
-                    className="form-control rounded bg-light px-4 py-2.5 font-bold  text-dark shadow"
+                    placeholder='Add a title...'
+                    className="form-control border rounded bg-light px-1.2 py-2 font-bold text-dark shadow"
                   />
                 </div>
               </div>
@@ -216,11 +203,11 @@ export default class AddForm extends React.Component {
                 <div className="col form-group mt-3">
                   <label
                     htmlFor="comment"
-                    className="fs-5 form-label text-muted">
+                    className="fs-5 form-label title-descript-add-form ">
                     Optional notes you think everyone should know
                   </label>
                   <textarea
-                    className="form-control border-2 border-muted-2 px-4 py-2.5 bg-light text-dark shadow p-3 mb-2"
+                    className="form-control border px-1.2 py-1 bg-light text-dark shadow p-3 mb-2"
                     rows="5"
                     id="description"
                     name="description"
@@ -243,18 +230,25 @@ export default class AddForm extends React.Component {
                     />
                   </div>
                   <div className="d-flex justify-content-end">
+                    { this.state.buttonError && <div className="col-sm button-error">Please select an event type above.</div> }
                     <button
-                      className="btn btn-info btn-md mt-1 shadow p-2 mb-5 rounded"
-                      type="submit">
+                      className="btn btn-info text-dark btn-md mt-1 shadow pt-2  rounded"
+                      type="submit" required>
                       POST TO TIMELINE
                     </button>
                   </div>
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
+
         </form>
       </div>
+
     );
   }
 }

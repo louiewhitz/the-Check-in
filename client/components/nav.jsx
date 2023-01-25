@@ -1,6 +1,5 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
-
 export default class Header extends React.Component {
   render() {
     const { user, handleSignOut } = this.context;
@@ -39,19 +38,15 @@ export default class Header extends React.Component {
                     </li>
                     <li>
                       <a className="dropdown-item" href="#addform">
-                        Add event
+                        Add Event
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="#calendar">
-                        Schedule Event
+                        Scheduling & Calendar
                       </a>
                     </li>
-                    <li>
-                      <a className="dropdown-item" href="#calendar">
-                        Calendar
-                      </a>
-                    </li>
+
                     <li>
                       <a className="dropdown-item" href="#allphotos">
                         View Photos
