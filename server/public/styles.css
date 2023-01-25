@@ -220,10 +220,11 @@ div.bg-light {
   font-family: "IBM Plex Mono", monospace;
 }
 
+/*
 input .time > input {
   font-size: 1rem !important;
   padding: 0.3em !important;
-}
+} */
 
 .mg {
   margin-left: 0 !important;
@@ -253,15 +254,13 @@ input .time > input {
   height: auto;
 }
 
-.react-calendar-datetime-picker .time .time > input {
-  width: 2rem !important;
-  font-size: 2em !important;
+.react-calendar-datetime-picker .time {
+  padding: 0 0.2rem 0.2rem !important;
+  margin: 0 !important;
 }
 
-.react-calendar-datetime-picker .calender-modal {
-  width: 19rem !important;
-  height: 27rem !important;
-  left: -95.75px !important;
+.time-fieldset > input {
+  width: 2.25rem !important;
 }
 
 .navbar-brand {
