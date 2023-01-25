@@ -1,18 +1,24 @@
-![logo](https://user-images.githubusercontent.com/99847558/213883036-aa6c2a0b-54b6-4542-939f-e6314c173209.png)
+
+![check-in-logo_1030x495](https://user-images.githubusercontent.com/99847558/214488676-31653df9-f182-4acb-a351-098d92c020f4.png)
 
 # The Check-In
-Check-in is a full stack web application built using the PERN (PostgreSQL, Express.js, React.js, Node.js) stack. It allows users to share information and schedule events for people they care about, such as elderly relatives or friends. The app allows users to track and manage the schedule of care for those in their network, ensuring that everyone is informed and on the same page. With the Check-in, coordinating care for loved ones is made easy and efficient.
+Check-in is a full stack web application built using the PERN (PostgreSQL, Express.js, React.js, Node.js) stack. It allows users to share information and schedule events for people they care about, such as elderly relatives or friends. The app allows users to track and manage the schedule of care for those in their network, ensuring that everyone is informed and on the same page. 
 
 ### Try the live demo [here](https://the-check-in.louisawhitaker.com/)
 * Press **'Click to try!'** for quick sign in on sign-in page.
 
 ### Web App in Action:
-![Kapture 2023-01-20 at 20 13 20](https://user-images.githubusercontent.com/99847558/213844389-05299800-5e11-469c-97a6-41dad6468f03.gif)
-![Kapture 2023-01-20 at 20 15 57](https://user-images.githubusercontent.com/99847558/213844399-e2bcf96d-6be6-4005-9ebd-bca6bd2e8a25.gif)
-![Kapture 2023-01-20 at 20 14 08](https://user-images.githubusercontent.com/99847558/213844248-6a2f2619-14a5-4944-b171-d9f4ab3924ae.gif)
+![add-event](https://user-images.githubusercontent.com/99847558/214485012-db73c2dd-3dfb-4f3c-9e4b-9aaf02e5bbd9.gif)
+
+![Kapture 2023-01-24 at 21 48 51](https://user-images.githubusercontent.com/99847558/214490067-ae1558a9-b4ba-4787-8e4e-a378528833f7.gif)
 
 
-## Technologies Used
+![calendar](https://user-images.githubusercontent.com/99847558/214485299-4b9835cb-6fc8-47c2-8653-674cbf9aa1da.gif)
+
+
+
+
+## Technologies Used:
 
 
 
