@@ -46,9 +46,7 @@ export default class EditForm extends React.Component {
 
   updateSubmit(event) {
     event.preventDefault();
-
     const { user } = this.context;
-
     const req = {
       method: 'PATCH',
       headers: {

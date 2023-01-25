@@ -1,5 +1,4 @@
 import React from 'react';
-
 import jwtDecode from 'jwt-decode';
 import Redirect from './components/redirect';
 import PageContainer from './components/page-container';

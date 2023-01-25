@@ -6,8 +6,6 @@ import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
 import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
-// eslint-disable-next-line no-unused-vars
-import IonDate from '../components/date-time-picker';
 
 export default class AddForm extends React.Component {
   constructor(props) {
@@ -115,6 +113,7 @@ export default class AddForm extends React.Component {
           </div>
           <div className="col-sm" />
         </div>
+
         <form className="row" id="eventId" onSubmit={this.handleSubmit}>
           <div className="form-holder">
             <div className="form-content">
@@ -238,17 +237,8 @@ export default class AddForm extends React.Component {
                       POST TO TIMELINE
                     </button>
                   </div>
-                </div>
-                <div className='row yy d-flex flex-wrap '>
-                  <div className='col d-flex'><h3 className='fs-5 title-descript-add-form text-left ps-1 xx'>Schedule Insead?</h3></div>
 
                 </div>
-                {/* <div className='row'>
-                  <div className='col'>
-                    <IonDate />
-
-                  </div>
-                </div> */}
 
               </div>
 

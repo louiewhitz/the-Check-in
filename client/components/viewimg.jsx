@@ -9,7 +9,6 @@ const img = {
   height: '20rem',
   objectFit: 'cover'
 };
-
 export default class ViewAllImages extends React.Component {
   constructor(props) {
     super(props);
@@ -38,7 +37,6 @@ export default class ViewAllImages extends React.Component {
         })
       )
       .catch(err => console.error('Dang, not this time!', err));
-
   }
 
   componentDidMount() {
@@ -59,7 +57,6 @@ export default class ViewAllImages extends React.Component {
 
   render() {
     const { user } = this.context;
-
     if (!user) {
       return <Redirect to="sign-in" />;
     }
@@ -87,7 +84,6 @@ export default class ViewAllImages extends React.Component {
                     return (
                       <div key={event.eventId} className='fix'>
                         <ViewPhoto
-
                   event={event}
                   loadEvents={this.loadEvents}
                 />
@@ -99,18 +95,12 @@ export default class ViewAllImages extends React.Component {
             </div>
             );
   }
-
 }
 function ViewPhoto(props) {
   const { photoUrl, eventId, title, event } = props.event;
 
   if (!event) {
-    <div className="container mt-nav">
-      <div className="row">
-        <h1 className="text-center timeline-color">IMAGES</h1>
-        <p>Sorry there are no images yet.</p>
-      </div>
-    </div>;
+    return null;
   }
 
   return (

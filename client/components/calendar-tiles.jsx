@@ -1,20 +1,18 @@
 
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo, useContext } from 'react';
 import AppContext from '../lib/app-context.js';
 import IonDate from './date-time-picker';
-import PropTypes from 'prop-types';
-import Toolbar from 'react-big-calendar/lib/Toolbar';
+
 import 'react-calendar/dist/Calendar.css';
-import { Calendar, dateFnsLocalizer, Views, DateLocalizer, Navigate } from 'react-big-calendar';
-import DatePicker from 'react-multi-date-picker';
+import { Calendar, dateFnsLocalizer } from 'react-big-calendar';
+
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
 import moment from 'moment';
-import TimePicker from 'react-multi-date-picker/plugins/time_picker';
+
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const locales = {
@@ -32,14 +30,9 @@ const localizer = dateFnsLocalizer({
 function MyCalendar() {
   const { user } = useContext(AppContext);
   const [events, setEvents] = useState([]);
-  const [newEvent, setNewEvent] = useState({ title: '', start: new Date(), end: '', startTime: '', endTime: '', timelineId: 1, user: user.username });
 
-  const [submit, setSubmitted] = useState(false);
   const [allEvents, setAllEvents] = useState(events);
-  function handleAddEvent(events, newEvent) {
-    setAllEvents({ ...allEvents, newEvent });
 
-  }
   useEffect(() => {
     fetch('/api/schedules', {
       headers: {
@@ -48,30 +41,53 @@ function MyCalendar() {
     })
       .then(response => response.json())
       .then(data => {
-        const allEvents = data;
+
+        const allEvents = data.map(event => {
+          return {
+            ...event,
+            start: new Date(event.start),
+            end: new Date(event.end)
+          };
+        });
         setAllEvents(allEvents);
       });
 
   }, []);
 
-  const { views, ...otherProps } = useMemo(() => ({
+  const { views } = useMemo(() => ({
     views: {
       month: true,
+      week: true,
+      day: true,
       agenda: true
     }
   }), []);
 
   function addEvent(event) {
     const newEvents = [...allEvents, event];
+
     setEvents(newEvents);
   }
 
   return (
+
     <div className='calendarApp'>
       <h1 className='timeline-color'>Calendar</h1>
       <h2 className='mb-3 timeline-color'>Add New Event</h2>
       <IonDate />
       <Calendar
+       formats={{
+         timeGutterFormat: (date, culture, dateFnsLocalizer) =>
+           date.getMinutes() > 0
+             ? ''
+             : dateFnsLocalizer.format(
+               date,
+               'h a',
+               culture
+             ),
+         dayFormat: 'ddd'
+       }}
+
       defaultDate={new Date()}
       components={{ CustomToolbar }}
       addEvent={addEvent}

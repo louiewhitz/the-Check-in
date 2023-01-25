@@ -12,14 +12,12 @@ export default class DeleteModal extends React.Component {
       userId: this.props.event.userId,
       show: false
     };
-
     this.handleDelete = this.handleDelete.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
   handleShow() {
-
     this.setState({
       show: true
     });
@@ -67,7 +65,6 @@ export default class DeleteModal extends React.Component {
         <Button onClick={this.handleShow} id="show-delete" className='my-0'>
           <RiDeleteBinFill
             size={25}
-
             style={{ fill: '#fa7199' }}
           />
         </Button>

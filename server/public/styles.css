@@ -83,24 +83,14 @@
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !important;
 }
 
-.yy {
-  border: 1px solid red;
-}
-
 .header {
   background-color: #6e0b64 !important;
-}
-
-.xx {
-  border: 1px solid black;
 }
 
 .input-picker > input {
   text-align: left !important;
   width: 100% !important;
   padding: 0.3rem 0 0 0.1rem !important;
-
-  /* padding: 0.235rem 0.45rem !important; */
   font-size: 1em !important;
   font-weight: 300 !important;
   line-height: 1.5 !important;
@@ -599,20 +589,8 @@ a {
 
 .calendar-container {
   display: flex;
-
-  /* align-items: center; */
   justify-content: center;
   flex-direction: column;
-}
-
-.placeholder-cal {
-  max-width: 50%;
-  padding: 10px 6.6667px;
-  background: none;
-  line-height: 16px;
-  color: #222;
-  border-radius: 8px;
-  box-shadow: 0 12px 24px rgb(0 0 0 / 20%);
 }
 
 .react-calendar {
@@ -635,7 +613,6 @@ a {
 
 #other,
 #title,
-#comment,
 #summary,
 #description {
   width: 100%;
