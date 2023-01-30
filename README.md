@@ -2,7 +2,7 @@
 ![check-in-logo_1030x495](https://user-images.githubusercontent.com/99847558/214488676-31653df9-f182-4acb-a351-098d92c020f4.png)
 
 # The Check-In
-Check-in is a full stack web application built using the PERN (PostgreSQL, Express.js, React.js, Node.js) stack. It allows users to share information and schedule events for people they care about, such as elderly relatives or friends. The app allows users to track and manage the schedule of care for those in their network, ensuring that everyone is informed and on the same page. 
+The Check-In is a full stack web application built using the PERN (PostgreSQL, Express.js, React.js, Node.js) stack. It allows users to share information and schedule events for people they care about, such as elderly relatives or friends. The app allows users to track and manage the schedule of care for those in their network, ensuring that everyone is informed and on the same page. 
 
 ### Try the live demo [here](https://the-check-in.louisawhitaker.com/)
 * Press **'Click to try!'** for quick sign in on sign-in page.
