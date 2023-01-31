@@ -12,9 +12,8 @@ export default class LoadUser extends React.Component {
     this.loadUsers = this.loadUsers.bind(this);
   }
 
-  loadUsers() {
+  async loadUsers() {
     const { userId } = this.context.user;
-
     const req = {
       method: 'POST',
       headers: { 'X-Access-Token': localStorage.getItem('auth-token') },
@@ -22,25 +21,22 @@ export default class LoadUser extends React.Component {
       body: JSON.stringify(this.state)
 
     };
-    fetch(`/api/events/users/${this.props.eventId}`, req)
-      .then(response => response.json())
-      .then(result => {
-        const thisusername = result[0].username;
-        const userid = result[0].userId;
-
-        const thisevent = this.props.eventId;
-
-        this.setState({
-          loading: false,
-          username: thisusername,
-          eventId: thisevent,
-          userId: userid
-
-        });
-      })
-      .catch(err => {
-        console.error('dang', err);
+    try {
+      const response = await fetch(`/api/events/users/${this.props.eventId}`, req);
+      const result = await response.json();
+      const thisusername = result[0].username;
+      const userid = result[0].userId;
+      const thisevent = this.props.eventId;
+      this.setState({
+        loading: false,
+        username: thisusername,
+        eventId: thisevent,
+        userId: userid
       });
+
+    } catch (err) {
+      console.error('dang', err);
+    }
   }
 
   componentDidMount() {

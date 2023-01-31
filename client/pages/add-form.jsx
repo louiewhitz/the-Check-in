@@ -85,9 +85,7 @@ export default class AddForm extends React.Component {
   }
 
   render() {
-
     const { user } = this.context;
-
     if (!user) {
       return <Redirect to="sign-in" />;
     }

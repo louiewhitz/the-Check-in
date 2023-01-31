@@ -9,7 +9,6 @@ export default class HomeBase extends React.Component {
     this.state = {
       user: null
     };
-
   }
 
   componentDidMount() {
@@ -19,13 +18,10 @@ export default class HomeBase extends React.Component {
   }
 
   render() {
-
     const { user } = this.context;
-
     if (!user) {
       return <Redirect to="sign-in" />;
     }
-
     return (
       <div className="container">
         <div className="container">

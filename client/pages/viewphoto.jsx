@@ -28,9 +28,7 @@ export default class AllPhotos extends React.Component {
         'X-Access-Token': localStorage.getItem('auth-token')
       },
       user
-
     };
-
     fetch(`/api/events/${this.props.eventId}`, req)
 
       .then(result => {

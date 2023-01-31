@@ -28,26 +28,25 @@ export default class Timeline extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
-
   }
 
-  loadEvents() {
-    fetch('/api/events', {
-      headers: {
-        'X-Access-Token': localStorage.getItem('auth-token')
-      }
-    })
-      .then(res => res.json())
-      .then(events =>
-        this.setState({
-          events,
-          loading: false
-        })
-      )
-      .catch(err => {
-        console.error('Dang, not this time!', err);
-        this.setState({ networkError: true });
+  async loadEvents() {
+    this.setState({ loading: true });
+    try {
+      const response = await fetch('/api/events', {
+        headers: {
+          'X-Access-Token': localStorage.getItem('auth-token')
+        }
       });
+      const events = await response.json();
+      this.setState({
+        events,
+        loading: false
+      });
+    } catch (err) {
+      console.error('Dang, not this time!', err);
+      this.setState({ networkError: true });
+    }
   }
 
   componentDidMount() {

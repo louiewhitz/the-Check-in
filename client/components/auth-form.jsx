@@ -37,7 +37,7 @@ export default class AuthForm extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     const { action } = this.props;
     const req = {
@@ -47,25 +47,23 @@ export default class AuthForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     };
-    fetch(`/api/auth/${action}`, req)
-      .then(res => res.json())
-      .then(result => {
-        if (action === 'sign-up') {
-          this.resetState();
-          window.location.hash = 'sign-in';
-        } else if (result.user && result.token) {
-          this.resetState();
-          this.props.onSignIn(result);
-          window.location.hash = '';
-
-        } else {
-          this.setState({ signInWasInvalid: true, loading: false });
-        }
-      })
-      .catch(error => {
-        console.error('Sorry, error', error);
-        this.setState({ networkError: true, loading: false });
-      });
+    try {
+      const res = await fetch(`/api/auth/${action}`, req);
+      const result = await res.json();
+      if (action === 'sign-up') {
+        this.resetState();
+        window.location.hash = 'sign-in';
+      } else if (result.user && result.token) {
+        this.resetState();
+        this.props.onSignIn(result);
+        window.location.hash = '';
+      } else {
+        this.setState({ signInWasInvalid: true, loading: false });
+      }
+    } catch (error) {
+      console.error('Sorry, error', error);
+      this.setState({ networkError: true, loading: false });
+    }
   }
 
   signedIn(event) {

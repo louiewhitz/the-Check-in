@@ -35,46 +35,46 @@ export default class IonDate extends React.Component {
     window.location.reload();
   }
 
-  handleSubmit(event) {
+  handleSubmit = async event => {
     event.preventDefault();
     const { user } = this.context;
-
     const startDate = this.state.start.from;
     const endDate = this.state.end.to;
-
     const endYear = endDate.year;
     const endDay = endDate.day;
     const endMonth = endDate.month - 1;
     const endMinute = endDate.minute;
     const endHour = endDate.hour;
     const end = new Date(endYear, endMonth, endDay, endHour, endMinute);
-
     const startYear = startDate.year;
     const startDay = startDate.day;
     const startMonth = startDate.month - 1;
     const startMinute = startDate.minute;
     const startHour = startDate.hour;
     const start = new Date(startYear, startMonth, startDay, startHour, startMinute);
-
     const timelineId = this.state.timelineId;
     const title = this.state.title;
     const body = { title, start, end, timelineId };
-
-    fetch('/api/schedules/schedule-time', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Access-Token': localStorage.getItem('auth-token')
-      },
-      user,
-      body: JSON.stringify(body)
-    })
-      .then(res => res.json())
-      .then(() => {
-        this.setState({ loading: false });
-        window.location.hash = '#calendar';
+    try {
+      const res = await fetch('/api/schedules/schedule-time', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Access-Token': localStorage.getItem('auth-token')
+        },
+        user,
+        body: JSON.stringify(body)
       });
-  }
+      const data = await res.json();
+      this.setState({
+        loading: false,
+        data
+      });
+      window.location.hash = '#calendar';
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   render() {
     return (

@@ -44,29 +44,30 @@ export default class EditForm extends React.Component {
     });
   }
 
-  updateSubmit(event) {
-    event.preventDefault();
-    const { user } = this.context;
-    const req = {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Access-Token': localStorage.getItem('auth-token')
-      },
-      user,
-      body: JSON.stringify(this.state)
-    };
+  async updateSubmit(event) {
+    try {
+      event.preventDefault();
+      const { user } = this.context;
+      const req = {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Access-Token': localStorage.getItem('auth-token')
+        },
+        user,
+        body: JSON.stringify(this.state)
+      };
+      const response = await fetch(`/api/events/${this.props.eventId}`, req);
+      const result = await response.json();
 
-    fetch(`/api/events/${this.props.eventId}`, req)
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          show: false
-        });
-        this.props.loadEvents();
-      })
-
-      .catch(err => console.error(err));
+      this.setState({
+        show: false,
+        result
+      });
+      this.props.loadEvents();
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   render() {
