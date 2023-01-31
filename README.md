@@ -8,9 +8,6 @@ The Check-In is a full stack web application built using the PERN (PostgreSQL, E
 ### Try the live demo [here](https://the-check-in.louisawhitaker.com/)
 * Press **'Click to try!'** for quick sign in on sign-in page.
 
-### Inspiration
-As someone who was struck by how many elderly may have felt very alone or were forgotten during the pandemic, I felt that I should create an app that allowed users to easily communicate on a platform regarding contact with said loved one.
-As a daughter of a father suffering from Alzheimers, and all my siblings scattered, I found this app could help any family keep track of thier interaction's with a loved one in need. It just takes a little organization. 
 
 ### Web App in Action:
 ![add-event](https://user-images.githubusercontent.com/99847558/214485012-db73c2dd-3dfb-4f3c-9e4b-9aaf02e5bbd9.gif)
@@ -21,11 +18,7 @@ As a daughter of a father suffering from Alzheimers, and all my siblings scatter
 ![calendar](https://user-images.githubusercontent.com/99847558/214485299-4b9835cb-6fc8-47c2-8653-674cbf9aa1da.gif)
 
 
-
-
 ## Technologies Used:
-
-
 
 * React
 * Node.js
@@ -54,6 +47,12 @@ As a daughter of a father suffering from Alzheimers, and all my siblings scatter
 * User can delete event
 * User can secure user authentication using JsonWebToken and Argon2
 * User can store images on AWS-S3
+
+## Future Features
+* A clock depicting the days that have passed without contact
+* Reminders when scheduled events are coming up
+* Optional reminder when user hasn't made contact in a while
+* Adding more than one timeline per user
 
 ## Getting Started
 
@@ -134,6 +133,9 @@ We welcome contributions to this project. If you are interested in contributing,
 - Node.js
 - AWS-S3 bucket
 
+### Inspiration
+As someone who was struck by how many elderly may have felt very alone or were forgotten during the pandemic, I felt that I should create an app that allowed users to easily communicate on a platform regarding contact with said loved one.
+As a daughter of a father suffering from Alzheimers, and all my siblings scattered, I found this app could help any family keep track of thier interaction's with a loved one in need. It just takes a little organization. 
 
 ### License
 The Check-In is licensed under the [MIT License](https://opensource.org/licenses/MIT).
