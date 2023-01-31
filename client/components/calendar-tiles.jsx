@@ -34,14 +34,14 @@ function MyCalendar() {
   const [allEvents, setAllEvents] = useState(events);
 
   useEffect(() => {
-    fetch('/api/schedules', {
-      headers: {
-        'X-Access-Token': localStorage.getItem('auth-token')
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/schedules', {
+          headers: {
+            'X-Access-Token': localStorage.getItem('auth-token')
+          }
+        });
+        const data = await response.json();
         const allEvents = data.map(event => {
           return {
             ...event,
@@ -50,8 +50,11 @@ function MyCalendar() {
           };
         });
         setAllEvents(allEvents);
-      });
-
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
   }, []);
 
   const { views } = useMemo(() => ({

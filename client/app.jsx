@@ -34,7 +34,6 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       const newRoute = window.location.hash;
       const parsedRoute = parseRoute(newRoute);
-
       this.setState({ route: parsedRoute });
     });
     const token = window.localStorage.getItem('auth-token');

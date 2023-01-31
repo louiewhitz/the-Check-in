@@ -30,7 +30,7 @@ export default class DeleteModal extends React.Component {
     });
   }
 
-  handleDelete(event) {
+  handleDelete = async event => {
     const { user } = this.context;
     event.preventDefault();
     const req = {
@@ -41,17 +41,18 @@ export default class DeleteModal extends React.Component {
       },
       user
     };
-
-    fetch(`/api/events/delete/${this.props.eventId}`, req)
-      .then(response => response.json())
-      .then(result => {
-        this.setState({
-          show: false
-        });
-        this.props.loadEvents();
-      })
-      .catch(err => console.error(err));
-  }
+    try {
+      const response = await fetch(`/api/events/delete/${this.props.eventId}`, req);
+      const result = await response.json();
+      this.setState({
+        show: false,
+        result
+      });
+      this.props.loadEvents();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   render() {
     const { show, userId } = this.state;

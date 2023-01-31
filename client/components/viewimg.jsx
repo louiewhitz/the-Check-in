@@ -22,21 +22,22 @@ export default class ViewAllImages extends React.Component {
     this.loadEvents = this.loadEvents.bind(this);
   }
 
-  loadEvents() {
-    this.setState({ loading: true });
-    fetch('/api/events', {
-      headers: {
-        'X-Access-Token': localStorage.getItem('auth-token')
-      }
-    })
-      .then(res => res.json())
-      .then(events =>
-        this.setState({
-          events,
-          loading: false
-        })
-      )
-      .catch(err => console.error('Dang, not this time!', err));
+  async loadEvents() {
+    try {
+      this.setState({ loading: true });
+      const response = await fetch('/api/events', {
+        headers: {
+          'X-Access-Token': localStorage.getItem('auth-token')
+        }
+      });
+      const events = await response.json();
+      this.setState({
+        events,
+        loading: false
+      });
+    } catch (err) {
+      console.error('Dang, not this time!', err);
+    }
   }
 
   componentDidMount() {
