@@ -13,5 +13,7 @@ insert into "schedules" ("title", "start", "timelineId", "end")
 values('Meeting with family, everyone get ready!', '2022-12-24T09:00:00',
   
   1,
-  '2022-12-24T17:00:00')
+  '2022-12-24T17:00:00');
 
+insert into "counts" ("count")
+values(0);

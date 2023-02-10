@@ -62,6 +62,14 @@ CREATE TABLE "public"."timelines" (
   OIDS=FALSE
 );
 
+CREATE TABLE "public"."counts" (
+	"countId" serial NOT NULL,
+	"count" integer NOT NULL,
+	CONSTRAINT "counts_pk" PRIMARY KEY ("countId")
+) WITH (
+  OIDS=FALSE
+);
+
 ALTER TABLE "events" ADD CONSTRAINT "events_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 ALTER TABLE "events" ADD CONSTRAINT "events_fk1" FOREIGN KEY ("eventTypeId") REFERENCES "eventTypes"("eventTypeId");
 ALTER TABLE "events" ADD CONSTRAINT "events_fk2" FOREIGN KEY ("timelineId") REFERENCES "timelines"("timelineId");

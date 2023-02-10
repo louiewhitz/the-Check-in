@@ -82,6 +82,13 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/count', (req, res) => {
+  db.query('SELECT count FROM counts', (err, result) => {
+    if (err) throw err;
+    res.json(result.rows[0]);
+  });
+});
+
 app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
   // console.log('req.file:', req.file);
   // https://www.npmjs.com/package/multer-s3#file-information
