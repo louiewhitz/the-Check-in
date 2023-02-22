@@ -59,7 +59,7 @@ export default class Header extends React.Component {
             <div className="row">
               <div className="col">
                 <h1 className="text-center navbar-brand fs-1 fw-bold">
-                  <span className='timer'>0</span>The Check-in
+                  <span className='circle-countdown'>0</span>The Check-in
                 </h1>
               </div>
             </div>
