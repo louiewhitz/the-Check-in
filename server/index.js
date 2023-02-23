@@ -82,13 +82,18 @@ app.post('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/count', (req, res) => {
-  db.query('SELECT count FROM counts', (err, result) => {
-    if (err) throw err;
-    res.json(result.rows[0]);
-  });
+app.get('/api/events/createdAt', (req, res, next) => {
+  const sql = `
+    select "createdAt"
+      from "events"
+      order by "createdAt" desc LIMIT 1
+  `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
 });
 
+// ORDER BY createdAt DESC LIMIT 1
 app.post('/api/uploads', uploadsMiddleware, (req, res, next) => {
   // console.log('req.file:', req.file);
   // https://www.npmjs.com/package/multer-s3#file-information

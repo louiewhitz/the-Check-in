@@ -1,5 +1,6 @@
 import React from 'react';
 import AppContext from '../lib/app-context';
+import EventCreatedAt from './counter';
 export default class Header extends React.Component {
   render() {
     const { user, handleSignOut } = this.context;
@@ -57,9 +58,11 @@ export default class Header extends React.Component {
               </div>
             </div>
             <div className="row">
+              <div className="col">  <span className='circle-countdown'><EventCreatedAt /> </span></div>
               <div className="col">
+
                 <h1 className="text-center navbar-brand fs-1 fw-bold">
-                  <span className='timer'>0</span>The Check-in
+                  The Check-in
                 </h1>
               </div>
             </div>
