@@ -1,22 +1,30 @@
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// function count() {
-//   const [count, setCount] = useState(0);
+function EventCreatedAt() {
+  const [daysSinceCreated, setDaysSinceCreated] = useState('');
 
-//   useEffect(() => {
-//     async function fetchCount() {
-//       const response = await fetch('/api/count');
-//       const data = await response.json();
-//       setCount(data.count);
-//     }
-//     fetchCount();
-//   }, []);
+  useEffect(() => {
+    fetch('/api/events/createdAt')
+      .then(response => response.json())
+      .then(data => {
+        setDaysSinceCreated(getDaysSinceCreated(data[0].createdAt));
+      })
+      .catch(error => console.error(error));
+  }, []);
 
-//   return (
-//     <nav>
-//       <h1>Count: {count}</h1>
-//     </nav>
-//   );
-// }
+  function getDaysSinceCreated(createdAt) {
+    const now = new Date();
+    const createdAtDate = new Date(createdAt);
+    const diffInMs = now.getTime() - createdAtDate.getTime();
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    return Math.floor(diffInDays);
+  }
 
-// export default count;
+  return (
+    <div>
+      <p className='timer'>{daysSinceCreated}</p>
+    </div>
+  );
+}
+
+export default EventCreatedAt;
