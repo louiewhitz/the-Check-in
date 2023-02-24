@@ -21,9 +21,7 @@ function EventCreatedAt() {
   }
 
   return (
-    <div>
-      <p className='timer'>{daysSinceCreated}</p>
-    </div>
+    <p className='timer'>{daysSinceCreated}</p>
   );
 }
 

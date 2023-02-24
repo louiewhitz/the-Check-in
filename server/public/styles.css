@@ -297,16 +297,18 @@ input::-webkit-calendar-picker-indicator {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  font-family: "Alegreya Sans SC", sans-serif;
-  box-shadow: 0 0 25px 5px rgb(245, 213, 28);
-  width: 1.5em;
-  height: 1.5em;
+
+  /* font-family: "Alegreya Sans SC", sans-serif; */
+  box-shadow: 0 0 25px 5px rgb(250, 213, 4);
+  width: 2em;
+  height: 2em;
   border-radius: 100%;
-  color: rgb(243, 247, 10);
-  background-color: #d4c44d;
+  color: rgb(195, 15, 6);
+  background-color: #fbfbfa;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 2em;
   padding: 1rem;
+  border: 2px solid rgb(126, 8, 8);
 }
 
 .animated-icon2 {
