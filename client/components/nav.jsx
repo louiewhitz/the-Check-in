@@ -58,8 +58,8 @@ export default class Header extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col">  <span className='circle-countdown'><EventCreatedAt /> </span></div>
-              <div className="col">
+              <div className="col d-flex align-items-center"><EventCreatedAt /></div>
+              <div className="col d-felx align-items-center">
 
                 <h1 className="text-center navbar-brand fs-1 fw-bold">
                   The Check-in
