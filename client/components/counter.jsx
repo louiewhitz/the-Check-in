@@ -21,7 +21,7 @@ function EventCreatedAt() {
   }
 
   return (
-    <p className='timer'>{daysSinceCreated}</p>
+    <p className='timer'><span className="timer-font">{daysSinceCreated}</span></p>
   );
 }
 
