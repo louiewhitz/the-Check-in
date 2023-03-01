@@ -8,7 +8,7 @@ import EventType from '../components/eventtypes';
 import EditForm from '../components/edit-modal';
 import DeleteModal from '../components/delete';
 import AllPhotos from './viewphoto';
-import { Button } from 'react-bootstrap';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import NetError from '../components/network-error';
 import LoadingSpinner from '../components/loading-spinner';
 import Axios from 'axios';
@@ -25,9 +25,11 @@ export default class Timeline extends React.Component {
       loading: true,
       networkError: false,
       user: null
+
     };
     this.handleClick = this.handleClick.bind(this);
     this.loadEvents = this.loadEvents.bind(this);
+
   }
 
   async loadEvents() {
@@ -81,14 +83,17 @@ export default class Timeline extends React.Component {
               </div>
               <div className="row d-flex justify-content-evenly">
                 <div className="col text-end">
+
                   <a href="#addform" id="addhref">
                     <IoAddCircle size={150} className="icon-shadow"/>
                   </a>
+
                 </div>
                 <div className="col text-start">
                   <a href="#calendar">
                     <IoCalendarSharp size={150} className="icon-shadow" />
                   </a>
+
                 </div>
               </div>
 
@@ -100,14 +105,22 @@ export default class Timeline extends React.Component {
               <h1 className="text-center timeline-color">Timeline of Events </h1>
               <div className="row d-flex justify-content-evenly">
                 <div className="col text-end">
-                  <a href="#addform" id="addhref">
-                    <IoAddCircle size={150} className="icon-shadow"/>
-                  </a>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Add an Event</Tooltip>}>
+                    <a href="#addform" id="addhref">
+                      <IoAddCircle size={150} className="icon-shadow"/>
+                    </a>
+                  </OverlayTrigger>
                 </div>
                 <div className="col text-start">
-                  <a href="#calendar">
-                    <IoCalendarSharp size={150} className="icon-shadow" />
-                  </a>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Schedule an Event</Tooltip>}>
+                    <a href="#calendar">
+                      <IoCalendarSharp size={150} className="icon-shadow" />
+                    </a>
+                  </OverlayTrigger>
                 </div>
               </div>
               <section id="timeline">

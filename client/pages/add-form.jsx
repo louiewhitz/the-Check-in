@@ -6,6 +6,7 @@ import { IoMdPeople, IoMdRestaurant } from 'react-icons/io';
 import { BiCameraMovie } from 'react-icons/bi';
 import LoadingSpinner from '../components/loading-spinner';
 import NetError from '../components/network-error';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default class AddForm extends React.Component {
   constructor(props) {
@@ -35,7 +36,6 @@ export default class AddForm extends React.Component {
   }
 
   onFileChange(event) {
-
     this.setState({
       file: URL.createObjectURL(event.target.files[0])
     });
@@ -47,12 +47,10 @@ export default class AddForm extends React.Component {
   }
 
   handleSubmit(event) {
-
     event.preventDefault();
     if (!this.state.eventTypeId) {
       this.setState({ buttonError: true });
     } else {
-
       this.setState({ loading: true });
 
       const formData = new FormData();
@@ -114,76 +112,100 @@ export default class AddForm extends React.Component {
         <form className="row" id="eventId" onSubmit={this.handleSubmit}>
           <div className="form-holder">
             <div className="form-content">
-
               <div className="">
-
                 <div className="col d-flex justify-content-evenly flex-wrap">
-                  <button
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Active hangout</Tooltip>}>
+                    <button
                     className="circle-one btn btn-hover border rounded-circle btn-active d-flex p-2"
                     data-set={this.state.eventTypeId}
                     type="button"
                     onClick={() => this.eventType(1)}>
-                    <IoMdPeople
+                      <IoMdPeople
                       size={60}
                       style={{ fill: 'pink' }}
                       className="pb-1"
                     />
-                  </button>
-                  <button
+                    </button>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Movie</Tooltip>}>
+                    <button
                     className="circle-three btn btn-hover border rounded-circle btn-active d-flex p-1"
                     data-set={this.state.eventTypeId}
                     type="button"
                     onClick={() => this.eventType(2)}>
-                    <BiCameraMovie
+                      <BiCameraMovie
                       size={60}
                       style={{ fill: '#FFA500' }}
                       className="ps-1"
                     />
-                  </button>
-                  <button
+                    </button>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Phonecall</Tooltip>}>
+                    <button
                     className="circle-four border btn btn-hover border-3 rounded-circle btn-active d-flex p-2"
                     data-set={this.state.eventTypeId}
                     type="button"
                     onClick={() => this.eventType(3)}>
-                    <FaPhoneAlt
+                      <FaPhoneAlt
                       size={47}
                       style={{ fill: 'green' }}
                       className="pt-1"
                     />
-                  </button>
-                  <button
+                    </button>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Meal</Tooltip>}>
+                    <button
                     className="circle-five btn btn-active btn-hover border btn  rounded-circle btn-active d-flex p-2"
                     data-set={this.state.eventTypeId}
                     type="button"
                     onClick={() => this.eventType(4)}>
-                    <IoMdRestaurant
+                      <IoMdRestaurant
                       name="eventTypeId"
                       size={50}
                       style={{ fill: '#52003a' }}
                     />
-                  </button>
-                  <button
+                    </button>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Doctor</Tooltip>}>
+                    <button
                     className="circle-two btn-hover border btn-active rounded-circle btn-active d-flex p-2"
                     data-set={this.state.eventTypeId}
                     type="button"
                     onClick={() => this.eventType(5)}>
-                    <FaUserNurse size={50} style={{ fill: '#00008B' }} />
-                  </button>
-                  <button
-                    className="circle-six btn btn-hover border rounded-circle btn-active d-flex justify-content-center align-items-center"
-                    onClick={() => this.eventType(6)}
-                    type="button"
-                    data-set={this.state.eventTypeId}>
-                    <p className="font-bold fs-4 pt-3 fw-bold otherText text-warning">
-                      Other
-                    </p>
-                  </button>
+                      <FaUserNurse size={50} style={{ fill: '#00008B' }} />
+                    </button>
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Something else</Tooltip>}>
+                    <button
+                      className="circle-six btn btn-hover border rounded-circle btn-active d-flex justify-content-center align-items-center"
+                      onClick={() => this.eventType(6)}
+                      type="button"
+                      data-set={this.state.eventTypeId}>
+                      <p className="font-bold fs-4 pt-3 fw-bold otherText text-warning">
+                        Other
+                      </p>
+                    </button>
+                  </OverlayTrigger>
                 </div>
               </div>
               <div className="row">
-
                 <div className="form-group col mt-3 d-flex">
-                  <label htmlFor="title" className="d-block fs-5 col-form-label add-form-title " />
+                  <label
+                    htmlFor="title"
+                    className="d-block fs-5 col-form-label add-form-title "
+                  />
                   <input
                     id="title"
                     required
@@ -191,7 +213,7 @@ export default class AddForm extends React.Component {
                     type="text"
                     onChange={this.onChange}
                     value={this.state.title}
-                    placeholder='Add a title...'
+                    placeholder="Add a title..."
                     className="form-control border rounded bg-light px-1.2 py-2 font-bold text-dark shadow"
                   />
                 </div>
@@ -227,25 +249,24 @@ export default class AddForm extends React.Component {
                     />
                   </div>
                   <div className="d-flex justify-content-end">
-                    { this.state.buttonError && <div className="col-sm button-error">Please select an event type above.</div> }
+                    {this.state.buttonError && (
+                      <div className="col-sm button-error">
+                        Please select an event type above.
+                      </div>
+                    )}
                     <button
                       className="btn btn-info text-dark btn-md mt-1 shadow pt-2  rounded"
-                      type="submit" required>
+                      type="submit"
+                      required>
                       POST TO TIMELINE
                     </button>
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </form>
       </div>
-
     );
   }
 }

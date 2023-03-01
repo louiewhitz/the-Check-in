@@ -9,6 +9,7 @@ export default class Header extends React.Component {
         <nav className="navbar navbar-dark color-nav">
           <div className="container">
             <div className="row">
+
               <div className="col">
                 <div className="dropdown">
                   <button
@@ -54,17 +55,21 @@ export default class Header extends React.Component {
                       </a>
                     </li>
                   </ul>
+
                 </div>
+
               </div>
             </div>
-            <div className="row">
-              <div className="col d-flex align-items-center"><EventCreatedAt /></div>
-              <div className="col d-felx align-items-center">
+            <div className="row pad-left">
+
+              <div className="col d-flex align-items-center justify-content-center d-inline-flex pe-0"><p className='days justify-content-center align-items-center'>Counting days<span className='star'>&#x2600;</span> </p><EventCreatedAt /></div>
+              <div className="col d-felx align-items-center ps-0">
 
                 <h1 className="text-center navbar-brand fs-1 fw-bold">
                   The Check-in
                 </h1>
               </div>
+
             </div>
             <div className="row">
               <div className="col">

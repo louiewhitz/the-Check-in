@@ -281,6 +281,24 @@ input .time > input {
   color: rgb(238, 245, 20);
 }
 
+.days {
+  color: white;
+  font-size: 1.2em;
+  font-family: "Moon Dance", cursive;
+
+  /* font-family: Handlee, cursive; */
+}
+
+.star {
+  color: white;
+  text-shadow: #fc0 1px 0 10px;
+  font-size: 0.6em;
+}
+
+.pad-left {
+  padding-left: 0 !important;
+}
+
 input::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
@@ -291,6 +309,51 @@ input::-webkit-calendar-picker-indicator {
 
 .object-fit {
   object-fit: cover !important;
+}
+
+.sphere {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%; /* to make it a circle */
+  width: 3em;
+  height: 3em;
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      #f8d93f,
+      #403601
+    ); /* this is the radial gradient I was talking about */
+}
+
+.timer-font {
+  font-size: 1.5em;
+
+  /* color: #f8ff28; */
+
+  /* color: #B7CAC7; */
+  font-family: Gloock, serif;
+  background: #000;
+  background-color: #000;
+  background-image:
+    linear-gradient(
+      0deg,
+      rgba(183, 110, 121, 1) 15%,
+      rgba(155, 85, 96, 1) 25%,
+      rgba(128, 61, 73, 1) 40%,
+      rgba(101, 37, 50, 1) 50%,
+      rgba(75, 12, 29, 1) 65%,
+      rgba(51, 0, 3, 1) 75%,
+      rgba(17, 0, 0, 1) 90%,
+      rgba(0, 0, 0, 1) 100%
+    );
+  background-size: 100%;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -moz-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .timer {
@@ -307,11 +370,6 @@ input::-webkit-calendar-picker-indicator {
   font-weight: bold;
   padding: 1rem;
   border: 4px solid rgb(245, 245, 84);
-}
-
-.timer-font {
-  font-size: 1.7em;
-  color: rgb(251, 246, 158);
 }
 
 .animated-icon2 {

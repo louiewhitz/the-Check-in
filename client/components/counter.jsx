@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 function EventCreatedAt() {
-  const [daysSinceCreated, setDaysSinceCreated] = useState('');
+  const [daysSinceCreated, setDaysSinceCreated] = useState('')
+  ;
 
   useEffect(() => {
     fetch('/api/events/createdAt')
@@ -21,7 +22,7 @@ function EventCreatedAt() {
   }
 
   return (
-    <p className='timer'><span className="timer-font">{daysSinceCreated}</span></p>
+    <div className='sphere'><span className="timer-font">{daysSinceCreated}</span></div>
   );
 }
 
