@@ -334,7 +334,7 @@ input::-webkit-calendar-picker-indicator {
   background-image:
     linear-gradient(
       0deg,
-      rgba(183, 110, 121, 1) 15%,
+      rgb(206, 124, 137) 15%,
       rgba(155, 85, 96, 1) 25%,
       rgba(128, 61, 73, 1) 40%,
       rgba(101, 37, 50, 1) 50%,
