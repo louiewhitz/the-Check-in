@@ -328,6 +328,10 @@ input::-webkit-calendar-picker-indicator {
 
 .timer-font {
   font-size: 1.5em;
+
+  /* color: #f8ff28; */
+
+  /* color: #B7CAC7; */
   font-family: Gloock, serif;
   background: #000;
   background-color: #000;
