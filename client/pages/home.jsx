@@ -2,6 +2,7 @@ import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default class HomeBase extends React.Component {
   constructor(props) {
@@ -30,15 +31,30 @@ export default class HomeBase extends React.Component {
         </div>
 
         <div className="row d-flex justify-content-evenly">
+
           <div className="col text-end">
-            <a href="#addform">
-              <IoAddCircle size={200} className="icon-shadow"/>
-            </a>
+            <OverlayTrigger
+                    placement="top"
+
+                    overlay={<Tooltip>Add an Event</Tooltip>}>
+
+              <a href="#addform">
+
+                <IoAddCircle size={200} className="icon-shadow"/>
+
+              </a>
+            </OverlayTrigger>
+
           </div>
+
           <div className="col text-start">
-            <a href="#calendar">
-              <IoCalendarSharp size={200} className="icon-shadow" />
-            </a>
+            <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>Schedule an Event</Tooltip>}>
+              <a href="#calendar">
+                <IoCalendarSharp size={200} className="icon-shadow" />
+              </a>
+            </OverlayTrigger>
           </div>
         </div>
       </div>
