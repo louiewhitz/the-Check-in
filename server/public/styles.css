@@ -333,9 +333,7 @@ input::-webkit-calendar-picker-indicator {
 
   /* color: #B7CAC7; */
   font-family: Gloock, serif;
-  background: linear-gradient(#fb0387, #4f062d);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #b40864;
 }
 
 .timer {
