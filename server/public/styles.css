@@ -333,27 +333,9 @@ input::-webkit-calendar-picker-indicator {
 
   /* color: #B7CAC7; */
   font-family: Gloock, serif;
-  background: #000;
-  background-color: #000;
-  background-image:
-    linear-gradient(
-      0deg,
-      rgba(183, 110, 121, 1) 15%,
-      rgba(155, 85, 96, 1) 25%,
-      rgba(128, 61, 73, 1) 40%,
-      rgba(101, 37, 50, 1) 50%,
-      rgba(75, 12, 29, 1) 65%,
-      rgba(51, 0, 3, 1) 75%,
-      rgba(17, 0, 0, 1) 90%,
-      rgba(0, 0, 0, 1) 100%
-    );
-  background-size: 100%;
-  background-repeat: repeat;
+  background: linear-gradient(#fb0387, #4f062d);
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  -moz-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .timer {
