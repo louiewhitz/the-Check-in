@@ -1,3 +1,6 @@
+/* stylelint-disable declaration-colon-newline-after */
+/* stylelint-disable string-quotes */
+
 * {
   box-sizing: border-box;
 }
@@ -32,7 +35,7 @@
   color: #000;
   text-align: center;
   font: 32px Arial, sans-serif;
-  font-family: "IBM Plex Mono", monospace !important;
+  font-family: 'IBM Plex Mono', monospace !important;
 }
 
 .style {
@@ -205,14 +208,14 @@ div.bg-light {
 }
 
 .no-events {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-weight: 800;
   color: rgb(86, 5, 5);
   text-shadow: 2px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .timeline-color {
-  font-family: "Alegreya Sans SC", sans-serif;
+  font-family: 'Alegreya Sans SC', sans-serif;
   text-shadow: 6px 6px 6px rgba(120, 118, 118, 0.648);
   color: rgb(86, 5, 5);
 }
@@ -229,7 +232,7 @@ div.bg-light {
   font-weight: 900 !important;
   background: none !important;
   font-size: 1rem !important;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 /*
@@ -276,7 +279,7 @@ input .time > input {
 }
 
 .navbar-brand {
-  font-family: "Moon Dance", cursive;
+  font-family: 'Moon Dance', cursive;
   font-size: 2em;
   color: rgb(238, 245, 20);
 }
@@ -284,7 +287,7 @@ input .time > input {
 .days {
   color: white;
   font-size: 1.2em;
-  font-family: "Moon Dance", cursive;
+  font-family: 'Moon Dance', cursive;
 
   /* font-family: Handlee, cursive; */
 }
@@ -318,36 +321,33 @@ input::-webkit-calendar-picker-indicator {
   border-radius: 50%; /* to make it a circle */
   width: 3em;
   height: 3em;
-  background:
-    radial-gradient(
-      circle at 30% 30%,
-      #f8d93f,
-      #403601
-    ); /* this is the radial gradient I was talking about */
+  background: radial-gradient(
+    circle at 30% 30%,
+    #f8d93f,
+    #403601
+  ); /* this is the radial gradient I was talking about */
 }
 
+/* stylelint-disable */
 .timer-font {
   font-size: 1.5em;
-  font-family: Gloock, serif;
-  background: #000;
-  background-color: #000;
-  background-image:
-    linear-gradient(
-      0deg,
-      rgba(183, 110, 121, 1) 15%,
-      rgba(155, 85, 96, 1) 25%,
-      rgba(128, 61, 73, 1) 40%,
-      rgba(101, 37, 50, 1) 50%,
-      rgba(75, 12, 29, 1) 65%,
-      rgba(51, 0, 3, 1) 75%,
-      rgba(17, 0, 0, 1) 90%,
-      rgba(0, 0, 0, 1) 100%
-    );
+  font-family: 'Gloock', serif;
+  background-image: linear-gradient(
+    0deg,
+    rgba(183, 110, 121, 1) 15%,
+    rgba(155, 85, 96, 1) 25%,
+    rgba(128, 61, 73, 1) 40%,
+    rgba(101, 37, 50, 1) 50%,
+    rgba(75, 12, 29, 1) 65%,
+    rgba(51, 0, 3, 1) 75%,
+    rgba(17, 0, 0, 1) 90%,
+    rgba(0, 0, 0, 1) 100%
+  );
   background-size: 100%;
   background-repeat: repeat;
-  background-clip: text;
+  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 }
 
@@ -459,110 +459,101 @@ a {
 }
 
 .btn-hover.color-1 {
-  background-image:
-    linear-gradient(
-      to right,
-      #25aae1,
-      #40e495,
-      #30dd8a,
-      #2bb673
-    );
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #40e495,
+    #30dd8a,
+    #2bb673
+  );
   box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
 }
 
 .btn-hover.color-2 {
-  background-image:
-    linear-gradient(
-      to right,
-      #f5ce62,
-      #e43603,
-      #fa7199,
-      #e85a19
-    );
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
   box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
 }
 
 .btn-hover.color-3 {
-  background-image:
-    linear-gradient(
-      to right,
-      #667eea,
-      #764ba2,
-      #6b8dd6,
-      #8e37d7
-    );
+  background-image: linear-gradient(
+    to right,
+    #667eea,
+    #764ba2,
+    #6b8dd6,
+    #8e37d7
+  );
   box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
 }
 
 .btn-hover.color-4 {
-  background-image:
-    linear-gradient(
-      to right,
-      #fc6076,
-      #ff9a44,
-      #ef9d43,
-      #e75516
-    );
+  background-image: linear-gradient(
+    to right,
+    #fc6076,
+    #ff9a44,
+    #ef9d43,
+    #e75516
+  );
   box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
 }
 
 .btn-hover.color-5 {
-  background-image:
-    linear-gradient(
-      to right,
-      #0ba360,
-      #3cba92,
-      #30dd8a,
-      #2bb673
-    );
+  background-image: linear-gradient(
+    to right,
+    #0ba360,
+    #3cba92,
+    #30dd8a,
+    #2bb673
+  );
   box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
 }
 
 .btn-hover.color-6 {
-  background-image:
-    linear-gradient(
-      to right,
-      #009245,
-      #fcee21,
-      #00a8c5,
-      #d9e021
-    );
+  background-image: linear-gradient(
+    to right,
+    #009245,
+    #fcee21,
+    #00a8c5,
+    #d9e021
+  );
   box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
 }
 
 .btn-hover.color-9 {
-  background-image:
-    linear-gradient(
-      to right,
-      #25aae1,
-      #4481eb,
-      #04befe,
-      #3f86ed
-    );
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #3f86ed
+  );
   box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
 }
 
 .btn-hover.color-10 {
-  background-image:
-    linear-gradient(
-      to right,
-      #ed6ea0,
-      #ec8c69,
-      #f7186a,
-      #fbb03b
-    );
+  background-image: linear-gradient(
+    to right,
+    #ed6ea0,
+    #ec8c69,
+    #f7186a,
+    #fbb03b
+  );
   box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
 }
 
 .btn-hover.color-11 {
-  background-image:
-    linear-gradient(
-      to right,
-      #eb3941,
-      #f15e64,
-      #e14e53,
-      #e2373f
-    );
+  background-image: linear-gradient(
+    to right,
+    #eb3941,
+    #f15e64,
+    #e14e53,
+    #e2373f
+  );
   box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
 }
 
@@ -570,14 +561,13 @@ a {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #6253e1,
-      #852d91,
-      #a3a1ff,
-      #f24645
-    );
+  background-image: linear-gradient(
+    to right,
+    #6253e1,
+    #852d91,
+    #a3a1ff,
+    #f24645
+  );
   box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
 }
 
@@ -585,14 +575,13 @@ a {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #25aae1,
-      #4481eb,
-      #04befe,
-      #3f86ed
-    );
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #3f86ed
+  );
   box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
 }
 
@@ -600,14 +589,13 @@ a {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #f5ce62,
-      #e43603,
-      #fa7199,
-      #e85a19
-    );
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
   box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
 }
 
@@ -615,14 +603,13 @@ a {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #0ba360,
-      #3cba92,
-      #30dd8a,
-      #2bb673
-    );
+  background-image: linear-gradient(
+    to right,
+    #0ba360,
+    #3cba92,
+    #30dd8a,
+    #2bb673
+  );
   box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
 }
 
@@ -630,14 +617,13 @@ a {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #eb3941,
-      #f15e64,
-      #e14e53,
-      #e2373f
-    );
+  background-image: linear-gradient(
+    to right,
+    #eb3941,
+    #f15e64,
+    #e14e53,
+    #e2373f
+  );
   box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
 }
 
@@ -645,14 +631,13 @@ a {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #744648,
-      #a5a2a5,
-      #8c8e96,
-      #7e997c
-    );
+  background-image: linear-gradient(
+    to right,
+    #744648,
+    #a5a2a5,
+    #8c8e96,
+    #7e997c
+  );
   box-shadow: 0 5px 15px rgba(92, 87, 87, 0.4);
 }
 
@@ -731,7 +716,7 @@ section#timeline {
 }
 
 section#timeline::before {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   left: 0;
@@ -749,7 +734,7 @@ section#timeline article {
 }
 
 section#timeline article::after {
-  content: "";
+  content: '';
   display: block;
   clear: both;
 }
@@ -765,14 +750,13 @@ section#timeline article div.inner {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #0ba360,
-      #3cba92,
-      #30dd8a,
-      #2bb673
-    );
+  background-image: linear-gradient(
+    to right,
+    #0ba360,
+    #3cba92,
+    #30dd8a,
+    #2bb673
+  );
   box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
 }
 
@@ -780,14 +764,13 @@ section#timeline article div.inner {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #eb3941,
-      #f15e64,
-      #f37e82,
-      #e2373f
-    );
+  background-image: linear-gradient(
+    to right,
+    #eb3941,
+    #f15e64,
+    #f37e82,
+    #e2373f
+  );
   box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
 }
 
@@ -795,14 +778,13 @@ section#timeline article div.inner {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #25aae1,
-      #4481eb,
-      #04befe,
-      #3f86ed
-    );
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #3f86ed
+  );
   box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
 }
 
@@ -810,14 +792,13 @@ section#timeline article div.inner {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #f5ce62,
-      #e43603,
-      #fa7199,
-      #e85a19
-    );
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
   box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
 }
 
@@ -825,14 +806,13 @@ section#timeline article div.inner {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #744648,
-      #a5a2a5,
-      #8c8e96,
-      #7e997c
-    );
+  background-image: linear-gradient(
+    to right,
+    #744648,
+    #a5a2a5,
+    #8c8e96,
+    #7e997c
+  );
   box-shadow: 0 5px 15px rgba(92, 87, 87, 0.4);
 }
 
@@ -841,14 +821,13 @@ section#timeline article div.inner {
   width: 75px;
   height: 75px;
   border: 2px solid white;
-  background-image:
-    linear-gradient(
-      to right,
-      #6253e1,
-      #852d91,
-      #a3a1ff,
-      #f24645
-    );
+  background-image: linear-gradient(
+    to right,
+    #6253e1,
+    #852d91,
+    #a3a1ff,
+    #f24645
+  );
   box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
 }
 
@@ -863,14 +842,13 @@ section#timeline article div.inner {
   margin: 0 0 0 -14px;
   border-radius: 100%;
   border: 2px solid rgb(124, 19, 19);
-  background-image:
-    linear-gradient(
-      to right,
-      #910c24,
-      #ba4549,
-      #de243d,
-      #f24645
-    );
+  background-image: linear-gradient(
+    to right,
+    #910c24,
+    #ba4549,
+    #de243d,
+    #f24645
+  );
   box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
 }
 
