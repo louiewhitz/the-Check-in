@@ -17,7 +17,8 @@
 		"redhat.fabric8-analytics",
 		"vincaslt.highlight-matching-tag",
 		"rcore.rcore-unused-css-classes",
-		"jeffersonlicet.snipped"
+		"jeffersonlicet.snipped",
+		"dbaeumer.vscode-eslint"
 	]
     }
   },
