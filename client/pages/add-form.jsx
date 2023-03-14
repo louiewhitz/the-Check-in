@@ -103,7 +103,7 @@ export default class AddForm extends React.Component {
           <div className="col d-flex d-inline-flex align-self-center">
             <blockquote className="blockquote text-center">
               <h2 className="timeline-color lead fs-3 lh-base text-center">
-                Showcase your event, reset your timer, make a difference
+                Showcase your event, reset your timer, make a difference today
               </h2>
             </blockquote>
           </div>
