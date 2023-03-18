@@ -72,6 +72,7 @@ export default class AddForm extends React.Component {
       })
         .then(() => {
           this.setState({ loading: false });
+          // this.props.onEventAdded();
           window.location.hash = '#timeline';
         })
 
