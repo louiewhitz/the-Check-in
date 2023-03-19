@@ -61,9 +61,18 @@ export default class Header extends React.Component {
               </div>
             </div>
             <div className="row pad-left">
+              <div className='col'>
 
-              <div className="col d-flex align-items-center justify-content-center d-inline-flex pe-0"><p className='days justify-content-center align-items-center'>Counting days<span className='star'>&#x2600;</span> </p><EventCreatedAt /></div>
-              <div className="col d-felx align-items-center ps-0">
+                <div className="card-body">
+                  <blockquote className="blockquote mb-0 text-white">
+                    <p className="timer-font"><EventCreatedAt /></p><footer className="blockquote-footer text-smaller">Days since last post</footer>
+                  </blockquote>
+                </div>
+
+                {/* <div className="col d-flex align-items-center justify-content-center d-inline-flex pe-0 circle"><p className='days justify-content-center align-items-center'>Last Post: <EventCreatedAt /></p></div>
+              <div className="col d-felx align-items-center ps-0"> */}
+              </div>
+              <div className="col">
 
                 <h1 className="text-center navbar-brand fs-1 fw-bold">
                   The Check-in
