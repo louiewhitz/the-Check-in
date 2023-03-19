@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from 'react';
 
 function EventCreatedAt() {
-  const [daysSinceCreated, setDaysSinceCreated] = useState('')
-  ;
+  const [timeSinceCreated, setTimeSinceCreated] = useState({ days: '', hours: '' });
 
   useEffect(() => {
     fetch('/api/events/createdAt')
       .then(response => response.json())
       .then(data => {
-        setDaysSinceCreated(getDaysSinceCreated(data[0].createdAt));
+        setTimeSinceCreated(getDaysAndHoursSinceCreated(data[0].createdAt));
       })
       .catch(error => console.error(error));
   }, []);
 
-  function getDaysSinceCreated(createdAt) {
+  function getDaysAndHoursSinceCreated(createdAt) {
     const now = new Date();
     const createdAtDate = new Date(createdAt);
     const diffInMs = now.getTime() - createdAtDate.getTime();
-    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-    return Math.floor(diffInDays);
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    const diffInHours = Math.floor((diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    return { days: diffInDays, hours: diffInHours };
   }
 
   return (
-    <div className='sphere'><span className="timer-font">{daysSinceCreated}</span></div>
+
+    <span>{timeSinceCreated.days} days, {timeSinceCreated.hours} hours</span>
+
   );
 }
 

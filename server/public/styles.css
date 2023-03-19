@@ -315,34 +315,44 @@ input::-webkit-calendar-picker-indicator {
 }
 
 .sphere {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: 50%; /* to make it a circle */
+  align-items: center; */
+
+  /* border-radius: 50%;
   width: 3em;
   height: 3em;
   background: radial-gradient(
     circle at 30% 30%,
     #f8d93f,
     #403601
-  ); /* this is the radial gradient I was talking about */
+  ); */
+}
+
+.text-small {
+  font-size: smaller;
 }
 
 /* stylelint-disable */
 .timer-font {
-  font-size: 1.5em;
+
+
   font-family: 'Gloock', serif;
-  background-image: linear-gradient(
+  font-size: smaller;
+
+  /* background-image: linear-gradient(
     0deg,
-    rgba(183, 110, 121, 1) 15%,
-    rgba(155, 85, 96, 1) 25%,
-    rgba(128, 61, 73, 1) 40%,
-    rgba(101, 37, 50, 1) 50%,
-    rgba(75, 12, 29, 1) 65%,
+    rgb(212, 134, 146) 15%,
+    rgb(197, 113, 125) 25%,
+    rgb(169, 80, 96) 0%,
+    rgb(124, 46, 62) 50%,
+    rgb(126, 19, 47) 65%,
     rgba(51, 0, 3, 1) 75%,
     rgba(17, 0, 0, 1) 90%,
     rgba(0, 0, 0, 1) 100%
-  );
+  ); */
+
+  background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
   background-size: 100%;
   background-repeat: repeat;
   -webkit-background-clip: text;
