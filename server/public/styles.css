@@ -336,7 +336,6 @@ input::-webkit-calendar-picker-indicator {
 /* stylelint-disable */
 .timer-font {
 
-
   font-family: 'Gloock', serif;
   font-size: smaller;
 
@@ -352,7 +351,7 @@ input::-webkit-calendar-picker-indicator {
     rgba(0, 0, 0, 1) 100%
   ); */
 
-  background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+  background-image: linear-gradient(to right top, #072f6a, #056196, #0195a3, #00bf72, #adf318);
   background-size: 100%;
   background-repeat: repeat;
   -webkit-background-clip: text;
