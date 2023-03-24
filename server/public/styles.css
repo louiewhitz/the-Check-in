@@ -314,21 +314,6 @@ input::-webkit-calendar-picker-indicator {
   object-fit: cover !important;
 }
 
-.sphere {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-
-  /* border-radius: 50%;
-  width: 3em;
-  height: 3em;
-  background: radial-gradient(
-    circle at 30% 30%,
-    #f8d93f,
-    #403601
-  ); */
-}
-
 .text-small {
   font-size: smaller;
 }
@@ -339,25 +324,17 @@ input::-webkit-calendar-picker-indicator {
   font-family: 'Gloock', serif;
   font-size: smaller;
 
-  /* background-image: linear-gradient(
-    0deg,
-    rgb(212, 134, 146) 15%,
-    rgb(197, 113, 125) 25%,
-    rgb(169, 80, 96) 0%,
-    rgb(124, 46, 62) 50%,
-    rgb(126, 19, 47) 65%,
-    rgba(51, 0, 3, 1) 75%,
-    rgba(17, 0, 0, 1) 90%,
-    rgba(0, 0, 0, 1) 100%
-  ); */
 
-  background-image: linear-gradient(to right top, #072f6a, #056196, #0195a3, #00bf72, #adf318);
   background-size: 100%;
   background-repeat: repeat;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
+background-color: #eec0c6;
+background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
+
+
 }
 
 .timer {
@@ -365,7 +342,7 @@ input::-webkit-calendar-picker-indicator {
   justify-content: center;
   align-items: center;
 
-  /* font-family: "Alegreya Sans SC", sans-serif; */
+
   box-shadow: 0 0 25px 7px rgb(250, 213, 4);
   width: 3.5em;
   height: 3.5em;
