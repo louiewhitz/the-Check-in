@@ -2,6 +2,8 @@ import React from 'react';
 import Redirect from '../components/redirect';
 import AppContext from '../lib/app-context';
 import { IoAddCircle, IoCalendarSharp } from 'react-icons/io5';
+import NewTimeline from '../components/addtimeline';
+
 // import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export default class HomeBase extends React.Component {
@@ -34,10 +36,7 @@ export default class HomeBase extends React.Component {
 
         <div className="row d-flex justify-content-evenly">
           <div className="col text-end">
-            {/* <OverlayTrigger style={{ height: '200px', width: '200px' }}
-              placement="top"
-              trigger={["focus", "hover"]}
-              overlay={<Tooltip>Add an Event</Tooltip>}> */}
+
             <a href="#addform">
               <IoAddCircle
                   size={200}
@@ -47,6 +46,7 @@ export default class HomeBase extends React.Component {
             </a>
             {/* </OverlayTrigger> */}
           </div>
+          <div className="col text-center"><NewTimeline /></div>
 
           <div className="col text-start">
             {/* <OverlayTrigger style={{ height: '200px', width: '200px' }}

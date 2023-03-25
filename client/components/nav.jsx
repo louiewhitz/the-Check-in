@@ -54,6 +54,12 @@ export default class Header extends React.Component {
                         View Photos
                       </a>
                     </li>
+
+                    <li>
+                      <a className="dropdown-item" href="#addtimeline">
+                        Add Timeline
+                      </a>
+                    </li>
                   </ul>
 
                 </div>
@@ -65,7 +71,7 @@ export default class Header extends React.Component {
 
                 <div className="card-body">
                   <blockquote className="blockquote mb-0 text-white">
-                    <p className="timer-font"><EventCreatedAt /></p><footer className="blockquote-footer fs-6 text-light">Days since last post</footer>
+                    <p className="timer-font"><EventCreatedAt /></p><footer className="blockquote-footer fs-6 light-purp">Since last post</footer>
                   </blockquote>
                 </div>
 

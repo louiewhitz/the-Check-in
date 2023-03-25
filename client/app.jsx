@@ -16,6 +16,7 @@ import AllPhotos from './pages/viewphoto';
 import ViewAllImages from '../client/components/viewimg';
 import MyCalendar from '../client/components/calendar-tiles';
 import LoadUser from '../client/components/load-users';
+import NewTimeline from './components/addtimeline';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -96,6 +97,10 @@ export default class App extends React.Component {
 
     if (route.path === 'ion-date') {
       return <IonDate />;
+    }
+
+    if (route.path === 'addtimeline') {
+      return <NewTimeline />;
     }
   }
 
