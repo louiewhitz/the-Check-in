@@ -57,6 +57,7 @@ CREATE TABLE "public"."timelines" (
 	"timelineId" serial NOT NULL,
 	"timelineFor" TEXT NOT NULL,
   "relation" TEXT,
+  "friendSince" TEXT,
 	"lastPost" TIMESTAMPTZ default null,
 	CONSTRAINT "timelines_pk" PRIMARY KEY ("timelineId")
 ) WITH (

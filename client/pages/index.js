@@ -206,7 +206,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     description,
     photoUrl,
     eventTypeId,
-    1,
+    timelineId,
     userId
   ];
 
@@ -214,6 +214,43 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     .then(result => {
       const [newEvent] = result.rows;
       res.status(201).json(newEvent);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/timeline', (req, res, next) => {
+  const { timelineFor, relation, friendSince } = req.body;
+
+  // check here for conditionals
+  if (!timelineFor || !relation || !friendSince) {
+    throw new ClientError(400, 'timelineFor, relation, and friendSince are required');
+  }
+  const sql = `INSERT INTO "timelines" ("timelineFor", "relation", "friendSince")
+   VALUES ($1, $2, $3) RETURNING *;`;
+  const params = [timelineFor, relation, friendSince];
+  db.query(sql, params)
+    .then(result => {
+      const [newTimeline] = result.rows;
+      res.status(201).json(newTimeline);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/timelines/:timelineId', (req, res, next) => {
+  const timelineId = Number(req.params.timelineId);
+  const { timelineFor, relation, friendSince } = req.body;
+  if (!Number.isInteger(timelineId) || timelineId < 1) {
+    throw new ClientError(
+      400,
+      `sorry, this ${timelineId} must be a positive integer`
+    );
+  }
+  const sql = 'select "timelineId", "timelineFor", "relation", "friendSince" from "timelines" where "timelineId" = $1;';
+  const params = [timelineId, timelineFor, relation, friendSince];
+  db.query(sql, params)
+    .then(result => {
+      const [newTimeline] = result.rows;
+      res.json(newTimeline);
     })
     .catch(err => next(err));
 });

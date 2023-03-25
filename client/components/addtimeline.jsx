@@ -7,13 +7,19 @@ import Modal from 'react-bootstrap/Modal';
 import AppContext from '../lib/app-context';
 import Container from 'react-bootstrap/Container';
 import { IoPersonAddSharp } from 'react-icons/io5';
+// import { adduser } from '../images/adduser.svg';
+const currentFill = '#0D6EFD';
 
 export default function NewTimeline() {
   const [isRelative, setIsRelative] = useState(false);
+  const [isFriend, setIsFriend] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const handleCheckboxChange = e => {
     setIsRelative(e.target.checked);
+  };
+  const handleFriendCheckboxChange = e => {
+    setIsFriend(e.target.checked);
   };
 
   const handleModalClose = () => {
@@ -26,12 +32,13 @@ export default function NewTimeline() {
 
   return (
     <Container>
-      <Button onClick={handleModalOpen} className="icon-shadow"><IoPersonAddSharp
-      size={120}
-      style={{ cursor: 'pointer', color: '#f5f5f5' }}
+      <button className="btn icon-shadow" type="button" onClick={handleModalOpen} ><IoPersonAddSharp
+      size={200}
+      style={{ cursor: 'pointer', fill: currentFill }}
+      className="icon-shadow"
 
       />
-      </Button>
+      </button>
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>New Timeline</Modal.Title>
@@ -54,7 +61,7 @@ export default function NewTimeline() {
               <Form.Check
                 type="checkbox"
                 label="Friend"
-                onChange={handleCheckboxChange}
+                onChange={handleFriendCheckboxChange}
               />
             </Form.Group>
             {isRelative && (
@@ -63,6 +70,13 @@ export default function NewTimeline() {
                 <Form.Control placeholder="Relation" />
               </Form.Group>
             )}
+            {isFriend && (
+              <Form.Group controlId="formBasicFriendship">
+                <Form.Label>How long have you known them?</Form.Label>
+                <Form.Control placeholder="Friendship" />
+              </Form.Group>
+            )}
+
           </Form>
         </Modal.Body>
         <Modal.Footer>
