@@ -206,7 +206,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     description,
     photoUrl,
     eventTypeId,
-    timelineId,
+    1,
     userId
   ];
 
@@ -218,7 +218,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/timeline', (req, res, next) => {
+app.post('/api/timelines', (req, res, next) => {
   const { timelineFor, relation, friendSince } = req.body;
 
   // check here for conditionals
@@ -249,8 +249,8 @@ app.get('/api/timelines/:timelineId', (req, res, next) => {
   const params = [timelineId, timelineFor, relation, friendSince];
   db.query(sql, params)
     .then(result => {
-      const [newTimeline] = result.rows;
-      res.json(newTimeline);
+      const [currentTimeline] = result.rows[0];
+      res.json(currentTimeline);
     })
     .catch(err => next(err));
 });

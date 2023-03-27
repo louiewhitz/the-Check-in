@@ -11,6 +11,7 @@ import { IoPersonAddSharp } from 'react-icons/io5';
 const currentFill = '#0D6EFD';
 
 export default function NewTimeline() {
+
   const [isRelative, setIsRelative] = useState(false);
   const [isFriend, setIsFriend] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -32,7 +33,7 @@ export default function NewTimeline() {
 
   return (
     <Container>
-      <button className="btn icon-shadow" type="button" onClick={handleModalOpen} ><IoPersonAddSharp
+      <button type="button" onClick={handleModalOpen} className="border-0"><IoPersonAddSharp
       size={200}
       style={{ cursor: 'pointer', fill: currentFill }}
       className="icon-shadow"
