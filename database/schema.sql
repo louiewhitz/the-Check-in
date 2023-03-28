@@ -45,7 +45,6 @@ CREATE TABLE "public"."schedules" (
 	"scheduleId" serial NOT NULL,
 	"title" TEXT NOT NULL,
 	"start" TIMESTAMPTZ NOT NULL,
-	
 	"timelineId" integer NOT NULL,
 	"end" TIMESTAMPTZ NOT NULL,
 	CONSTRAINT "schedules_pk" PRIMARY KEY ("scheduleId")
@@ -56,6 +55,8 @@ CREATE TABLE "public"."schedules" (
 CREATE TABLE "public"."timelines" (
 	"timelineId" serial NOT NULL,
 	"timelineFor" TEXT NOT NULL,
+  "relation" TEXT,
+  "friendSince" TEXT,
 	"lastPost" TIMESTAMPTZ default null,
 	CONSTRAINT "timelines_pk" PRIMARY KEY ("timelineId")
 ) WITH (

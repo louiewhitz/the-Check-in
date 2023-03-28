@@ -148,6 +148,10 @@
   background-color: rgba(244, 228, 142, 0.319) !important;
 }
 
+.light-purp {
+  color: #f2e0f0a9 !important;
+}
+
 .bubble {
   background: white;
   border: 1px solid #a0a096;
@@ -323,8 +327,6 @@ input::-webkit-calendar-picker-indicator {
 
   font-family: 'Gloock', serif;
   font-size: smaller;
-
-
   background-size: 100%;
   background-repeat: repeat;
   -webkit-background-clip: text;
@@ -341,8 +343,6 @@ background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
-
   box-shadow: 0 0 25px 7px rgb(250, 213, 4);
   width: 3.5em;
   height: 3.5em;
