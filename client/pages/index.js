@@ -246,11 +246,12 @@ app.get('/api/timelines/:timelineId', (req, res, next) => {
     );
   }
   const sql = 'select "timelineId", "timelineFor", "relation", "friendSince" from "timelines" where "timelineId" = $1;';
-  const params = [timelineId, timelineFor, relation, friendSince];
+  const params = [timelineId];
   db.query(sql, params)
     .then(result => {
       const [currentTimeline] = result.rows[0];
       res.json(currentTimeline);
+
     })
     .catch(err => next(err));
 });

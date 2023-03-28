@@ -100,7 +100,8 @@ export default class App extends React.Component {
     }
 
     if (route.path === 'addtimeline') {
-      return <NewTimeline />;
+      const timelineId = route.params.get('timelineId');
+      return <NewTimeline timelineId={timelineId}/>;
     }
   }
 

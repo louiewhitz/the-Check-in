@@ -45,7 +45,6 @@ CREATE TABLE "public"."schedules" (
 	"scheduleId" serial NOT NULL,
 	"title" TEXT NOT NULL,
 	"start" TIMESTAMPTZ NOT NULL,
-
 	"timelineId" integer NOT NULL,
 	"end" TIMESTAMPTZ NOT NULL,
 	CONSTRAINT "schedules_pk" PRIMARY KEY ("scheduleId")
