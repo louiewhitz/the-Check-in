@@ -99,7 +99,7 @@ export default class App extends React.Component {
       return <IonDate />;
     }
 
-    if (route.path === 'addtimeline') {
+    if (route.path === 'timelines') {
       const timelineId = route.params.get('timelineId');
       return <NewTimeline timelineId={timelineId}/>;
     }
