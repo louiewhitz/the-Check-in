@@ -206,7 +206,7 @@ app.post('/api/events', uploadsMiddleware, (req, res, next) => {
     description,
     photoUrl,
     eventTypeId,
-    1,
+    timelineId,
     userId
   ];
 
@@ -249,7 +249,7 @@ app.get('/api/timelines/:timelineId', (req, res, next) => {
   const params = [timelineId];
   db.query(sql, params)
     .then(result => {
-      const [currentTimeline] = result.rows[0];
+      const [currentTimeline] = result.rows;
       res.json(currentTimeline);
 
     })

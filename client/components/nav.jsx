@@ -55,11 +55,11 @@ export default class Header extends React.Component {
                       </a>
                     </li>
 
-                    <li>
-                      <a className="dropdown-item" href="#addtimeline">
+                    {/* <li>
+                      <a className="dropdown-item" href="#timelines">
                         Add Timeline
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
 
                 </div>
